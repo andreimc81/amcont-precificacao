@@ -46,3 +46,4 @@ cp IT001-*.docx IT002-*.docx MC001-*.docx MU001-*.docx RC001-*.docx RT001-*.docx
 python3 src/build_web.py site >/dev/null && (cd site && rm -f ../Amcont-Central-Fiscal-site-v$V.zip && zip -qr ../Amcont-Central-Fiscal-site-v$V.zip . )
 mkdir -p historico/publicadas && cp Amcont-Reforma-Tributaria-Completo-v$V.zip historico/publicadas/
 echo "== publicada $V"
+bash src/backup_git.sh || true
