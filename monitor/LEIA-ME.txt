@@ -1,0 +1,49 @@
+AMCONT - MONITOR DA REFORMA TRIBUTÁRIA
+
+Objetivo
+Garantir que nenhuma mudança na LC 214/2025 passe despercebida antes de uma versão das calculadoras e da planilha chegar ao cliente.
+
+Como funciona
+1. Toda segunda-feira, o n8n baixa a norma atualizada da LC 214 publicada pela Câmara (arquivo Word) e salva nesta pasta com a data no nome. Fluxo: n8n_baixar_lc214.json.
+2. Toda segunda-feira, uma tarefa agendada do Claude:
+   a) confere no Senado se surgiu lei, decreto, MP ou decisão do STF nova sobre a LC 214 (lista conhecida em alteracoes_conhecidas.json);
+   b) se houver um arquivo da lei mais novo que a última fotografia, roda o monitor_legislacao.py: compara artigo por artigo e item por item dos anexos com a fotografia anterior e confere a base da ferramenta contra os anexos;
+   c) roda o monitor_fontes.py (segunda camada, vinda da auditoria independente): confere 9 páginas oficiais (Planalto, Senado, Receita, atos conjuntos, NFS-e RTC, NF-e, ALESC) e acusa qualquer mudança de texto;
+   Atenção: o ambiente do Claude não alcança o Planalto e alguns portais do governo. Rode o monitor_fontes.py no computador do escritório (python3 monitor_fontes.py) ou no n8n (nó Execute Command) e salve o relatorio_fontes.json nesta pasta.
+   d) grava os relatórios nesta pasta e envia aviso ao celular.
+   O monitoramento semanal do ChatGPT é um alerta adicional. Não substitui estas conferências nem os testes.
+3. As calculadoras mostram a data da última conferência e passam a exibir alerta ao cliente 45 dias depois dela.
+
+Arquivos
+- monitor_legislacao.py: camada 1, conteúdo da LC 214 artigo por artigo e auditoria da base (requer python-docx).
+- monitor_fontes.py: camada 2, páginas oficiais por hash do texto (sem layout). Estado em estado_fontes.json.
+- registro_alteracoes.xlsx: registro obrigatório de toda mudança de regra (norma, dispositivo, vigência, códigos, regra afetada, antes e depois, testes, aprovador, situação).
+- foto_lc214_AAAA-MM-DD.json.gz: fotografia da lei usada na última conferência.
+- class_dump.json.gz: base da ferramenta (classificação de todos os NCM e NBS) na versão em uso.
+- aceitas.json: divergências entre a lei e a base já revisadas, com o motivo. Só mude com revisão.
+- alteracoes_conhecidas.json: normas que alteraram a LC 214 e já foram incorporadas.
+- LC214_consolidada_AAAA-MM-DD.docx: textos da lei baixados.
+- Relatório AAAA-MM-DD: resultado de cada conferência.
+
+Quando o relatório disser "AÇÃO NECESSÁRIA"
+1. Não envie versão nova a nenhum cliente até concluir a revisão.
+2. Leia cada item apontado no texto da lei.
+3. Abra uma linha no registro_alteracoes.xlsx com situação "Em análise".
+4. Peça ao Claude para corrigir a base e regerar calculadoras e planilha, ou registre em aceitas.json por que a divergência está certa. Nenhum monitor altera regra sozinho.
+5. Rode os testes (cruzamento planilha contra calculadora, verificação independente ref_independente.py e recálculo sem erro) e anote no registro.
+6. Aprovação da Amcont no registro (aprovador e data). Sem aprovação, a versão não sai.
+7. Atualize a MC.001 e a data da conferência (monitor/ultima_conferencia.txt), gere a nova fotografia e envie a versão nova aos clientes.
+
+O que o monitor NÃO cobre (conferir manualmente)
+O monitor_fontes.py avisa QUE uma página mudou, mas não diz se a mudança afeta a ferramenta: a leitura é humana.
+- Regulamentos e atos infralegais: Decreto 12.955/2026 (CBS), atos do Comitê Gestor do IBS, lista de medicamentos do art. 146.
+- Resolução do Senado com a alíquota de referência da CBS (prevista até 15/12/2026).
+- Tabelas de cClassTrib e CST (nota técnica da NF-e) e o Anexo VIII da NFS-e.
+- ICMS de Santa Catarina (Lei 10.297/1996 e RICMS/SC, inclusive cesta básica após 31/12/2026) e alíquotas dos outros estados.
+- LC 123/2006 (Simples Nacional) e tabelas do PIS e da COFINS (SPED).
+
+Importar o fluxo no n8n
+1. No n8n, menu Workflows, Import from File, escolha n8n_baixar_lc214.json.
+2. No nó "Salvar na pasta do monitor", conecte a credencial do Google Drive (OAuth da conta da Amcont).
+3. Rode uma vez manualmente (Execute Workflow) e confira se o arquivo apareceu nesta pasta.
+4. Ative o fluxo (Active).

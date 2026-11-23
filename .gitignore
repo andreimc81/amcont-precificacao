@@ -1,0 +1,11 @@
+# Gerados a cada publicação (refeitos pelo src/publicar.sh)
+*.zip
+!historico/publicadas/*.zip
+zipfinal/
+candidata/
+pacote/
+site/
+historico/v*/
+__pycache__/
+node_modules/
+*.pyc

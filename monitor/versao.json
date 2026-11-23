@@ -1,0 +1,50 @@
+{
+ "base": "2026.8",
+ "seq": 6,
+ "data": "2026-11-22T22:14",
+ "hist": [
+  {
+   "v": "2026.8.0",
+   "data": "2026-11-10T23:15",
+   "resumo": "Versão aprovada pela Amcont: correções da auditoria independente e conferência com as fontes oficiais (LC 214 consolidada, Lei 10.485, MP 1.399, Anexo VIII v1.02.00).",
+   "registros": "R08-01 a R15-01"
+  },
+  {
+   "v": "2026.8.1",
+   "data": "2026-11-11T13:26",
+   "resumo": "Perguntas de ICMS de SC antes da alíquota, na calculadora e na planilha; benefícios do RICMS/SC (isenções e cargas reduzidas); selo Benefício para NCM sem condição; rótulo da opção integral; controle de versão.",
+   "registros": "R16-01 a R17-03"
+  },
+  {
+   "v": "2026.8.2",
+   "data": "2026-11-11T17:49",
+   "resumo": "Revisão completa e controle de versão em todos os arquivos: rodapé com a versão nos documentos, versão nos estudos e simulações salvos com aviso ao abrir arquivo de outra versão, bateria de testes registrada por versão. Inclui tudo da 2026.8.1.",
+   "registros": "R16-01 a R18-01"
+  },
+  {
+   "v": "2026.8.3",
+   "data": "2026-11-11T20:17",
+   "resumo": "Conferência com o texto do RICMS/SC (art. 26): protetor solar a 17%, combustíveis com ICMS monofásico sem débito na revenda, etanol carburante a 17% entre contribuintes, notas de fibrocimento, coque e crédito vedado (art. 35-A).",
+   "registros": "R19-01"
+  },
+  {
+   "v": "2026.8.4",
+   "data": "2026-11-11T21:08",
+   "resumo": "Listas do RICMS/SC, Anexo 1 (Seções VI, VII, XI e XIX): a pergunta de máquinas e informática só oferece a seção em que o NCM aparece; aço restrito às posições da Seção XI; asa-delta, balão e dirigível (8801) a 25%.",
+   "registros": "R19-02"
+  },
+  {
+   "v": "2026.8.5",
+   "data": "2026-11-13T12:43",
+   "resumo": "Versão aprovada pela Amcont em 13/11/2026 (R16-01 a R19-02 aprovados). Mesmo conteúdo de cálculo da 2026.8.4; registro e manuais com a aprovação. Liberada para clientes.",
+   "registros": "R16-01 a R19-02 (aprovados)"
+  },
+  {
+   "v": "2026.8.6",
+   "data": "2026-11-22T22:14",
+   "resumo": "Metadados das tabelas corrigidos (fontes de SC e de PIS/COFINS) e número de versão único para dados, base fiscal e aplicativo. Sem mudança de cálculo.",
+   "registros": "R20-01"
+  }
+ ],
+ "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"
+}

@@ -1,0 +1,251 @@
+﻿
+INSTRUÇÃO DE TRABALHO
+Código:
+IT.001
+
+Diagnóstico de Precificação na Reforma Tributária
+Rev.: 02
+Folha 1 de 5
+
+1. OBJETIVO
+
+Padronizar a execução do diagnóstico de precificação na Reforma Tributária, desde a triagem da carteira até a entrega da proposta ao cliente, garantindo que todos os cálculos sejam conferidos e que nenhum número saia do escritório sem prova real.
+
+2. RESPONSÁVEL E APLICAÇÃO
+
+Responsável
+Departamento Fiscal, com validação do sócio responsável pela conta
+Periodicidade
+Triagem da carteira: anual, e sempre que as alíquotas mudarem. Diagnóstico individual: sob demanda
+Ferramentas
+Planilha Amcont de Precificação, calculadora em página web, Domínio Sistemas como origem dos dados
+Documentos ligados
+MC.001 memória de cálculo, RC.001 roteiro comercial
+Prazo legal
+Não se aplica. A CBS e o IBS passam a incidir em 01/2027
+
+3. QUAL FERRAMENTA USAR EM CADA SITUAÇÃO
+
+Situação
+Ferramenta
+Aba ou tela
+Classificar a carteira inteira
+Planilha
+TRIAGEM
+Diagnóstico completo de um cliente
+Planilha
+GASTOS e MOTOR_PRECO_2026
+Precificar produto novo
+Planilha
+MOTOR_CUSTO
+Decidir opção do Simples
+Planilha
+SIMPLES
+Comparar propostas de fornecedor
+Planilha
+FORNECEDORES
+Projetar até 2033
+Planilha
+LINHA_TEMPO
+Precificar um produto especifico
+Calculadora de produto
+Tela única
+Comparar fornecedores de um produto
+Calculadora de produto
+Painel de origens
+Precificar um produto na planilha
+Planilha
+PRODUTO
+Simular ao vivo na reunião
+Calculadora de empresa
+Tela única
+Levar resultado impresso
+Planilha
+RESUMO
+
+
+INSTRUÇÃO DE TRABALHO
+Código:
+IT.001
+
+Diagnóstico de Precificação na Reforma Tributária
+Rev.: 02
+Folha 2 de 5
+
+4. PASSO A PASSO
+
+FASE 1 — TRIAGEM DA CARTEIRA
+
+1
+Conferir alíquotas
+Abrir a aba PARAMETROS e comparar a CBS e o IBS da tabela A32 a D39 com a norma vigente. Se houver divergência, atualizar antes de qualquer cálculo. Nenhum número é confiável sem esta conferência.
+2
+Lançar a carteira
+Na aba TRIAGEM, uma linha por cliente. Colunas A a M, com dados extraídos da escrituração: faturamento do último exercício, entradas separadas por faixa de redução, base de crédito de ICMS e alíquota praticada.
+3
+Ler a classificação
+Conferir a coluna Q. Ordenar por faixa e, dentro de cada faixa, por faturamento.
+4
+Consolidar
+Ler o painel no rodapé da aba: quantidade de clientes por faixa, faturamento total e faturamento concentrado na faixa ALTA. Levar aos sócios.
+5
+Priorizar
+Iniciar pelos clientes de faixa ALTA com maior honorário. Faixa BAIXA recebe apenas comunicado por escrito, sem consumir agenda.
+
+FASE 2 — DIAGNÓSTICO INDIVIDUAL (faixas ALTA e MÉDIA)
+
+6
+Lançar gastos
+Na aba GASTOS, lançar os gastos anuais do cliente linha a linha, com descrição, valor bruto, faixa de redução de CBS e IBS e os percentuais de crédito de ICMS, IPI e PIS/COFINS.
+7
+Parametrizar
+Na aba PARAMETROS, selecionar o ano de referência, a atividade e a premissa jurídica. Conferir a alíquota de ICMS ou de ISS praticada pelo cliente.
+8
+Apurar
+Na aba MOTOR_PRECO_2026, informar o faturamento e o regime. Conferir a prova real da linha 61.
+9
+Simples Nacional
+Se o cliente for optante, usar a aba SIMPLES: informar anexo, alíquota efetiva do DAS e as bases creditáveis. Ler o ponto de virada e registrar a recomendação.
+
+
+INSTRUÇÃO DE TRABALHO
+Código:
+IT.001
+
+Diagnóstico de Precificação na Reforma Tributária
+Rev.: 02
+Folha 3 de 5
+
+10
+Projetar
+Abrir a aba LINHA_TEMPO e anotar o impacto de 2027 e o de 2033. O segundo é o que sustenta a conversa.
+11
+Fechar o dossiê
+Abrir a aba RESUMO, conferir os números e salvar em PDF. É o documento que vai à reunião.
+
+FASE 3 — REUNIÃO E PROPOSTA
+
+12
+Preparar a tela
+Abrir a calculadora web e carregar os dados do cliente antes da reunião. Nunca preencher na frente dele.
+13
+Conduzir
+Seguir o RC.001, roteiro comercial. Sete blocos, quarenta minutos.
+14
+Enviar no mesmo dia
+Encaminhar o PDF da simulação e, em documento separado, a proposta com escopo, prazo e valor.
+15
+Registrar
+Anotar no controle interno a faixa do cliente, a data da reunião e o desfecho.
+
+FASE 4 — ANÁLISE DE UM PRODUTO (sob demanda)
+
+16
+Identificar o produto
+Na calculadora de produto, buscar o NCM por código ou descrição. Conferir se a descrição oficial corresponde ao produto do cliente.
+17
+Classificar o tratamento
+Se o NCM já estiver no mapa, a ferramenta sugere a redução e o Imposto Seletivo. Conferir sempre contra os anexos da LC 214/2025 antes de aceitar.
+18
+Lançar compra e venda
+Informar o preço de compra, o regime do fornecedor e o preço de venda praticados hoje. Sem esses três, o resultado não existe.
+19
+Ler o preço e a margem
+A ferramenta devolve o preço que preserva a mesma margem de contribuição. Conferir que a margem no ano é igual à de hoje.
+20
+Comparar fornecedores
+Abrir o painel de origens. Decidir pelo custo real, nunca pelo valor da nota.
+
+
+INSTRUÇÃO DE TRABALHO
+Código:
+IT.001
+
+Diagnóstico de Precificação na Reforma Tributária
+Rev.: 02
+Folha 4 de 5
+
+5. PONTOS DE ATENÇÃO
+
+!
+Prova real diferente de zero indica erro de lançamento, não de fórmula. Refaça os lançamentos antes de seguir. A única exceção é a indústria, onde a diferença é exatamente o crédito de IPI que deixa de existir.
+!
+O NCM identifica o produto, mas não define sozinho o tratamento de CBS e IBS. A classificação sugerida pela ferramenta é ponto de partida, não resposta.
+!
+As alíquotas do Imposto Seletivo ainda não foram fixadas em lei. Apresentar sempre como estimativa.
+!
+Nunca alterar fórmula da planilha. Alteração de regra de cálculo segue obrigatoriamente a seção 14 da MC.001, começando pelo motor de referência.
+!
+As alíquotas de CBS e IBS são estimativas divulgadas pelo governo, não texto legal. Conferir a cada ciclo de trabalho.
+!
+A redução de alíquota decorre do regime do fornecedor e da natureza do bem. Nunca presumir pelo tipo de gasto.
+!
+Nunca apresentar número único ao cliente. A faixa da premissa jurídica deve estar sempre visível.
+!
+Cliente do Lucro Real não entra na triagem automática. Exige diagnóstico individual desde o início.
+!
+A calculadora agrega as entradas em cinco faixas e a planilha lança linha a linha. Diferença entre as duas costuma ser agregação, não erro. Na dúvida, prevalece a planilha.
+
+
+INSTRUÇÃO DE TRABALHO
+Código:
+IT.001
+
+Diagnóstico de Precificação na Reforma Tributária
+Rev.: 02
+Folha 5 de 5
+
+6. CONTROLE DE REVISÕES
+
+Rev.
+Data
+Descrição da alteração
+Responsável
+01
+13/08/2026
+Emissão inicial. Triagem da carteira, diagnóstico individual e condução da reunião.
+Andrei Constantino
+02
+16/08/2026
+Inclui a fase de análise por produto, a busca de NCM e o Imposto Seletivo.
+Andrei Constantino
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7. QUANDO ESTA IT PRECISA SER REVISADA
+
+Evento
+Ação
+Publicação de alíquota definitiva de CBS ou IBS
+Atualizar a planilha e a calculadora, refazer a triagem da carteira
+Decisão sobre CBS e IBS na base do ICMS e do ISS
+Fixar a premissa e revisar a orientação de apresentar faixa
+Alteração de regra de cálculo em qualquer ferramenta
+Revisar esta IT e a MC.001, subindo as duas revisões
+Virada de 2029
+Rever a triagem inteira. É quando o IBS começa a subir de verdade
+Entrada de nova atividade na carteira
+Conferir se a presunção correspondente já está na tabela de PARAMETROS
+
+Elaborado por:
+Andrei Constantino
+Aprovado por:
+Andrei Constantino
+Data de emissão:
+13/08/2026
+Próxima revisão:
+Antes de 01/2027

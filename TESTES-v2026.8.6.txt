@@ -1,0 +1,24 @@
+BATERIA DE TESTES (completa)  |  versão 2026.8.6  |  22/11/2026 22:14
+aprovado   tela t_lc
+aprovado   tela t_cq
+aprovado   tela t_pc
+aprovado   tela t_compra
+aprovado   tela t_user
+aprovado   tela t_uf
+aprovado   tela t_prud
+aprovado   tela test_html
+aprovado   tela test_load
+aprovado   tela test_prec
+aprovado   tela test_def
+aprovado   tela test_emp
+aprovado   tela test_red
+aprovado   tela test_senha
+aprovado   perguntas de ICMS de SC (t_scq): 54 de 54 []
+aprovado   verificação independente (301 casos): COMPRA: 160 de 160 casos iguais (créditos, DIFAL e custo)
+aprovado   planilha x calculadora, 23 cenários: 23/23
+aprovado   busca por código de serviço: TUDO OK
+aprovado   planilha x calculadora, venda para outro estado: 7/7 []
+aprovado   planilha x calculadora, compra (672): 672/672 [] []
+aprovado   planilha x calculadora, 80 cenários aleatórios: 80/80
+aprovado   planilha x calculadora, perguntas de ICMS (99): 99 de 99 []
+RESULTADO: APROVADA

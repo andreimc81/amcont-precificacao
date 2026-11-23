@@ -1,0 +1,289 @@
+﻿
+ROTEIRO COMERCIAL
+Código:
+RC.001
+
+Reforma Tributária e Precificação
+Rev.: 02
+Folha 1 de 6
+
+1. O QUE A AMCONT ESTÁ VENDENDO
+
+Não estamos vendendo medo da reforma. Estamos vendendo uma resposta a uma pergunta que o cliente não consegue responder sozinho: quanto ele precisa cobrar em cada ano da transição para continuar ganhando o mesmo.
+A resposta depende de três variáveis que só nós temos: quanto ele compra de fornecedor que gera crédito, qual o regime desses fornecedores e como a lei vai resolver um ponto ainda em aberto. Nenhuma delas está no boleto do contador. Todas estão na escrituração que já fazemos.
+
+A FRASE QUE SUSTENTA A VENDA
+"O senhor não precisa de opinião sobre a reforma. Precisa de número. E o número depende de dados que já estão na sua escrituração, com a gente."
+
+2. O QUE NUNCA DIZER
+
+Não diga
+Por quê
+"A reforma vai aumentar seus impostos."
+Depende do perfil de compras. No mesmo cenário, mudando só o regime dos fornecedores, o resultado vai de redução de 0,86% para aumento de 1,96%. O sinal inverte.
+"Você precisa se preparar já para 2027."
+Em 2027 e 2028 o impacto no preço é de 0,06%. O cliente vai perceber que não aconteceu nada e perder a confiança no que dissermos depois.
+"O Simples vai acabar."
+Não vai. O que muda é a possibilidade de optar pelo regime regular de CBS e IBS. É uma escolha, com ponto de virada calculável.
+"Fornecedor do Simples vai ficar inviável."
+Em 2027 e 2028 ele ainda pode ser o mais barato. O crédito de 9,3% não compensa diferenças grandes de preço. Isso só muda a partir de 2029.
+Qualquer número sem faixa de variação.
+A lei não definiu se CBS e IBS entram na base do ICMS e do ISS. Um número único esconde uma variação de até 1,88% no preço.
+
+
+
+ROTEIRO COMERCIAL
+Código:
+RC.001
+
+Reforma Tributária e Precificação
+Rev.: 02
+Folha 2 de 6
+
+3. TRIAGEM DA CARTEIRA
+
+Antes de marcar reunião, classifique. A conversa muda completamente conforme a faixa. Use os dados que já temos na escrituração, sem precisar perguntar nada ao cliente.
+
+Faixa
+Critério objetivo
+Como abordar
+ALTA
+Vende para consumidor final ou não contribuinte; a maior parte das entradas é sem crédito ou com redução de 60% ou 70%; margem abaixo de 15%.
+Reunião individual e paga. O impacto pode consumir parcela relevante da margem e o cliente não tem para quem repassar.
+MÉDIA
+Vende para empresa do regime regular; entradas divididas entre crédito integral e reduzido; margem entre 15% e 30%.
+Reunião em grupo ou simulação enviada por e-mail. O impacto existe mas é absorvível.
+BAIXA
+Vende para empresa; a maior parte das entradas gera crédito integral de fornecedor do regime regular.
+Comunicado por escrito. Provavelmente vai reduzir preço, não aumentar. É uma boa notícia, e boa notícia também fideliza.
+SIMPLES
+Optante do Simples Nacional, qualquer anexo.
+Trilha própria. A pergunta não é preço, é se compensa optar pelo regime regular. Ver o item 5.
+
+O ERRO DE TRIAGEM MAIS COMUM
+Olhar só o volume de compras. Uma entrada com redução de 60% gera menos da metade do crédito de uma entrada integral, e a de 70% gera menos de um terço. Cliente que compra muito de setor com alíquota reduzida tem crédito bem menor do que o volume sugere. A pergunta certa não é quanto ele compra com crédito, e sim quanto ele compra em cada faixa de redução.
+
+4. NÚMEROS PARA SABER DE CABEÇA
+
+Base: comércio, ICMS de 12%, custo de R$ 500, despesas de 9,86% e lucro de 10%. Servem de referência mental, não como resposta ao caso do cliente.
+
+Situação
+Número
+O que significa
+Impacto em 2027 e 2028
++0,06%
+Praticamente nada. Não há urgência de preço neste biênio.
+Impacto em 2033
++10,92%
+É aqui que dói. Teto de impacto, com custo mantido constante.
+Faixa da premissa jurídica
+1,88%
+Diferença entre a leitura mais e a menos conservadora. Compare sempre com a margem do cliente.
+Simples: ponto de virada
+R$ 630 mil
+Base de compras creditáveis, para receita de R$ 1 milhão no Anexo I. Acima, optar reduz a carga. Abaixo, aumenta.
+Crédito transferido em 2027
+9,3%
+Pequeno demais para inverter decisão de fornecedor. A partir de 2029 isso muda.
+Peso do crédito por faixa
+100 / 70 / 40 / 30
+Quanto vale o crédito de uma entrada integral, com redução de 30%, de 60% e de 70%.
+
+
+
+ROTEIRO COMERCIAL
+Código:
+RC.001
+
+Reforma Tributária e Precificação
+Rev.: 02
+Folha 3 de 6
+
+5. ROTEIRO DA REUNIÃO — 40 MINUTOS
+
+1
+5 min
+Ancoragem no negócio dele, não na lei
+Objetivo: Fazer o cliente falar primeiro e revelar como precifica hoje.
+
+O que falar: "Antes de eu falar de reforma: hoje, como o senhor forma o preço? Pega o custo e multiplica, olha o concorrente, ou usa outro critério?"
+
+2
+3 min
+Enquadrar o problema certo
+Objetivo: Trocar a pergunta de 'vai aumentar?' para 'quanto e quando?'.
+
+O que falar: "A reforma não muda só quanto o senhor paga. Muda quem paga o quê ao longo da cadeia. Quem entende primeiro, negocia melhor com fornecedor e com cliente."
+
+3
+8 min
+Mostrar a simulação ao vivo
+Objetivo: Abrir a ferramenta com os dados reais dele e deixá-lo ver o número aparecer.
+
+O que falar: "Vou colocar os seus números aqui na frente do senhor. Nada é chute, tudo sai da sua escrituração."
+
+4
+6 min
+Mostrar a linha do tempo até 2033
+Objetivo: Desarmar a urgência falsa de 2027 e construir a urgência real de 2029.
+
+O que falar: "Em 2027 quase nada muda no seu preço. Quem disser o contrário está exagerando. O problema começa em 2029 e chega no talo em 2033. É por isso que a hora de planejar é agora, com calma, e não em cima da hora."
+
+5
+5 min
+Mostrar a faixa, não esconder
+Objetivo: Transformar a incerteza jurídica em prova de competência técnica.
+
+O que falar: "Existe um ponto que a lei ainda não resolveu, e ele mexe no seu preço em até 1,88%. Quem te der um número único está escondendo isso. Eu prefiro te mostrar a faixa e te avisar quando resolver."
+
+6
+8 min
+Traduzir em decisão
+Objetivo: Sair da reunião com uma ação, não com uma impressão.
+
+O que falar: "Com esses números, o senhor tem três decisões pela frente: revisar preço em degraus, renegociar com os fornecedores que não passam crédito, e escolher o regime. Eu consigo montar isso produto a produto."
+
+7
+5 min
+Fechar o escopo e o valor
+Objetivo: Propor o serviço com escopo delimitado e prazo. Ver o item 6.
+
+O que falar: "O que eu proponho é o seguinte, com prazo e valor fechados. Posso te mandar por escrito hoje ainda?"
+
+
+
+ROTEIRO COMERCIAL
+Código:
+RC.001
+
+Reforma Tributária e Precificação
+Rev.: 02
+Folha 4 de 6
+
+6. OBJEÇÕES E RESPOSTAS
+
+O cliente diz
+Responda
+Erro a evitar
+"Isso é só em 2033, ainda falta muito."
+"Falta. Mas o reajuste em degraus, um pouco por ano, o cliente absorve. De uma vez em 2033, ele troca de fornecedor. Quem começa agora chega lá sem sobressalto."
+Concordar que dá para deixar para depois. Perde-se a venda inteira.
+"Meu concorrente não vai aumentar."
+"Talvez ele nem tenha calculado. Se comprar pior que o senhor, vai ter que aumentar mais. Quer descobrir isso antes ou depois?"
+Prometer vantagem competitiva. Não sabemos ainda.
+"Você não pode me dar um número certo?"
+"Posso dar o número e a margem de erro. A lei tem um ponto em aberto. Prefiro te dizer isso agora do que te explicar depois por que o número mudou."
+Ceder e dar número único para agradar. É aí que a conta volta para nós.
+"Isso não é obrigação do contador?"
+"Apuração e entrega são. Precificação é decisão de negócio e não está no contrato."
+Fazer de graça. Cria precedente na carteira inteira.
+"Vou esperar a lei ficar mais clara."
+"A parte que está clara já dá para calcular 98% do impacto. O que falta mexe em menos de 2%. Esperar não melhora a decisão, só encurta o prazo."
+Concordar em esperar. O cliente esquece e o assunto morre.
+"Quanto custa?"
+Item 7. Nunca improvisar valor na reunião.
+Dar valor de cabeça e depois voltar atrás.
+
+
+ROTEIRO COMERCIAL
+Código:
+RC.001
+
+Reforma Tributária e Precificação
+Rev.: 02
+Folha 5 de 6
+
+7. COMO PRECIFICAR O SERVIÇO
+
+Não venda por percentual de economia, porque em muitos casos não haverá economia. Venda por esforço, que é o que de fato consumimos. Preencha a coluna de valor com a hora técnica da Amcont.
+
+Entregável
+Horas
+Valor
+Escopo
+Diagnóstico de exposição
+2 a 3
+
+Classificação da faixa, simulação agregada e reunião de apresentação.
+Precificação por linha de produto
+8 a 16
+
+Levantamento de custos, apuração de créditos por fornecedor e preço sugerido por item.
+Análise da carteira de fornecedores
+4 a 6
+
+Comparação por custo real, identificação de quem não transfere crédito.
+Estudo de regime (Simples)
+3 a 5
+
+Ponto de virada, simulação nos dois cenários e parecer de recomendação.
+Acompanhamento anual da transição
+2 por ano
+
+Revisão do preço a cada virada de alíquota, de 2029 a 2033.
+
+SOBRE O REAJUSTE DE HONORÁRIOS DO CONTRATO
+A reforma aumenta o trabalho recorrente: novos campos na nota, apuração assistida, conta corrente fiscal e conciliação de créditos. Isso justifica reajuste do contrato e é conversa separada da consultoria de preço. Não misture as duas na mesma reunião.
+
+8. CHECKLIST ANTES DE CADA REUNIÃO
+
+Nº
+Conferir
+1
+A faixa de triagem do cliente está definida.
+2
+Os números dele já estão carregados na ferramenta. Nunca preencher na frente dele.
+3
+As alíquotas de CBS e IBS foram conferidas contra a norma vigente.
+4
+A proposta comercial está pronta para enviar no mesmo dia.
+5
+Você sabe dizer, sem consultar, qual é o impacto em 2027 e qual é em 2033.
+
+
+
+ROTEIRO COMERCIAL
+Código:
+RC.001
+
+Reforma Tributária e Precificação
+Rev.: 02
+Folha 6 de 6
+
+9. MENSAGENS PRONTAS
+
+Abertura por WhatsApp
+ENVIAR PARA CLIENTES DE FAIXA ALTA E MÉDIA
+"[Nome], tudo bem? Rodei uma simulação do impacto da reforma tributária no preço de venda da [Empresa], usando os números da sua própria escrituração. O resultado tem um ponto que vale a pena o senhor ver antes de fechar o preço do próximo ano. Consegue 40 minutos nesta semana?"
+
+E-mail depois da reunião
+ENVIAR NO MESMO DIA, COM A SIMULAÇÃO EM PDF ANEXA
+"[Nome], segue em anexo a simulação que vimos hoje. Três pontos para registro: (1) em 2027 e 2028 o impacto no seu preço é próximo de zero; (2) o impacto relevante se concentra entre 2029 e 2033, e por isso vale reajustar em degraus; (3) há um ponto da lei ainda em aberto que faz o valor variar dentro da faixa indicada no documento, e eu aviso assim que for definido. A proposta de trabalho segue em documento separado."
+
+Comunicado para clientes de faixa baixa
+ENVIO EM MASSA, SEM REUNIÃO
+"[Nome], fizemos uma primeira análise do impacto da reforma tributária na [Empresa]. A boa notícia é que o seu perfil de compras gera crédito suficiente para que o impacto no preço seja pequeno, e possivelmente favorável. Não é necessária nenhuma ação agora. Vamos reavaliar antes de 2029, quando as alíquotas começam a mudar de verdade."
+
+10. LIMITES DO QUE PODEMOS AFIRMAR
+
+Assunto
+Postura
+Alíquotas de CBS e IBS
+São estimativas divulgadas pelo governo. Sempre apresentar como estimativa, nunca como definitivo.
+CBS e IBS na base do ICMS e do ISS
+Ponto não pacificado. Sempre apresentar a faixa.
+Redução de alíquota do crédito
+Depende do fornecedor e do bem. Nunca assumir por padrão.
+Projeção até 2033
+Mantém o custo constante. É teto de impacto, não previsão.
+Decisão de preço
+É do cliente. Nós entregamos o cálculo e o cenário, não a decisão.
+
+Elaborado por:
+Andrei Constantino
+Aprovado por:
+Andrei Constantino
+Data de emissão:
+13/08/2026
+Revisão prevista:
+Antes de 01/2029

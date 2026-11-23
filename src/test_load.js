@@ -1,0 +1,11 @@
+const { chromium } = require('playwright'); const fs=require('fs');
+(async()=>{ const b=await chromium.launch(); const p=await b.newPage({acceptDownloads:true}); const errs=[]; p.on('pageerror',e=>errs.push(String(e)));
+ await p.goto('file:///home/claude/work/amcont-produto.html'); await p.fill('#senha','amcont2027'); await p.click('#form-gate button'); await p.waitForSelector('#app:not([hidden])');
+ await p.click('#tipo button[data-t=servico]'); await p.fill('#ncm','1.2301.22.00'); await p.waitForTimeout(150);
+ await p.click('#ficha input[value="1"]'); await p.fill('#pv','850');
+ const antes=await p.evaluate(()=>[TIPO,FICHA.cod,FICHA.sel,$("#trat").value,document.querySelector('#p-ano .val').textContent]);
+ const [dl]=await Promise.all([p.waitForEvent('download'),p.click('#b-salvar')]); const path='/tmp/claude-0/-home-claude/ad0e41b0-2ebc-575a-9ba1-f64b3d834613/scratchpad/est.json'; await dl.saveAs(path);
+ await p.reload(); await p.fill('#senha','amcont2027'); await p.click('#form-gate button'); await p.waitForSelector('#app:not([hidden])');
+ await p.setInputFiles('#arquivo',path); await p.waitForTimeout(300);
+ const depois=await p.evaluate(()=>[TIPO,FICHA.cod,FICHA.sel,$("#trat").value,document.querySelector('#p-ano .val').textContent]);
+ console.log(JSON.stringify(antes),JSON.stringify(depois),JSON.stringify(antes)===JSON.stringify(depois),errs); await b.close(); })();

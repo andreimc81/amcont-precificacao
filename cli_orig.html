@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Amcont · Calculadora de Preço na Reforma Tributária</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   AMCONT · CALCULADORA DE PREÇO NA REFORMA TRIBUTÁRIA
+   Arquivo único. Basta hospedar. Ver bloco CONFIG no script.
+   ============================================================ */
+:root{
+  --tinta:#10242A;
+  --petroleo:#2A5F6B;
+  --petroleo-2:#4A8593;
+  --petroleo-3:#8FB0B7;
+  --via:#E4EAE9;
+  --via-2:#F1F4F3;
+  --nota:#FCFCFA;
+  --linha:#C4CFCE;
+  --carimbo:#A63D1B;
+  --saldo:#2F6B4A;
+  --r:3px;
+  --sp:clamp(16px,2.2vw,26px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font:400 15px/1.55 "IBM Plex Sans",system-ui,sans-serif;
+  color:var(--tinta);background:var(--via);
+  padding-bottom:60px;
+}
+h1,h2,h3,.disp{font-family:"IBM Plex Sans Condensed",system-ui,sans-serif;font-weight:600;letter-spacing:.01em}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--carimbo);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--sp)}
+
+/* ---------- porta de entrada ---------- */
+#gate{
+  position:fixed;inset:0;z-index:99;display:grid;place-items:center;
+  background:var(--petroleo);padding:24px;
+}
+.gate-card{width:100%;max-width:380px;text-align:left}
+.gate-mark{font-family:"IBM Plex Sans Condensed";font-size:13px;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--petroleo-3);margin-bottom:10px}
+.gate-card h1{color:#fff;font-size:clamp(28px,5vw,38px);line-height:1.08;margin-bottom:8px}
+.gate-card p{color:var(--petroleo-3);font-size:14px;margin-bottom:26px}
+.gate-row{display:flex;gap:8px}
+#senha{
+  flex:1;min-width:0;background:rgba(255,255,255,.08);border:1px solid var(--petroleo-2);
+  color:#fff;padding:13px 14px;border-radius:var(--r);font-size:15px;
+  font-family:"IBM Plex Mono";letter-spacing:.14em;
+}
+#senha::placeholder{color:var(--petroleo-3);letter-spacing:normal;font-family:"IBM Plex Sans"}
+#gate button{
+  background:#fff;color:var(--petroleo);border:0;padding:13px 22px;border-radius:var(--r);
+  font:600 14px "IBM Plex Sans Condensed";letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+}
+#gate button:hover{background:var(--via)}
+#gate-erro{color:#F0B8A4;font-size:13px;margin-top:12px;min-height:18px}
+
+/* ---------- cabeçalho ---------- */
+header{background:var(--petroleo);color:#fff;padding:15px 0}
+.hd{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.hd .mark{font-family:"IBM Plex Sans Condensed";font-weight:700;font-size:19px;letter-spacing:.2em}
+.hd .sep{color:var(--petroleo-2)}
+.hd .sub{font-size:13.5px;color:var(--petroleo-3)}
+.hd .lei{margin-left:auto;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--petroleo-3)}
+
+/* ---------- abas ---------- */
+.abas{display:flex;gap:4px;padding-top:calc(var(--sp)*1.1);border-bottom:1px solid var(--linha)}
+.abas button{background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;
+  padding:9px 16px;font:600 13.5px "IBM Plex Sans Condensed";letter-spacing:.05em;
+  text-transform:uppercase;color:#5C6E72}
+.abas button[aria-selected=true]{color:var(--petroleo);border-bottom-color:var(--petroleo)}
+.abas .barra{margin-left:auto;display:flex;gap:8px;align-items:center;padding-bottom:6px}
+.btn{background:var(--via-2);border:1px solid var(--linha);color:var(--petroleo);
+  padding:7px 13px;border-radius:var(--r);font:500 12.5px "IBM Plex Sans";cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--petroleo-2)}
+.btn.forte{background:var(--petroleo);color:#fff;border-color:var(--petroleo)}
+.btn.forte:hover{background:var(--petroleo-2)}
+#aviso{margin-top:12px;padding:10px 14px;border-radius:var(--r);font-size:13px;display:none}
+#aviso.ok{background:#E4EFE8;color:var(--saldo);display:block}
+#aviso.err{background:#F6E3DC;color:var(--carimbo);display:block}
+
+/* ---------- configuracao ---------- */
+#tela-config{padding-top:calc(var(--sp)*1.2)}
+.cfg-cab{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;margin-bottom:6px}
+.cfg-cab h2{font-size:20px;color:var(--petroleo)}
+.cfg-meta{font-family:"IBM Plex Mono";font-size:11.5px;color:#5C6E72}
+.cfg-bloco{background:var(--nota);padding:20px var(--sp);margin-top:16px;box-shadow:0 1px 0 var(--linha)}
+.cfg-bloco h3{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--petroleo);padding-bottom:8px;border-bottom:1px solid var(--linha);margin-bottom:14px}
+.cfg-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px 16px}
+.cfg-tab{width:100%;border-collapse:collapse;font-size:13px}
+.cfg-tab th{text-align:left;font:600 10.5px "IBM Plex Mono";letter-spacing:.12em;text-transform:uppercase;
+  color:var(--petroleo-2);padding:0 8px 7px 0;border-bottom:1px solid var(--linha)}
+.cfg-tab td{padding:4px 8px 4px 0;border-bottom:1px solid #EEEDE8}
+.cfg-tab input{padding:6px 8px;font-size:13.5px}
+.cfg-tab td:first-child{font-weight:500;white-space:nowrap}
+.cfg-legal{font-size:12.5px;color:#5C6E72;line-height:1.5;margin-top:10px;max-width:80ch}
+
+/* ---------- grade ---------- */
+.grade{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:calc(var(--sp)*1.4);align-items:start;padding-top:calc(var(--sp)*1.4)}
+@media(max-width:900px){.grade{grid-template-columns:1fr;gap:var(--sp)}}
+
+/* ---------- painel de entrada ---------- */
+.bloco{margin-bottom:26px}
+.bloco-tit{
+  font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--petroleo);padding-bottom:7px;border-bottom:1px solid var(--linha);margin-bottom:14px;
+  display:flex;justify-content:space-between;align-items:baseline;
+}
+.bloco-tit em{font-style:normal;color:var(--petroleo-2);letter-spacing:.04em;text-transform:none;font-size:11px}
+label{display:block;font-size:13px;font-weight:500;margin-bottom:5px}
+.dica{font-size:12px;color:#5C6E72;margin-top:4px;line-height:1.4}
+.campo{margin-bottom:14px}
+input[type=number],input[type=text],select{
+  width:100%;padding:9px 11px;border:1px solid var(--linha);border-radius:var(--r);
+  background:var(--via-2);font:500 15px "IBM Plex Mono";color:var(--tinta);
+}
+select{font-family:"IBM Plex Sans";font-size:14px}
+input:hover,select:hover{border-color:var(--petroleo-2)}
+.dupla{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:420px){.dupla{grid-template-columns:1fr}}
+
+/* segmentos */
+.seg{display:flex;border:1px solid var(--linha);border-radius:var(--r);overflow:hidden;background:var(--via-2)}
+.seg button{
+  flex:1;padding:9px 6px;border:0;background:none;cursor:pointer;
+  font:500 13px "IBM Plex Sans";color:#4E6165;border-right:1px solid var(--linha);
+}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--petroleo);color:#fff;font-weight:600}
+
+/* ano */
+.anos{display:flex;gap:4px;flex-wrap:wrap}
+.anos button{
+  flex:1;min-width:52px;padding:8px 2px;border:1px solid var(--linha);border-radius:var(--r);
+  background:var(--via-2);cursor:pointer;font:500 13px "IBM Plex Mono";color:#4E6165;
+}
+.anos button[aria-pressed=true]{background:var(--petroleo);color:#fff;border-color:var(--petroleo)}
+.anos button:hover:not([aria-pressed=true]){border-color:var(--petroleo-2)}
+
+details{border-top:1px solid var(--linha);padding-top:12px;margin-top:6px}
+summary{cursor:pointer;font-size:12.5px;color:var(--petroleo);font-weight:500;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+ ";font-family:"IBM Plex Mono"}
+details[open] summary::before{content:"– "}
+details>div{padding-top:14px}
+
+/* ---------- a nota fiscal ---------- */
+.nota-col{position:sticky;top:var(--sp)}
+@media(max-width:900px){.nota-col{position:static}}
+.nota{
+  position:relative;background:var(--nota);padding:30px 26px 34px;
+  box-shadow:0 1px 0 var(--linha),0 14px 34px -20px rgba(16,36,42,.4);
+}
+.nota::before,.nota::after{
+  content:"";position:absolute;left:0;right:0;height:9px;
+  background:radial-gradient(circle at 7px 0,var(--via) 6.5px,transparent 7px) repeat-x;
+  background-size:14px 9px;
+}
+.nota::before{top:0}
+.nota::after{bottom:0;transform:rotate(180deg)}
+.nota-topo{display:flex;justify-content:space-between;align-items:baseline;
+  padding-bottom:12px;border-bottom:1px solid var(--linha);margin-bottom:18px}
+.nota-topo .t{font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--petroleo-2)}
+.nota-topo .a{font-family:"IBM Plex Mono";font-size:12px;font-weight:600;color:var(--petroleo)}
+
+.destaque{margin-bottom:20px}
+.destaque .rot{font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--petroleo-2);margin-bottom:2px}
+.destaque .val{font-family:"IBM Plex Mono";font-weight:600;
+  font-size:clamp(34px,5.4vw,46px);line-height:1.05;color:var(--petroleo);letter-spacing:-.02em}
+.destaque .cmp{font-size:13px;color:#5C6E72;margin-top:6px}
+.destaque .cmp b{font-weight:600;color:var(--tinta)}
+
+.linhas{border-top:1px dashed var(--linha);padding-top:12px}
+.li{display:flex;align-items:baseline;gap:6px;padding:4.5px 0;font-family:"IBM Plex Mono";font-size:13.5px}
+.li .n{white-space:nowrap}
+.li .p{flex:1;border-bottom:1px dotted var(--linha);transform:translateY(-3px);min-width:14px}
+.li .v{white-space:nowrap;font-variant-numeric:tabular-nums}
+.li.g{color:#5C6E72}
+.li.trib .n{color:var(--carimbo)}
+.li.trib .v{color:var(--carimbo)}
+.li.sum{border-top:2px solid var(--tinta);margin-top:10px;padding-top:9px;
+  font-weight:600;font-size:15px}
+.li .tag{font-size:10px;letter-spacing:.08em;color:var(--petroleo-3);padding-left:5px}
+
+@keyframes imprime{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+.anima .li{animation:imprime .22s ease-out backwards}
+@media(prefers-reduced-motion:reduce){.anima .li{animation:none}}
+
+/* tabela de tributos */
+.tt{display:grid;grid-template-columns:1fr auto auto auto;
+  font-family:"IBM Plex Mono";font-size:12.5px;font-variant-numeric:tabular-nums}
+.tt>div{padding:4px 0 4px 10px;border-bottom:1px solid #EEEDE8}
+.tt>div:first-child{padding-left:0}
+.tt .num{text-align:right;white-space:nowrap}
+.tt .sec{grid-column:1/-1;padding:13px 0 5px;border-bottom:1px solid var(--linha);
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--petroleo-2)}
+.tt .sec:first-child{padding-top:2px}
+.tt .hd{padding-bottom:6px;border-bottom:1px solid var(--linha);
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--petroleo-2)}
+.tt .nome{color:var(--tinta)}
+.tt .cr{color:var(--saldo)}
+.tt .zero{color:#AFBAB9}
+.tt .tot>div,.tt div.tot{font-weight:600;border-bottom:0;border-top:2px solid var(--tinta);
+  padding-top:7px;font-size:13.5px}
+.tt .var{grid-column:1/-1;padding:9px 0 0;border-bottom:0;font-family:"IBM Plex Sans";
+  font-size:12.5px;color:#4E6165}
+
+/* faixa de premissa */
+.faixa{margin-top:18px;padding:14px 16px;background:var(--via-2);border-left:3px solid var(--carimbo)}
+.faixa .ft{font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--carimbo);margin-bottom:9px}
+.escala{position:relative;height:44px;margin:0 4px 8px}
+.escala .trilho{position:absolute;top:13px;left:0;right:0;height:2px;background:var(--linha)}
+.escala .pt{position:absolute;top:8px;width:12px;height:12px;border-radius:50%;
+  background:var(--nota);border:2px solid var(--petroleo-3);transform:translateX(-50%)}
+.escala .pt.on{background:var(--carimbo);border-color:var(--carimbo);width:14px;height:14px;top:7px}
+.escala .lb{position:absolute;top:24px;font-family:"IBM Plex Mono";font-size:10px;
+  color:#5C6E72;white-space:nowrap}
+.escala .lb.on{color:var(--carimbo);font-weight:600}
+.faixa p{font-size:12.5px;color:#4E6165;line-height:1.5}
+.faixa b{color:var(--carimbo)}
+
+/* ---------- gráfico ---------- */
+.linhadotempo{margin-top:calc(var(--sp)*1.6);background:var(--nota);padding:24px var(--sp) 20px;
+  box-shadow:0 1px 0 var(--linha)}
+.lt-cab{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:6px}
+.lt-cab h2{font-size:19px;color:var(--petroleo)}
+.legenda{display:flex;gap:14px;flex-wrap:wrap;font-family:"IBM Plex Mono";font-size:11px;color:#4E6165}
+.legenda span{display:flex;align-items:center;gap:5px}
+.legenda i{width:10px;height:10px;display:block}
+#grafico{width:100%;height:auto;display:block;margin-top:6px}
+.lt-nota{font-size:12.5px;color:#5C6E72;margin-top:12px;max-width:76ch;line-height:1.5}
+
+/* ---------- rodapé ---------- */
+.rod{margin-top:calc(var(--sp)*1.6);border-top:1px solid var(--linha);padding-top:20px}
+.rod h3{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--petroleo);margin-bottom:10px}
+.rod ol{padding-left:18px;font-size:12.5px;color:#4E6165;line-height:1.65;max-width:82ch}
+.cta{margin-top:22px;background:var(--petroleo);color:#fff;padding:22px var(--sp);
+  display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.cta p{font-size:14.5px;max-width:56ch}
+.cta b{font-family:"IBM Plex Sans Condensed";font-size:17px;display:block;margin-bottom:3px}
+.cta a{background:#fff;color:var(--petroleo);text-decoration:none;padding:11px 20px;border-radius:var(--r);
+  font:600 14px "IBM Plex Sans Condensed";letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.cta a:hover{background:var(--via)}
+.btn-imprimir{background:none;border:1px solid var(--linha);color:var(--petroleo);
+  padding:8px 14px;border-radius:var(--r);font:500 12.5px "IBM Plex Sans";cursor:pointer}
+.btn-imprimir:hover{border-color:var(--petroleo-2)}
+
+@media print{
+  #gate,.cta a,.btn-imprimir,details{display:none!important}
+  body{background:#fff}
+  .grade{grid-template-columns:1fr 1fr}
+  .nota{box-shadow:none;border:1px solid #999}
+  .nota::before,.nota::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== PORTA DE ENTRADA ===================== -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-mark">Amcont</div>
+    <h1>Calculadora de preço na reforma tributária</h1>
+    <p>Ferramenta exclusiva para clientes. Informe a senha que a Amcont enviou.</p>
+    <form class="gate-row" id="form-gate">
+      <input id="senha" type="password" placeholder="Senha de acesso" autocomplete="current-password" aria-label="Senha de acesso">
+      <button type="submit">Entrar</button>
+    </form>
+    <div id="gate-erro" role="alert"></div>
+  </div>
+</div>
+
+<!-- ===================== APLICAÇÃO ===================== -->
+<div id="app" hidden>
+<header>
+  <div class="wrap hd">
+    <span class="mark">AMCONT</span>
+    <span class="sep">|</span>
+    <span class="sub">Calculadora de preço na reforma tributária</span>
+    <span class="lei">LC 214/2025</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="abas" role="tablist">
+    <button type="button" id="ab-sim" role="tab" aria-selected="true">Simular</button>
+    <button type="button" id="ab-cfg" role="tab" aria-selected="false">Configurar</button>
+    <span class="barra">
+      <button type="button" class="btn" id="b-abrir">Abrir simulação</button>
+      <button type="button" class="btn forte" id="b-salvar">Salvar simulação</button>
+    </span>
+  </div>
+  <div id="aviso" role="status"></div>
+
+  <div id="tela-sim">
+  <div class="grade">
+
+    <!-- ---------- entradas ---------- -->
+    <section aria-label="Dados da sua empresa">
+
+      <div class="bloco">
+        <div class="bloco-tit">O que você quer calcular</div>
+        <div class="seg" id="seg-modo" role="group" aria-label="Modo de cálculo">
+          <button type="button" data-v="custo" aria-pressed="true">Preço de um produto novo</button>
+          <button type="button" data-v="reajuste" aria-pressed="false">Reajuste do preço atual</button>
+        </div>
+        <p class="dica" id="dica-modo">Parte do custo do produto e monta o preço com sua margem.</p>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-tit">Sua empresa</div>
+        <div class="campo">
+          <label for="regime">Regime tributário</label>
+          <select id="regime">
+            <option value="presumido">Lucro Presumido</option>
+            <option value="real">Lucro Real</option>
+            <option value="simples">Simples Nacional</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="setor">Atividade</label>
+          <select id="setor">
+            <option value="comercio">Comércio</option>
+            <option value="industria">Indústria</option>
+            <option value="carga">Transporte de cargas</option>
+            <option value="passageiros">Transporte de passageiros</option>
+            <option value="servicos">Serviços em geral</option>
+            <option value="hospitalar">Serviços com equiparação hospitalar</option>
+            <option value="combustivel">Revenda de combustíveis</option>
+          </select>
+          <p class="dica" id="dica-setor"></p>
+        </div>
+        <div class="campo" id="c-imposto">
+          <label for="imposto" id="lb-imposto">Alíquota de ICMS nas suas vendas</label>
+          <input id="imposto" type="number" step="0.01" value="12">
+          <p class="dica">Em percentual. Na dúvida, confirme com a Amcont.</p>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-tit">Ano <em>arraste ao longo da transição</em></div>
+        <div class="anos" id="anos" role="group" aria-label="Ano de referência"></div>
+        <p class="dica" id="dica-ano"></p>
+      </div>
+
+      <!-- modo custo -->
+      <div class="bloco" id="bloco-custo">
+        <div class="bloco-tit">Custo e margem</div>
+        <div class="campo">
+          <label for="custo">Custo do produto, já sem os impostos recuperáveis</label>
+          <input id="custo" type="number" step="0.01" value="500">
+        </div>
+        <div class="dupla">
+          <div class="campo">
+            <label for="desp">Despesas (%)</label>
+            <input id="desp" type="number" step="0.01" value="9.86">
+          </div>
+          <div class="campo">
+            <label for="lucro">Lucro desejado (%)</label>
+            <input id="lucro" type="number" step="0.01" value="10">
+          </div>
+        </div>
+        <p class="dica">Percentuais calculados sobre a receita líquida, não sobre o custo.</p>
+      </div>
+
+      <!-- modo reajuste -->
+      <div class="bloco" id="bloco-reajuste" hidden>
+        <div class="bloco-tit">Faturamento e gastos do ano</div>
+        <div class="campo">
+          <label for="receita">Faturamento bruto anual de hoje</label>
+          <input id="receita" type="number" step="0.01" value="3100000">
+        </div>
+        <p class="dica" style="margin:-4px 0 12px">Separe as entradas do ano pelo tipo de crédito de CBS e IBS que cada uma gera. Na dúvida sobre em qual grupo lançar, consulte a Amcont.</p>
+        <div class="campo">
+          <label for="g-integral">Entradas com crédito integral</label>
+          <input id="g-integral" type="number" step="0.01" value="340000">
+          <p class="dica">Fornecedores do regime regular, sem redução de alíquota.</p>
+        </div>
+        <div class="campo">
+          <label for="g-red30">Entradas com redução de 30%</label>
+          <input id="g-red30" type="number" step="0.01" value="0">
+        </div>
+        <div class="campo">
+          <label for="g-red60">Entradas com redução de 60%</label>
+          <input id="g-red60" type="number" step="0.01" value="1200000">
+          <p class="dica">Alimentos, saúde, educação, insumos agropecuários e demais itens da lista da LC 214.</p>
+        </div>
+        <div class="campo">
+          <label for="g-red70">Entradas com redução de 70%</label>
+          <input id="g-red70" type="number" step="0.01" value="120000">
+          <p class="dica">Aluguel de imóvel e demais hipóteses de redução de 70%.</p>
+        </div>
+        <div class="campo">
+          <label for="g-sem">Entradas sem crédito</label>
+          <input id="g-sem" type="number" step="0.01" value="720000">
+          <p class="dica">Folha, pró-labore, fornecedor do Simples tradicional e gastos sem nota de empresa.</p>
+        </div>
+        <div class="campo" id="c-bimp">
+          <label for="g-bimp" id="lb-bimp">Do total acima, quanto gera crédito de ICMS</label>
+          <input id="g-bimp" type="number" step="0.01" value="1200000">
+        </div>
+        <div class="campo" id="c-bipi" hidden>
+          <label for="g-bipi">Do total acima, quanto gera crédito de IPI</label>
+          <input id="g-bipi" type="number" step="0.01" value="1200000">
+        </div>
+        <div class="campo" id="c-ipi" hidden>
+          <label for="imposto-ipi">Alíquota de IPI nas suas saídas (%)</label>
+          <input id="imposto-ipi" type="number" step="0.01" value="10">
+        </div>
+        <div class="campo" id="c-lucroreal" hidden>
+          <label for="lucroliq">Lucro líquido anual antes dos tributos</label>
+          <input id="lucroliq" type="number" step="0.01" value="100000">
+        </div>
+      </div>
+
+      <!-- simples -->
+      <div class="bloco" id="bloco-simples" hidden>
+        <div class="bloco-tit">Seu Simples Nacional</div>
+        <div class="campo">
+          <label for="anexo">Anexo</label>
+          <select id="anexo">
+            <option value="I">Anexo I · Comércio</option>
+            <option value="II">Anexo II · Indústria</option>
+            <option value="III">Anexo III · Serviços</option>
+            <option value="IV">Anexo IV · Serviços sem CPP</option>
+            <option value="V">Anexo V · Serviços</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="aliqsn">Alíquota efetiva do seu DAS (%)</label>
+          <input id="aliqsn" type="number" step="0.001" value="9.403">
+          <p class="dica">Está no seu extrato do PGDAS. Se não souber, peça à Amcont.</p>
+        </div>
+      </div>
+
+      <details>
+        <summary>Ajustes avançados</summary>
+        <div>
+          <div class="campo">
+            <label for="premissa">Como tratar CBS e IBS na base do ICMS e do ISS</label>
+            <select id="premissa">
+              <option value="prof">Compõem a base (leitura mais conservadora)</option>
+              <option value="lc">Excluir CBS e IBS da própria base (LC 214, art. 12)</option>
+              <option value="plp">Não compõem a base do ICMS e do ISS (PLP 16/2025)</option>
+            </select>
+            <p class="dica">A lei ainda não resolveu esse ponto. O resultado principal segue a opção escolhida e a faixa de variação aparece abaixo da nota.</p>
+          </div>
+          <div class="dupla">
+            <div class="campo">
+              <label for="a-cbs27">CBS em 2027 e 2028 (%)</label>
+              <input id="a-cbs27" type="number" step="0.001" value="9.2">
+            </div>
+            <div class="campo">
+              <label for="a-ibs27">IBS em 2027 e 2028 (%)</label>
+              <input id="a-ibs27" type="number" step="0.001" value="0.1">
+            </div>
+          </div>
+          <div class="dupla">
+            <div class="campo">
+              <label for="a-cbs">CBS a partir de 2029 (%)</label>
+              <input id="a-cbs" type="number" step="0.01" value="9.3">
+            </div>
+            <div class="campo">
+              <label for="a-ibs">IBS no regime pleno (%)</label>
+              <input id="a-ibs" type="number" step="0.01" value="18.7">
+            </div>
+          </div>
+          <p class="dica" style="margin-top:-8px;margin-bottom:14px">Alíquotas ainda não definitivas. Confira contra a norma vigente antes de decidir.</p>
+          <div class="dupla">
+            <div class="campo">
+              <label for="p-irpj">Presunção de IRPJ (%)</label>
+              <input id="p-irpj" type="number" step="0.1" value="8">
+            </div>
+            <div class="campo">
+              <label for="p-csll">Presunção de CSLL (%)</label>
+              <input id="p-csll" type="number" step="0.1" value="12">
+            </div>
+          </div>
+          <p class="dica" style="margin-top:-8px;margin-bottom:14px">Preenchidas automaticamente pela atividade. Edite apenas se houver enquadramento específico.</p>
+          <div class="campo" id="c-reducao">
+            <label for="reducao">Redução de alíquota nas suas vendas</label>
+            <select id="reducao">
+              <option value="0">Sem redução, alíquota integral</option>
+              <option value="0.3">Redução de 30%</option>
+              <option value="0.6">Redução de 60% (saúde, educação, alimentos e outros)</option>
+              <option value="0.7">Redução de 70%</option>
+            </select>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- ---------- nota fiscal ---------- -->
+    <section class="nota-col" aria-live="polite" aria-label="Resultado">
+      <div class="nota">
+        <div class="nota-topo">
+          <span class="t">Simulação de nota fiscal</span>
+          <span class="a mono" id="nt-ano">2027</span>
+        </div>
+        <div class="destaque">
+          <div class="rot" id="nt-rotulo">Preço de venda sugerido</div>
+          <div class="val mono" id="nt-preco">R$ 0,00</div>
+          <div class="cmp" id="nt-comparativo"></div>
+        </div>
+        <div class="linhas" id="nt-linhas"></div>
+      </div>
+
+      <div class="faixa">
+        <div class="ft">Faixa de risco da premissa jurídica</div>
+        <div class="escala" id="escala" aria-hidden="true"></div>
+        <p id="faixa-txt"></p>
+      </div>
+      <p style="margin-top:14px"><button class="btn-imprimir" onclick="window.print()">Imprimir ou salvar em PDF</button></p>
+    </section>
+  </div>
+
+  <!-- ---------- linha do tempo ---------- -->
+  <section class="linhadotempo">
+    <div class="lt-cab">
+      <h2>Como o seu preço se comporta até 2033</h2>
+      <div class="legenda" id="legenda"></div>
+    </div>
+    <svg id="grafico" viewBox="0 0 900 300" role="img" aria-label="Composição do preço de venda de 2026 a 2033"></svg>
+    <p class="lt-nota" id="lt-nota"></p>
+  </section>
+
+  </div><!-- fim tela-sim -->
+
+  <!-- ---------- configuracao ---------- -->
+  <div id="tela-config" hidden>
+    <div class="cfg-cab">
+      <h2>Parâmetros de cálculo</h2>
+      <span class="cfg-meta" id="cfg-versao"></span>
+    </div>
+    <p class="cfg-legal" id="cfg-aviso-legal"></p>
+
+    <div class="cfg-bloco">
+      <h3>Premissa jurídica padrão</h3>
+      <div class="campo" style="max-width:520px;margin:0">
+        <select id="cfg-premissa">
+          <option value="prof">Compõem a base do ICMS e do ISS (leitura conservadora)</option>
+          <option value="lc">Excluir CBS e IBS da própria base (LC 214, art. 12)</option>
+          <option value="plp">Não compõem a base do ICMS e do ISS (PLP 16/2025)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="cfg-bloco">
+      <h3>Linha do tempo da transição</h3>
+      <table class="cfg-tab"><thead><tr><th>Ano</th><th>CBS</th><th>IBS</th><th>Fator ICMS e ISS</th></tr></thead>
+      <tbody id="cfg-transicao"></tbody></table>
+      <p class="cfg-legal">Percentuais. O fator reduz o ICMS ou o ISS vigente, conforme o art. 128 do ADCT.</p>
+    </div>
+
+    <div class="cfg-bloco">
+      <h3>Presunções de IRPJ e CSLL por atividade</h3>
+      <table class="cfg-tab"><thead><tr><th>Atividade</th><th>IRPJ</th><th>CSLL</th><th>Redução na saída</th></tr></thead>
+      <tbody id="cfg-ativ"></tbody></table>
+    </div>
+
+    <div class="cfg-bloco">
+      <h3>Regime atual, tributos sobre o lucro e reduções</h3>
+      <div class="cfg-grade" id="cfg-geral"></div>
+    </div>
+
+    <div class="cfg-bloco">
+      <h3>Repartição do DAS por anexo do Simples</h3>
+      <table class="cfg-tab"><thead><tr><th>Anexo</th><th>IRPJ</th><th>CSLL</th><th>COFINS</th><th>PIS</th><th>CPP</th><th>IPI</th><th>ICMS</th><th>ISS</th></tr></thead>
+      <tbody id="cfg-anexos"></tbody></table>
+      <p class="cfg-legal">Proporções da faixa mais comum de cada anexo. Confira o extrato do PGDAS do cliente.</p>
+    </div>
+
+    <p style="margin-top:18px;display:flex;gap:8px;flex-wrap:wrap">
+      <button type="button" class="btn forte" id="b-cfg-salvar">Salvar parâmetros</button>
+      <button type="button" class="btn" id="b-cfg-exportar">Exportar JSON</button>
+      <button type="button" class="btn" id="b-cfg-importar">Importar JSON</button>
+      <button type="button" class="btn" id="b-cfg-restaurar">Restaurar padrão</button>
+    </p>
+    <p class="cfg-legal">Os parâmetros ficam gravados neste navegador e valem para todos os cálculos.
+      Restaurar padrão volta aos valores do bloco original deste arquivo.</p>
+  </div>
+
+  <input type="file" id="arquivo" accept="application/json,.json" hidden>
+
+  <div class="rod" id="rodape-notas">
+    <h3>Antes de usar este número</h3>
+    <ol>
+      <li>As alíquotas de CBS e IBS ainda são estimativas divulgadas pelo governo e podem mudar até a vigência.</li>
+      <li>A lei não definiu se CBS e IBS entram na base de cálculo do ICMS e do ISS. Por isso a ferramenta mostra uma faixa, e não um número único.</li>
+      <li>O crédito depende do regime de cada fornecedor e da natureza de cada bem. Aqui ele é estimado por grupos de gasto.</li>
+      <li>A projeção até 2033 mantém o custo constante e não captura o ganho de crédito ao longo da cadeia. Trate como teto de impacto.</li>
+      <li>Esta é uma simulação de apoio à decisão. Não substitui a análise individualizada das suas operações.</li>
+    </ol>
+  </div>
+
+  <div class="cta">
+    <p><b>Quer o cálculo aplicado ao seu caso real?</b>A Amcont analisa suas notas de entrada e saída e monta a precificação produto a produto, com memória de cálculo.</p>
+    <a href="#" id="cta-link">Falar com a Amcont</a>
+  </div>
+</main>
+</div>
+
+<script type="application/json" id="amcont-parametros">
+{
+ "app": "amcont-precificacao",
+ "versaoDados": "2026.1",
+ "atualizadoEm": "2026-08-13",
+ "fonte": "EC 132/2023; LC 214/2025; LC 227/2026; Lei 9.249/1995; Lei 14.592/2023",
+ "avisoLegal": "As aliquotas de CBS e IBS sao estimativas divulgadas pelo governo e nao texto legal. Confira contra a norma vigente antes de usar com cliente.",
+ "premissaPadrao": "prof",
+ "transicao": [
+  {
+   "ano": 2026,
+   "cbs": 0.0,
+   "ibs": 0.0,
+   "fatorIcmsIss": 1.0
+  },
+  {
+   "ano": 2027,
+   "cbs": 0.092,
+   "ibs": 0.001,
+   "fatorIcmsIss": 1.0
+  },
+  {
+   "ano": 2028,
+   "cbs": 0.092,
+   "ibs": 0.001,
+   "fatorIcmsIss": 1.0
+  },
+  {
+   "ano": 2029,
+   "cbs": 0.093,
+   "ibs": 0.0187,
+   "fatorIcmsIss": 0.9
+  },
+  {
+   "ano": 2030,
+   "cbs": 0.093,
+   "ibs": 0.0374,
+   "fatorIcmsIss": 0.8
+  },
+  {
+   "ano": 2031,
+   "cbs": 0.093,
+   "ibs": 0.0561,
+   "fatorIcmsIss": 0.7
+  },
+  {
+   "ano": 2032,
+   "cbs": 0.093,
+   "ibs": 0.0748,
+   "fatorIcmsIss": 0.6
+  },
+  {
+   "ano": 2033,
+   "cbs": 0.093,
+   "ibs": 0.187,
+   "fatorIcmsIss": 0.0
+  }
+ ],
+ "reducoes": {
+  "integral": 0.0,
+  "red30": 0.3,
+  "red60": 0.6,
+  "red70": 0.7,
+  "sem": 1.0
+ },
+ "regimeAtual": {
+  "pisCumulativo": 0.0065,
+  "cofinsCumulativo": 0.03,
+  "pisNaoCumulativo": 0.0165,
+  "cofinsNaoCumulativo": 0.076
+ },
+ "lucro": {
+  "aliqIrpj": 0.15,
+  "aliqCsll": 0.09,
+  "limiteAdicional": 240000,
+  "aliqAdicional": 0.1
+ },
+ "atividades": [
+  {
+   "id": "comercio",
+   "nome": "Comércio",
+   "imposto": "ICMS",
+   "ipi": false,
+   "presIrpj": 0.08,
+   "presCsll": 0.12,
+   "redSaida": 0.0,
+   "dica": "Presunção de 8% para IRPJ e 12% para CSLL."
+  },
+  {
+   "id": "industria",
+   "nome": "Indústria",
+   "imposto": "ICMS",
+   "ipi": true,
+   "presIrpj": 0.08,
+   "presCsll": 0.12,
+   "redSaida": 0.0,
+   "dica": "Presunção de 8% e 12%. O IPI é apurado à parte."
+  },
+  {
+   "id": "carga",
+   "nome": "Transporte de cargas",
+   "imposto": "ICMS",
+   "ipi": false,
+   "presIrpj": 0.08,
+   "presCsll": 0.12,
+   "redSaida": 0.0,
+   "dica": "Transporte de cargas tem presunção de 8% para IRPJ e 12% para CSLL."
+  },
+  {
+   "id": "passageiros",
+   "nome": "Transporte de passageiros",
+   "imposto": "ICMS",
+   "ipi": false,
+   "presIrpj": 0.16,
+   "presCsll": 0.12,
+   "redSaida": 0.6,
+   "dica": "Transporte de passageiros tem presunção de 16% para IRPJ e 12% para CSLL."
+  },
+  {
+   "id": "servicos",
+   "nome": "Serviços em geral",
+   "imposto": "ISS",
+   "ipi": false,
+   "presIrpj": 0.32,
+   "presCsll": 0.32,
+   "redSaida": 0.0,
+   "dica": "Serviços em geral têm presunção de 32% para IRPJ e para CSLL."
+  },
+  {
+   "id": "hospitalar",
+   "nome": "Serviços com equiparação hospitalar",
+   "imposto": "ISS",
+   "ipi": false,
+   "presIrpj": 0.08,
+   "presCsll": 0.12,
+   "redSaida": 0.6,
+   "dica": "Equiparação hospitalar reduz a presunção de 32% para 8% e 12%. Exige sociedade empresária e atendimento às normas da Anvisa."
+  },
+  {
+   "id": "combustivel",
+   "nome": "Revenda de combustíveis",
+   "imposto": "ICMS",
+   "ipi": false,
+   "presIrpj": 0.016,
+   "presCsll": 0.12,
+   "redSaida": 0.0,
+   "dica": "Revenda de combustíveis tem presunção de 1,6% para IRPJ."
+  }
+ ],
+ "simplesAnexos": {
+  "I": {
+   "irpj": 0.055,
+   "csll": 0.035,
+   "cofins": 0.1274,
+   "pis": 0.0276,
+   "cpp": 0.42,
+   "ipi": 0,
+   "icms": 0.335,
+   "iss": 0
+  },
+  "II": {
+   "irpj": 0.055,
+   "csll": 0.035,
+   "cofins": 0.1151,
+   "pis": 0.0249,
+   "cpp": 0.375,
+   "ipi": 0.075,
+   "icms": 0.32,
+   "iss": 0
+  },
+  "III": {
+   "irpj": 0.04,
+   "csll": 0.035,
+   "cofins": 0.1282,
+   "pis": 0.0278,
+   "cpp": 0.434,
+   "ipi": 0,
+   "icms": 0,
+   "iss": 0.335
+  },
+  "IV": {
+   "irpj": 0.188,
+   "csll": 0.152,
+   "cofins": 0.1767,
+   "pis": 0.0383,
+   "cpp": 0,
+   "ipi": 0,
+   "icms": 0,
+   "iss": 0.445
+  },
+  "V": {
+   "irpj": 0.25,
+   "csll": 0.15,
+   "cofins": 0.141,
+   "pis": 0.0305,
+   "cpp": 0.2885,
+   "ipi": 0,
+   "icms": 0,
+   "iss": 0.14
+  }
+ }
+}
+</script>
+
+<script>
+"use strict";
+/* ============================================================
+   CONFIG · edite aqui para personalizar
+   ------------------------------------------------------------
+   SENHA_SHA256 : hash SHA-256 da senha. Para gerar outra, abra o
+                  console do navegador e rode:
+                  crypto.subtle.digest('SHA-256', new TextEncoder()
+                    .encode('SUA-SENHA')).then(b=>console.log(
+                    [...new Uint8Array(b)].map(x=>x.toString(16)
+                    .padStart(2,'0')).join('')))
+                  Atenção: senha no navegador é barreira de
+                  conveniência, não segurança. Não coloque dado
+                  sigiloso de cliente nesta página.
+   CONTATO      : link do botão final (WhatsApp, e-mail ou site).
+   ============================================================ */
+const CONFIG = {
+  SENHA_SHA256: "",
+  SENHA_PADRAO: "amcont2027",
+  CONTATO: "https://wa.me/5500000000000",
+  // true esconde a aba Configurar. Use true na versao enviada ao cliente.
+  MODO_CLIENTE: true
+};
+
+/* ---------- porta de entrada ---------- */
+async function sha256(t){
+  const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
+}
+let HASH_ALVO = null;
+sha256(CONFIG.SENHA_PADRAO).then(h => { HASH_ALVO = CONFIG.SENHA_SHA256 || h; });
+
+document.getElementById("form-gate").addEventListener("submit", async e => {
+  e.preventDefault();
+  const v = document.getElementById("senha").value;
+  const h = await sha256(v);
+  const alvo = HASH_ALVO || await sha256(CONFIG.SENHA_PADRAO);
+  if (h === alvo) {
+    document.getElementById("gate").remove();
+    document.getElementById("app").hidden = false;
+    calcular(true);
+  } else {
+    document.getElementById("gate-erro").textContent = "Senha incorreta. Confira o e-mail que a Amcont enviou.";
+    document.getElementById("senha").value = "";
+    document.getElementById("senha").focus();
+  }
+});
+
+/* ============================================================
+   MOTOR DE CÁLCULO
+   Espelha a planilha Amcont. Conferido contra 66 pontos de
+   controle dos casos práticos de referência.
+   ============================================================ */
+/* ------------------------------------------------------------
+   Os parametros vem do bloco JSON com id "amcont-parametros",
+   no topo deste arquivo. Para atualizar uma aliquota basta editar
+   aquele bloco: nenhuma linha de codigo precisa ser tocada.
+   A aba Configurar grava um ajuste local que se sobrepoe ao bloco.
+   ------------------------------------------------------------ */
+const PADRAO = JSON.parse(document.getElementById("amcont-parametros").textContent);
+const CHAVE  = "amcont_precificacao_";
+const clonar = o => JSON.parse(JSON.stringify(o));
+
+let PARAM = clonar(PADRAO);
+try {
+  const salvo = localStorage.getItem(CHAVE + "parametros");
+  if (salvo) PARAM = Object.assign(clonar(PADRAO), JSON.parse(salvo));
+} catch(e){ }
+
+const ANOS = PARAM.transicao.map(t => t.ano);
+const RED  = () => PARAM.reducoes;
+const AL   = () => PARAM.lucro;
+const RA   = () => PARAM.regimeAtual;
+
+function aliquotas(ano){
+  const t = PARAM.transicao.find(x => x.ano === ano) || PARAM.transicao[0];
+  return {cbs:t.cbs, ibs:t.ibs, fator:t.fatorIcmsIss};
+}
+
+/* Presunções de IRPJ e CSLL por atividade (arts. 15 e 20 da Lei 9.249/1995).
+   Serviços hospitalares e equiparados seguem 8% e 12% desde que a empresa
+   seja sociedade empresária e atenda às normas da Anvisa. */
+let ATIV = {};
+function montarAtividades(){
+  ATIV = {};
+  PARAM.atividades.forEach(a => ATIV[a.id] = {
+    imp:a.imposto, ipi:a.ipi, pi:a.presIrpj*100, pc:a.presCsll*100,
+    red:a.redSaida, nome:a.nome, dica:a.dica});
+}
+montarAtividades();
+const adicionalIRPJ = base => Math.max(0, base - AL().limiteAdicional) * AL().aliqAdicional;
+
+/* --- Motor A: preço a partir do custo --- */
+function motorCusto(o){
+  const P0 = o.custo/(1-o.desp-o.lucro);
+  const a = aliquotas(o.ano);
+  const c = a.cbs*(1-o.redSaida), b = a.ibs*(1-o.redSaida);
+  const i = o.imposto*a.fator;
+  const tpc = (o.ano===2026 ? o.pis+o.cofins : 0)*(1-i);
+  let NF, bc;
+  if (o.premissa === "prof"){
+    NF = P0/(1-i-tpc-(c+b)*(1-i));  bc = NF*(1-i);
+  } else if (o.premissa === "lc"){
+    NF = P0/(1-i-tpc-(c+b)*(1-i)/(1+c+b));  bc = NF*(1-i)/(1+c+b);
+  } else {
+    const vop = P0/(1-i-tpc);  bc = vop*(1-i);  NF = vop + bc*(c+b);
+  }
+  const baseImp = (o.premissa==="plp") ? NF-bc*(c+b) : NF;
+  const icms = baseImp*i;
+  const pis    = o.ano===2026 ? (NF-icms)*o.pis    : 0;
+  const cofins = o.ano===2026 ? (NF-icms)*o.cofins : 0;
+  return {NF, bc, icms, cbs:bc*c, ibs:bc*b, pis, cofins,
+          P0, despesas:P0*o.desp, lucroV:P0*o.lucro, markup:NF/o.custo, aliq:{c,b,i}};
+}
+
+/* --- Motor B: reajuste preservando a receita líquida --- */
+function motorReajuste(o){
+  const a = aliquotas(o.ano);
+  const c = a.cbs*(1-o.redSaida), b = a.ibs*(1-o.redSaida);
+  const i = o.imposto*a.fator, iAtual = o.imposto;
+  const real = o.regime === "real";
+
+  // créditos de CBS e IBS por grupo de gasto
+  let credC = 0, credB = 0;
+  o.gastos.forEach(g => {
+    const ac = a.cbs*(1-g.red), ab = a.ibs*(1-g.red);
+    credC += ac ? (g.valor/(1+ac))*ac : 0;
+    credB += ab ? (g.valor/(1+ab))*ab : 0;
+  });
+  const cred = credC + credB;
+
+  /* ---------- cenário de hoje ---------- */
+  const pisD = real ? (o.receita-o.receita*iAtual)*RA().pisNaoCumulativo : o.receita*o.pis;
+  const cofD = real ? (o.receita-o.receita*iAtual)*RA().cofinsNaoCumulativo : o.receita*o.cofins;
+  const bcPC = real ? o.gastos.filter(g=>g.pc).reduce((s,g)=>s+g.valor,0)*(1-iAtual) : 0;
+  const pisC = bcPC*RA().pisNaoCumulativo, cofC = bcPC*RA().cofinsNaoCumulativo;
+  const impD_a = o.receita*iAtual;
+  // O ISS é cumulativo e não gera crédito na entrada. Só o ICMS gera.
+  const impC   = o.nomeImp === "ICMS" ? o.baseImp*iAtual : 0;
+  const ipiD_a = o.receita*o.ipi;
+  const ipiC   = o.ipi ? o.baseIpi*o.ipi : 0;
+
+  const bIrpjA = real ? o.lucroLiq : o.receita*o.presIrpj;
+  const bCsllA = real ? o.lucroLiq : o.receita*o.presCsll;
+  const irpjA = bIrpjA*AL().aliqIrpj, adicA = adicionalIRPJ(bIrpjA), csllA = bCsllA*AL().aliqCsll;
+
+  const nfAntes = o.receita + (ipiD_a - ipiC);
+  const tribAntes = (pisD-pisC)+(cofD-cofC)+(impD_a-impC)+(ipiD_a-ipiC)+irpjA+adicA+csllA;
+  const liqAntes = nfAntes - tribAntes;
+
+  /* ---------- cenário do ano escolhido ----------
+     O adicional de IRPJ só incide acima de R$ 240.000, o que cria um degrau na
+     equação dos tributos por dentro. As duas hipóteses são calculadas em forma
+     fechada e a coerente é adotada. Mesmo algoritmo da planilha Amcont. */
+  const rBase = real ? 0 : (o.presIrpj*AL().aliqIrpj + o.presCsll*AL().aliqCsll);
+  const base0 = liqAntes - impC + (o.ipi ? ipiC : 0) - cred;
+
+  function hipotese(comAdic){
+    const r = rBase + (comAdic && !real ? o.presIrpj*AL().aliqAdicional : 0);
+    const base = base0 - (comAdic && !real ? AL().limiteAdicional*AL().aliqAdicional : 0);
+    const A  = base/(1-i-r);
+    const bc = (o.premissa === "lc") ? A*(1-i)/(1+c+b) : A*(1-i);
+    const cbsD = bc*c, ibsD = bc*b;
+    const cbsNF = (o.premissa === "plp") ? cbsD : cbsD/(1-i);
+    const ibsNF = (o.premissa === "plp") ? ibsD : ibsD/(1-i);
+    const k = r/(1-i);
+    const NF = (A + cbsNF + ibsNF - k*(cbsD+ibsD+A))/(1-k);
+    const BL = NF - cbsD - ibsD;
+    return {NF, A, bc, cbsD, ibsD, cbsNF, ibsNF, BL,
+            bIrpj: real ? o.lucroLiq : BL*o.presIrpj};
+  }
+
+  const h1 = hipotese(false);
+  const s = (real || h1.bIrpj <= AL().limiteAdicional) ? h1 : hipotese(true);
+
+  const impD = ((o.premissa === "plp") ? s.NF-s.cbsNF-s.ibsNF : s.NF)*i;
+  const bCsll = real ? o.lucroLiq : s.BL*o.presCsll;
+  const irpj = s.bIrpj*AL().aliqIrpj, adic = adicionalIRPJ(s.bIrpj), csll = bCsll*AL().aliqCsll;
+  const cbsRec = s.cbsD-credC, ibsRec = s.ibsD-credB;
+  const tribApos = cbsRec+ibsRec+(impD-impC)+irpj+adic+csll;
+
+  return {NF:s.NF, nfAntes, tribAntes, liqAntes, tribApos, liqApos:s.NF-tribApos,
+          cbs:s.cbsD, ibs:s.ibsD, cbsRec, ibsRec, icms:impD-impC, irpj, csll, adic,
+          cred, credC, credB, base:base0, variacao:s.NF/nfAntes-1, aliq:{c,b,i},
+          hipotese: (s === h1 ? 1 : 2),
+          det:{
+            hoje:[["PIS",pisD,pisC],["COFINS",cofD,cofC],[o.nomeImp,impD_a,impC],
+                  ["IPI",ipiD_a,ipiC],["IRPJ",irpjA,0],["Adicional de IRPJ",adicA,0],
+                  ["CSLL",csllA,0]],
+            ano:[["CBS",s.cbsD,credC],["IBS",s.ibsD,credB],[o.nomeImp,impD,impC],
+                 ["IRPJ",irpj,0],["Adicional de IRPJ",adic,0],["CSLL",csll,0]]
+          }};
+}
+
+/* --- Motor C: Simples Nacional --- */
+const REP = () => PARAM.simplesAnexos;
+function motorSimples(o){
+  const a = aliquotas(o.ano);
+  const c = a.cbs*(1-o.redSaida), b = a.ibs*(1-o.redSaida);
+  const p = REP()[o.anexo], T = o.aliqSN;
+  const Th = T - T*p.pis - T*p.cofins;
+  const Kb = 1 - T*(p.cpp + p.ipi + p.icms + p.iss);
+
+  let credC = 0, credB = 0;
+  o.gastos.forEach(g => {
+    const ac = a.cbs*(1-g.red), ab = a.ibs*(1-g.red);
+    credC += ac ? (g.valor/(1+ac))*ac : 0;
+    credB += ab ? (g.valor/(1+ab))*ab : 0;
+  });
+  const credV = credC + credB;
+
+  const dasTrad = o.receita*T, liq = o.receita - dasTrad;
+  const precoHib = (liq - credV)/(1-Th);
+  const dasHib = precoHib*Th;
+  const bc = precoHib*Kb;
+  const cbsDev = bc*c, ibsDev = bc*b;
+  const cbsRec = cbsDev-credC, ibsRec = ibsDev-credB;
+  const NF = precoHib + cbsDev + ibsDev;
+  const cargaHib = dasHib + cbsDev + ibsDev - credV;
+
+  const M = (Th + Kb*(c+b))/(1-Th);
+  const credEq = (liq*M - o.receita*T)/(M+1);
+  const baseEq = (c+b) ? credEq/(c+b) : 0;
+
+  const fx = k => o.receita*T*p[k];
+  return {NF, nfAntes:o.receita, precoHib, dasTrad, dasHib, bc, cbs:cbsDev, ibs:ibsDev,
+          cbsRec, ibsRec, cred:credV, cargaTrad:dasTrad, cargaHib,
+          delta:dasTrad-cargaHib, baseEq, liq, variacao:NF/o.receita-1, aliq:{c,b,i:0},
+          det:{
+            hoje:[["DAS, parcela de IRPJ",fx("irpj"),0],["DAS, parcela de CSLL",fx("csll"),0],
+                  ["DAS, parcela de COFINS",fx("cofins"),0],["DAS, parcela de PIS",fx("pis"),0],
+                  ["DAS, parcela de CPP",fx("cpp"),0],["DAS, parcela de IPI",fx("ipi"),0],
+                  ["DAS, parcela de ICMS",fx("icms"),0],["DAS, parcela de ISS",fx("iss"),0]],
+            ano:[["DAS sem PIS e COFINS",dasHib,0],["CBS",cbsDev,credC],["IBS",ibsDev,credB]]
+          }};
+}
+
+/* ============================================================
+   INTERFACE
+   ============================================================ */
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const BRL = new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"});
+const PCT = n => (n*100).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2})+"%";
+const num = id => parseFloat($("#"+id).value.replace(",",".")) || 0;
+
+let MODO = "custo", ANO = 2027, chaveRender = "", SETOR_ANT = "comercio";
+
+// botões de ano
+$("#anos").innerHTML = ANOS.map(a =>
+  `<button type="button" data-a="${a}" aria-pressed="${a===ANO}">${a}</button>`).join("");
+$("#anos").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  ANO = +b.dataset.a;
+  $$("#anos button").forEach(x => x.setAttribute("aria-pressed", +x.dataset.a===ANO));
+  calcular(true);
+});
+$("#seg-modo").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  MODO = b.dataset.v;
+  $$("#seg-modo button").forEach(x => x.setAttribute("aria-pressed", x.dataset.v===MODO));
+  sincronizar(); calcular(true);
+});
+$("#cta-link").href = CONFIG.CONTATO;
+
+function sincronizar(){
+  const reg = $("#regime").value, setor = $("#setor").value;
+  const simples = reg === "simples";
+  if (simples && MODO === "custo"){
+    MODO = "reajuste";
+    $$("#seg-modo button").forEach(x => x.setAttribute("aria-pressed", x.dataset.v==="reajuste"));
+  }
+  $$("#seg-modo button")[0].disabled = simples;
+  $$("#seg-modo button")[0].style.opacity = simples ? .4 : 1;
+  $("#dica-modo").textContent = simples
+    ? "No Simples, a ferramenta compara permanecer no regime tradicional com optar pelo regime regular de CBS e IBS."
+    : (MODO === "custo"
+        ? "Parte do custo do produto e monta o preço com sua margem."
+        : "Parte do seu faturamento de hoje e calcula o preço que preserva o mesmo lucro.");
+
+  $("#bloco-custo").hidden    = simples || MODO !== "custo";
+  $("#bloco-reajuste").hidden = MODO !== "reajuste";
+  $("#bloco-simples").hidden  = !simples;
+  $("#c-lucroreal").hidden    = reg !== "real";
+  $("#c-ipi").hidden          = !ATIV[setor].ipi || simples;
+  $("#c-bipi").hidden         = !ATIV[setor].ipi || simples;
+  $("#c-bimp").hidden         = simples;
+  $("#lb-bimp").textContent   = "Do total acima, quanto gera crédito de "
+    + (ATIV[setor].imp === "ISS" ? "ISS (o ISS é cumulativo e não gera)" : "ICMS");
+  $("#c-imposto").hidden      = simples;
+
+
+  const at = ATIV[setor];
+  $("#lb-imposto").textContent = at.imp === "ISS"
+    ? "Alíquota de ISS nos seus serviços" : "Alíquota de ICMS nas suas vendas";
+  $("#dica-setor").textContent = at.dica;
+  if (setor !== SETOR_ANT){
+    SETOR_ANT = setor;
+    $("#p-irpj").value = at.pi;
+    $("#p-csll").value = at.pc;
+    $("#reducao").value = String(at.red);
+    if (at.imp === "ISS" && num("imposto") > 10) $("#imposto").value = 3;
+    if (at.imp === "ICMS" && num("imposto") < 8) $("#imposto").value = 12;
+  }
+  if (simples) $("#anexo").value = setor==="comercio" ? "I"
+    : (setor==="industria" ? "II" : (at.imp==="ICMS" ? "III" : "III"));
+
+  const a = aliquotas(ANO, num("a-cbs")/100, num("a-ibs")/100);
+  $("#dica-ano").textContent = ANO === 2026
+    ? "Regime atual. PIS, COFINS, ICMS e ISS ainda vigentes."
+    : (ANO <= 2028
+      ? "CBS já cheia e IBS em fase de teste a 0,1%. ICMS e ISS integrais."
+      : (ANO === 2033
+        ? "Regime pleno. ICMS e ISS extintos, IBS a "+PCT(a.ibs)+"."
+        : "Transição. IBS sobe para "+PCT(a.ibs)+" e o ICMS ou ISS cai para "+PCT(a.fator*num("imposto")/100)+"."));
+}
+
+function coletarGastos(){
+  return [
+    {valor:num("g-integral"), red:RED().integral, pc:true},
+    {valor:num("g-red30"),    red:RED().red30,    pc:true},
+    {valor:num("g-red60"),    red:RED().red60,    pc:true},
+    {valor:num("g-red70"),    red:RED().red70,    pc:true},
+    {valor:num("g-sem"),      red:RED().sem,      pc:false}
+  ];
+}
+
+function opcoes(premissa){
+  const reg = $("#regime").value, at = ATIV[$("#setor").value];
+  return {
+    ano:ANO, premissa, nomeImp:at.imp, ipi:at.ipi ? num("imposto-ipi")/100 : 0,
+    custo:num("custo"), desp:num("desp")/100, lucro:num("lucro")/100,
+    imposto:num("imposto")/100,
+    redSaida:parseFloat($("#reducao").value),
+    pis: reg==="real" ? RA().pisNaoCumulativo : RA().pisCumulativo,
+    cofins: reg==="real" ? RA().cofinsNaoCumulativo : RA().cofinsCumulativo,
+    presIrpj:num("p-irpj")/100, presCsll:num("p-csll")/100,
+    regime:reg, receita:num("receita"), lucroLiq:num("lucroliq"),
+    gastos:coletarGastos(), baseImp:num("g-bimp"), baseIpi:at.ipi ? num("g-bipi") : 0,
+    anexo:$("#anexo").value, aliqSN:num("aliqsn")/100
+  };
+}
+
+function rodar(premissa){
+  const o = opcoes(premissa);
+  if (o.regime === "simples") return {tipo:"simples", r:motorSimples(o), o};
+  if (MODO === "custo")       return {tipo:"custo",   r:motorCusto(o),   o};
+  return {tipo:"reajuste", r:motorReajuste(o), o};
+}
+
+function tt(titulo1, l1, titulo2, l2, tot1, tot2){
+  const lin = (n,d,cr) => `<div class="nome">${n}</div>`
+    + `<div class="num${d?"":" zero"}">${d?BRL.format(d):"–"}</div>`
+    + `<div class="num${cr?" cr":" zero"}">${cr?BRL.format(cr):"–"}</div>`
+    + `<div class="num${(d-cr)?"":" zero"}">${(d-cr)?BRL.format(d-cr):"–"}</div>`;
+  const bloco = (t,ls) => `<div class="sec">${t}</div>`
+    + ls.filter(x => Math.abs(x[1])>0.005 || Math.abs(x[2])>0.005)
+        .map(x => lin(x[0],x[1],x[2])).join("");
+  return `<div class="tt">`
+    + `<div class="hd"></div><div class="hd num">Débito</div>`
+    + `<div class="hd num">Crédito</div><div class="hd num">A recolher</div>`
+    + bloco(titulo1,l1)
+    + `<div class="nome tot">Total hoje</div><div class="num tot"></div>`
+    + `<div class="num tot"></div><div class="num tot">${BRL.format(tot1)}</div>`
+    + bloco(titulo2,l2)
+    + `<div class="nome tot">Total em ${ANO}</div><div class="num tot"></div>`
+    + `<div class="num tot"></div><div class="num tot">${BRL.format(tot2)}</div>`
+    + `</div>`;
+}
+
+function li(nome, valor, cls, tag){
+  return `<div class="li ${cls||""}"><span class="n">${nome}${tag?`<span class="tag">${tag}</span>`:""}</span>`
+       + `<span class="p"></span><span class="v">${BRL.format(valor)}</span></div>`;
+}
+
+function calcular(estrutural){
+  sincronizar();
+  const prem = $("#premissa").value;
+  const {tipo, r, o} = rodar(prem);
+  const nova = tipo + ANO + o.regime + prem + MODO;
+  const anima = estrutural || nova !== chaveRender;
+  chaveRender = nova;
+
+  $("#nt-ano").textContent = ANO;
+  let linhas = "", rotulo = "Preço de venda sugerido", preco = r.NF, comp = "";
+
+  if (tipo === "custo"){
+    linhas += li("Custo do produto", o.custo, "g");
+    linhas += li("Despesas", r.despesas, "g");
+    linhas += li("Seu lucro", r.lucroV, "g");
+    if (r.pis)    linhas += li("PIS", r.pis, "trib");
+    if (r.cofins) linhas += li("COFINS", r.cofins, "trib");
+    if (r.icms)   linhas += li($("#setor").value==="servicos"?"ISS":"ICMS", r.icms, "trib", PCT(r.aliq.i));
+    if (r.cbs)    linhas += li("CBS", r.cbs, "trib", PCT(r.aliq.c));
+    if (r.ibs)    linhas += li("IBS", r.ibs, "trib", PCT(r.aliq.b));
+    linhas += li("Total da nota fiscal", r.NF, "sum");
+    comp = `Markup de <b>${r.markup.toFixed(4).replace(".",",")}</b> sobre o custo · `
+         + `carga de <b>${PCT((r.icms+r.cbs+r.ibs+r.pis+r.cofins)/r.NF)}</b> sobre a nota.`;
+  }
+  else if (tipo === "reajuste"){
+    rotulo = "Faturamento necessário no ano";
+    linhas = tt("Como está hoje", r.det.hoje, `Como fica em ${ANO}`, r.det.ano,
+                r.tribAntes, r.tribApos)
+      + `<div class="var">Faturamento de <b>${BRL.format(r.nfAntes)}</b> hoje para `
+      + `<b>${BRL.format(r.NF)}</b> em ${ANO}. A sobra permanece em `
+      + `<b>${BRL.format(r.liqApos)}</b>.</div>`;
+    const sinal = r.variacao >= 0 ? "aumentar" : "reduzir";
+    comp = `Para manter a mesma sobra, você precisa <b>${sinal} o preço em `
+         + `${PCT(Math.abs(r.variacao))}</b>. Créditos de CBS e IBS estimados em `
+         + `<b>${BRL.format(r.cred)}</b> no ano.`;
+  }
+  else {
+    rotulo = "Faturamento no regime regular";
+    linhas = tt("Simples tradicional, composição do DAS", r.det.hoje,
+                `Optando pelo regime regular em ${ANO}`, r.det.ano,
+                r.cargaTrad, r.cargaHib)
+      + `<div class="var">Nota fiscal de <b>${BRL.format(r.nfAntes)}</b> hoje para `
+      + `<b>${BRL.format(r.NF)}</b> no regime regular.</div>`;
+    const ganha = r.delta > 0;
+    comp = ganha
+      ? `Optar pelo regime regular <b>reduz sua carga em ${BRL.format(r.delta)}</b> no ano. `
+      : `Optar pelo regime regular <b>aumenta sua carga em ${BRL.format(-r.delta)}</b> no ano. `;
+    comp += `O ponto de virada está em <b>${BRL.format(r.baseEq)}</b> de compras que geram crédito.`;
+  }
+
+  $("#nt-rotulo").textContent = rotulo;
+  $("#nt-preco").textContent = BRL.format(preco);
+  $("#nt-comparativo").innerHTML = comp;
+  const cont = $("#nt-linhas");
+  cont.className = "linhas" + (anima ? " anima" : "");
+  cont.innerHTML = linhas;
+  if (anima) [...cont.children].forEach((el,ix) => el.style.animationDelay = (ix*26)+"ms");
+
+  faixa(prem);
+  grafico();
+}
+
+function faixa(prem){
+  const vals = ["prof","lc","plp"].map(p => rodar(p).r.NF);
+  const mn = Math.min(...vals), mx = Math.max(...vals), atual = rodar(prem).r.NF;
+  const amp = atual ? (mx-mn)/atual : 0;
+  const nomes = {prof:"Compõem", lc:"LC 214", plp:"PLP 16"};
+  const ordem = ["prof","lc","plp"];
+  const pos = v => mx===mn ? 50 : 8 + ((v-mn)/(mx-mn))*84;
+  if (mx - mn < 0.005){
+    $("#escala").innerHTML = `<div class="trilho"></div>`
+      + `<div class="pt on" style="left:50%"></div>`
+      + `<div class="lb on" style="left:50%;transform:translateX(-50%)">as três leituras coincidem</div>`;
+  } else
+  $("#escala").innerHTML = `<div class="trilho"></div>` + ordem.map((p,ix) => {
+    const x = pos(vals[ix]);
+    const t = x < 18 ? "0%" : (x > 82 ? "-100%" : "-50%");
+    return `<div class="pt ${p===prem?"on":""}" style="left:${x}%"></div>`
+         + `<div class="lb ${p===prem?"on":""}" style="left:${x}%;transform:translateX(${t})">${nomes[p]}</div>`;
+  }).join("");
+  $("#faixa-txt").innerHTML = amp < 0.0005
+    ? `Neste ano a premissa jurídica não altera o resultado.`
+    : `Dependendo de como a lei resolver esse ponto, o valor varia entre `
+      + `<b>${BRL.format(mn)}</b> e <b>${BRL.format(mx)}</b>, uma diferença de `
+      + `<b>${PCT(amp)}</b>. Compare com a sua margem antes de fechar o preço.`;
+}
+
+/* ---------- gráfico de composição ---------- */
+function grafico(){
+  const prem = $("#premissa").value, reg = $("#regime").value;
+  const simples = reg === "simples";
+  const serv = $("#setor").value === "servicos";
+  const CORES = {liq:"#2A5F6B", ind:"#8FB0B7", cbs:"#A63D1B", ibs:"#D98E6E",
+                 pc:"#C4CFCE", lucroT:"#5C6E72"};
+  const nomeInd = simples ? "DAS do Simples" : (serv ? "ISS" : "ICMS");
+
+  const dados = ANOS.map(ano => {
+    const o = opcoes(prem); o.ano = ano;
+    let r, seg;
+    if (simples){
+      r = motorSimples(o);
+      if (ano === 2026){
+        r = {NF:o.receita};
+        seg = [{v:o.receita*o.aliqSN*0+o.receita-o.receita*o.aliqSN, c:CORES.liq},
+               {v:o.receita*o.aliqSN, c:CORES.ind}];
+      } else {
+        seg = [{v:r.precoHib - r.dasHib, c:CORES.liq}, {v:r.dasHib, c:CORES.ind},
+               {v:r.cbsRec, c:CORES.cbs}, {v:r.ibsRec, c:CORES.ibs}];
+      }
+    } else if (MODO === "custo"){
+      r = motorCusto(o);
+      seg = [{v:r.P0, c:CORES.liq}, {v:r.icms, c:CORES.ind},
+             {v:r.cbs, c:CORES.cbs}, {v:r.ibs, c:CORES.ibs},
+             {v:r.pis + r.cofins, c:CORES.pc}];
+    } else {
+      r = motorReajuste(o);
+      seg = [{v:r.liqApos, c:CORES.liq}, {v:r.icms, c:CORES.ind},
+             {v:r.cbsRec, c:CORES.cbs}, {v:r.ibsRec, c:CORES.ibs},
+             {v:r.irpj + r.csll, c:CORES.lucroT}];
+    }
+    return {ano, NF:r.NF, seg:seg.filter(s => s.v > 0)};
+  });
+
+  const max = Math.max(...dados.map(d=>d.NF))*1.13 || 1;
+  const W=900,H=300,PL=8,PB=44,PT=26, bw=(W-PL*2)/8, gap=bw*0.26;
+  const rotulo = v => v >= 1e6 ? (v/1e6).toFixed(2).replace(".",",")+"M"
+                    : (v >= 1000 ? (v/1000).toFixed(1).replace(".",",")+"k" : v.toFixed(0));
+  let s = "";
+  dados.forEach((d,ix) => {
+    const x = PL + ix*bw + gap/2, w = bw-gap;
+    let y = H-PB;
+    d.seg.forEach(p => {
+      const hh = (p.v/max)*(H-PB-PT);
+      y -= hh;
+      s += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${hh.toFixed(1)}" fill="${p.c}"><title>${d.ano}</title></rect>`;
+    });
+    s += `<text x="${(x+w/2).toFixed(1)}" y="${(y-7).toFixed(1)}" text-anchor="middle" `
+       + `font-family="IBM Plex Mono" font-size="12" font-weight="500" fill="#10242A">${rotulo(d.NF)}</text>`;
+    const on = d.ano === ANO;
+    s += `<text x="${(x+w/2).toFixed(1)}" y="${H-PB+20}" text-anchor="middle" `
+       + `font-family="IBM Plex Mono" font-size="13" font-weight="${on?600:400}" `
+       + `fill="${on?"#A63D1B":"#5C6E72"}">${d.ano}</text>`;
+    if (on) s += `<rect x="${x.toFixed(1)}" y="${H-PB+27}" width="${w.toFixed(1)}" height="2" fill="#A63D1B"/>`;
+  });
+  s += `<line x1="${PL}" y1="${H-PB}" x2="${W-PL}" y2="${H-PB}" stroke="#C4CFCE" stroke-width="1"/>`;
+  $("#grafico").innerHTML = s;
+
+  const usadas = new Set();
+  dados.forEach(d => d.seg.forEach(p => usadas.add(p.c)));
+  $("#legenda").innerHTML = [
+    ["liq", simples || MODO !== "custo" ? "O que sobra para você" : "Custo, despesas e lucro"],
+    ["ind", nomeInd], ["cbs","CBS"], ["ibs","IBS"],
+    ["pc","PIS e COFINS"], ["lucroT","IRPJ e CSLL"]
+  ].filter(([k]) => usadas.has(CORES[k]))
+   .map(([k,n]) => `<span><i style="background:${CORES[k]}"></i>${n}</span>`).join("");
+
+  const v26 = dados[0].NF, v33 = dados[7].NF, d = v26 ? v33/v26-1 : 0;
+  $("#lt-nota").innerHTML = `Do regime atual até 2033, o valor sai de <b>${BRL.format(v26)}</b> `
+    + `para <b>${BRL.format(v33)}</b>, variação de <b>${PCT(d)}</b>. `
+    + `O impacto relevante não está em 2027, e sim entre 2029 e 2033, quando o IBS sobe e `
+    + (simples ? `a parcela de ICMS ou ISS sai do DAS` : `o ${serv ? "ISS" : "ICMS"} zera`)
+    + `. Planeje o reajuste em degraus.`;
+}
+
+/* ============================================================
+   CONFIGURACAO, BACKUP E RESTAURACAO
+   ============================================================ */
+const PC = n => (n*100).toFixed(6).replace(/0+$/,"").replace(/\.$/,"").replace(".",",");
+const dePC = s => (parseFloat(String(s).replace(",","."))||0)/100;
+
+function avisar(msg, tipo){
+  const a = $("#aviso");
+  a.textContent = msg; a.className = tipo;
+  clearTimeout(avisar._t);
+  avisar._t = setTimeout(() => { a.className = ""; }, 6000);
+}
+
+/* ---------- montagem da tela de configuracao ---------- */
+function montarConfig(){
+  $("#cfg-versao").textContent = "Dados " + PARAM.versaoDados
+    + " · atualizado em " + PARAM.atualizadoEm;
+  $("#cfg-aviso-legal").textContent = PARAM.avisoLegal + " Fonte: " + PARAM.fonte;
+  $("#cfg-premissa").value = PARAM.premissaPadrao;
+
+  // Campo de texto com teclado decimal: type=number nao aceita virgula,
+  // e o usuario brasileiro digita virgula.
+  const inp = (path, v) =>
+    `<input type="text" inputmode="decimal" data-p="${path}" value="${v}">`;
+
+  $("#cfg-transicao").innerHTML = PARAM.transicao.map((t,i) =>
+    `<tr><td>${t.ano}</td>`
+    + `<td>${inp("transicao."+i+".cbs", PC(t.cbs))}</td>`
+    + `<td>${inp("transicao."+i+".ibs", PC(t.ibs))}</td>`
+    + `<td>${inp("transicao."+i+".fatorIcmsIss", PC(t.fatorIcmsIss))}</td></tr>`).join("");
+
+  $("#cfg-ativ").innerHTML = PARAM.atividades.map((a,i) =>
+    `<tr><td>${a.nome}</td>`
+    + `<td>${inp("atividades."+i+".presIrpj", PC(a.presIrpj))}</td>`
+    + `<td>${inp("atividades."+i+".presCsll", PC(a.presCsll))}</td>`
+    + `<td>${inp("atividades."+i+".redSaida", PC(a.redSaida))}</td></tr>`).join("");
+
+  const campos = [
+    ["PIS cumulativo", "regimeAtual.pisCumulativo", PARAM.regimeAtual.pisCumulativo],
+    ["COFINS cumulativa", "regimeAtual.cofinsCumulativo", PARAM.regimeAtual.cofinsCumulativo],
+    ["PIS não cumulativo", "regimeAtual.pisNaoCumulativo", PARAM.regimeAtual.pisNaoCumulativo],
+    ["COFINS não cumulativa", "regimeAtual.cofinsNaoCumulativo", PARAM.regimeAtual.cofinsNaoCumulativo],
+    ["Alíquota de IRPJ", "lucro.aliqIrpj", PARAM.lucro.aliqIrpj],
+    ["Alíquota de CSLL", "lucro.aliqCsll", PARAM.lucro.aliqCsll],
+    ["Alíquota do adicional", "lucro.aliqAdicional", PARAM.lucro.aliqAdicional],
+    ["Redução de 30%", "reducoes.red30", PARAM.reducoes.red30],
+    ["Redução de 60%", "reducoes.red60", PARAM.reducoes.red60],
+    ["Redução de 70%", "reducoes.red70", PARAM.reducoes.red70],
+  ];
+  $("#cfg-geral").innerHTML = campos.map(([r,p,v]) =>
+      `<div class="campo" style="margin:0"><label>${r} (%)</label>${inp(p, PC(v))}</div>`).join("")
+    + `<div class="campo" style="margin:0"><label>Limite anual do adicional (R$)</label>`
+    + `<input type="text" inputmode="decimal" data-p="lucro.limiteAdicional|abs" value="${PARAM.lucro.limiteAdicional}"></div>`;
+
+  const cols = ["irpj","csll","cofins","pis","cpp","ipi","icms","iss"];
+  $("#cfg-anexos").innerHTML = Object.keys(PARAM.simplesAnexos).map(k =>
+    `<tr><td>${k}</td>` + cols.map(c =>
+      `<td>${inp("simplesAnexos."+k+"."+c, PC(PARAM.simplesAnexos[k][c]))}</td>`).join("")
+    + `</tr>`).join("");
+}
+
+/* ---------- ler a tela e gravar em PARAM ---------- */
+function coletarConfig(){
+  const novo = clonar(PARAM);
+  novo.premissaPadrao = $("#cfg-premissa").value;
+  $$("#tela-config input[data-p]").forEach(el => {
+    const [caminho, modo] = el.dataset.p.split("|");
+    const bruto = String(el.value).replace(/\./g,"").replace(",",".");
+    const v = modo === "abs" ? (parseFloat(bruto)||0) : (parseFloat(bruto)||0)/100;
+    const partes = caminho.split(".");
+    let ref = novo;
+    for (let i = 0; i < partes.length - 1; i++) ref = ref[partes[i]];
+    ref[partes[partes.length-1]] = v;
+  });
+  return novo;
+}
+
+function aplicar(p, msg){
+  PARAM = p;
+  montarAtividades();
+  $("#premissa").value = PARAM.premissaPadrao;
+  montarConfig();
+  sincronizar();
+  calcular(true);
+  if (msg) avisar(msg, "ok");
+}
+
+/* ---------- validacao do arquivo ---------- */
+function validar(o){
+  if (!o || typeof o !== "object") return "arquivo não é um JSON válido";
+  const p = o.parametros || o;
+  if (p.app !== PADRAO.app) return "este arquivo não é da calculadora Amcont";
+  for (const c of ["transicao","atividades","reducoes","regimeAtual","lucro","simplesAnexos"])
+    if (!p[c]) return "faltam os dados de " + c;
+  if (!Array.isArray(p.transicao) || p.transicao.length < 3) return "linha do tempo incompleta";
+  if (!Array.isArray(p.atividades) || !p.atividades.length) return "lista de atividades vazia";
+  for (const t of p.transicao)
+    if (typeof t.ano !== "number" || typeof t.cbs !== "number" || typeof t.ibs !== "number")
+      return "linha do tempo com valor não numérico";
+  return null;
+}
+
+/* ---------- gravar e ler arquivo ---------- */
+function baixar(obj, nome){
+  const b = new Blob([JSON.stringify(obj, null, 1)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(b); a.download = nome;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+
+function entradasAtuais(){
+  const o = {modo:MODO, ano:ANO};
+  $$("#tela-sim input, #tela-sim select").forEach(el => { if (el.id) o[el.id] = el.value; });
+  return o;
+}
+function aplicarEntradas(e){
+  if (!e) return;
+  Object.keys(e).forEach(k => {
+    const el = document.getElementById(k);
+    if (el) el.value = e[k];
+  });
+  if (e.ano){ ANO = +e.ano;
+    $$("#anos button").forEach(x => x.setAttribute("aria-pressed", +x.dataset.a===ANO)); }
+  if (e.modo){ MODO = e.modo;
+    $$("#seg-modo button").forEach(x => x.setAttribute("aria-pressed", x.dataset.v===MODO)); }
+}
+
+let alvoImport = "tudo";
+$("#arquivo").addEventListener("change", ev => {
+  const f = ev.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    let o;
+    try { o = JSON.parse(r.result); }
+    catch(e){ avisar("Arquivo ilegível: não é um JSON válido.", "err"); ev.target.value=""; return; }
+    const erro = validar(o);
+    if (erro){ avisar("Arquivo recusado: " + erro + ".", "err"); ev.target.value=""; return; }
+    const p = Object.assign(clonar(PADRAO), o.parametros || o);
+    aplicar(p, "Parâmetros carregados do arquivo.");
+    if (alvoImport === "tudo" && o.entradas){
+      aplicarEntradas(o.entradas); calcular(true);
+      avisar("Simulação e parâmetros carregados" + (o.cliente ? " · " + o.cliente : "") + ".", "ok");
+    }
+    ev.target.value = "";
+  };
+  r.readAsText(f);
+});
+
+/* ---------- botoes ---------- */
+function aba(qual){
+  const sim = qual === "sim";
+  $("#ab-sim").setAttribute("aria-selected", sim);
+  $("#ab-cfg").setAttribute("aria-selected", !sim);
+  $("#tela-sim").hidden = !sim;
+  $("#rodape-notas").hidden = !sim;
+  $("#tela-config").hidden = sim;
+  if (!sim) montarConfig();
+}
+$("#ab-sim").addEventListener("click", () => aba("sim"));
+$("#ab-cfg").addEventListener("click", () => aba("cfg"));
+
+$("#b-cfg-salvar").addEventListener("click", () => {
+  const p = coletarConfig();
+  const erro = validar(p);
+  if (erro){ avisar("Não foi possível salvar: " + erro + ".", "err"); return; }
+  try { localStorage.setItem(CHAVE + "parametros", JSON.stringify(p)); } catch(e){}
+  aplicar(p, "Parâmetros salvos neste navegador.");
+});
+$("#b-cfg-exportar").addEventListener("click", () => {
+  baixar({tipo:"parametros", geradoEm:new Date().toISOString().slice(0,10),
+          parametros:coletarConfig()},
+         "amcont-parametros-" + PARAM.versaoDados + ".json");
+  avisar("Arquivo de parâmetros gerado.", "ok");
+});
+$("#b-cfg-importar").addEventListener("click", () => { alvoImport="params"; $("#arquivo").click(); });
+$("#b-cfg-restaurar").addEventListener("click", () => {
+  try { localStorage.removeItem(CHAVE + "parametros"); } catch(e){}
+  aplicar(clonar(PADRAO), "Parâmetros restaurados para o padrão deste arquivo.");
+});
+$("#b-salvar").addEventListener("click", () => {
+  const nome = ($("#cliente") && $("#cliente").value.trim()) || "simulacao";
+  baixar({tipo:"simulacao", geradoEm:new Date().toISOString().slice(0,10),
+          cliente:nome, parametros:PARAM, entradas:entradasAtuais()},
+         "amcont-" + nome.toLowerCase().replace(/[^a-z0-9]+/g,"-").slice(0,40) + ".json");
+  avisar("Simulação salva. Guarde o arquivo ou envie para a Amcont.", "ok");
+});
+$("#b-abrir").addEventListener("click", () => { alvoImport="tudo"; $("#arquivo").click(); });
+
+/* ---------- modo cliente: esconde a configuracao ---------- */
+if (CONFIG.MODO_CLIENTE){
+  $("#ab-cfg").hidden = true;
+  $("#ab-cfg").setAttribute("aria-hidden","true");
+}
+
+/* ---------- eventos ---------- */
+$$("input, select").forEach(el => {
+  if (el.id === "senha") return;
+  el.addEventListener("input", () => calcular(false));
+  el.addEventListener("change", () => calcular(true));
+});
+$("#premissa").value = PARAM.premissaPadrao;
+montarConfig();
+sincronizar();
+</script>
+</body>
+</html>

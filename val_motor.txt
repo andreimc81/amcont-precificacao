@@ -1,0 +1,142 @@
+====================================================================================================
+CASO 02 - MARK UP MULTIPLICADOR (slides 39 a 42)
+====================================================================================================
+ 2026 (PIS/COFINS nao cumulativos, ICMS fora da base):
+  OK  Preco antes dos tributos                     motor         623.91 | slide         623.91 |  0.000%
+  OK  Valor total da NF                            motor         781.25 | slide         781.25 |  0.000%
+  OK  ICMS                                         motor          93.75 | slide          93.75 |  0.000%
+  OK  PIS                                          motor          11.34 | slide          11.34 |  0.033%
+  OK  COFINS                                       motor          52.25 | slide          52.25 |  0.000%
+
+ 2027 - modelo do professor:
+  OK  Valor total da NF                            motor         781.68 | slide         781.68 |  0.000%
+  OK  Base de calculo CBS/IBS                      motor         687.88 | slide         687.88 |  0.000%
+  OK  ICMS                                         motor          93.80 | slide          93.80 |  0.002%
+  OK  CBS 9,2%                                     motor          63.29 | slide          63.29 |  0.008%
+  OK  IBS 0,1%                                     motor           0.69 | slide           0.69 |  0.307%
+
+ 2027 - modelos alternativos (mesma entrada, premissa diferente):
+   professor   NF R$   781.68 | markup 1.5634
+   lc214       NF R$   774.92 | markup 1.5498
+   plp16       NF R$   767.01 | markup 1.5340
+
+====================================================================================================
+CASO 03 - SIMPLES NACIONAL TRADICIONAL x HIBRIDO (slides 46 a 51)
+====================================================================================================
+  OK  DAS tradicional (9,403%)                     motor      94,030.00 | slide      94,030.00 |  0.000%
+  OK  Liquido tradicional                          motor     905,970.00 | slide     905,970.00 |  0.000%
+  OK  Creditos de CBS e IBS                        motor      64,170.00 | slide      64,170.00 |  0.000%
+  OK  Preco hibrido sem CBS/IBS                    motor     914,453.32 | slide     914,453.32 |  0.000%
+  OK  DAS hibrido (7,945%)                         motor      72,653.32 | slide      72,653.32 |  0.000%
+  OK  BC da CBS/IBS hibrido                        motor     849,536.28 | slide     849,536.28 |  0.000%
+  OK  CBS devida                                   motor      78,157.34 | slide      78,157.34 |  0.000%
+  OK  CBS a recolher                               motor      14,677.34 | slide      14,677.34 |  0.000%
+  OK  IBS a recolher                               motor         159.54 | slide         159.54 |  0.002%
+  OK  Valor total da NF hibrido                    motor     993,460.19 | slide     993,460.19 |  0.000%
+  OK  Carga hibrida total                          motor      87,490.19 | slide      87,490.19 |  0.000%
+  OK  Reducao de carga                             motor       6,539.81 | slide       6,539.81 |  0.000%
+  ... Credito de equilibrio (ponto de virada): R$ 630,414.49 de base de compras
+
+ Cenario do slide 53 (menos creditos, carga AUMENTA):
+  OK  Preco hibrido sem CBS/IBS                    motor     924,555.97 | slide     924,555.97 |  0.000%
+  OK  Valor total da NF                            motor   1,004,435.69 | slide   1,004,435.69 |  0.000%
+  OK  CBS a recolher                               motor      24,740.80 | slide      24,740.80 |  0.000%
+  OK  Aumento de carga                             motor       4,435.69 | slide       4,435.69 |  0.000%
+
+====================================================================================================
+CASO 04 - LUCRO PRESUMIDO, CLINICA MEDICA (slides 55 a 59)
+====================================================================================================
+  OK  Credito de CBS                               motor      68,165.05 | slide      68,165.05 |  0.000%
+  OK  Credito de IBS                               motor         779.55 | slide         779.55 |  0.000%
+  OK  Preco ajustado por dentro (5,28%)            motor   2,906,910.27 | slide   2,907,754.86 |  0.029%
+  OK  BC da CBS/IBS                                motor   2,819,702.96 | slide   2,820,522.22 |  0.029%
+  OK  CBS devida (3,68%)                           motor     103,765.07 | slide     103,795.22 |  0.029%
+  DIF Ajuste IRPJ/CSLL por dentro                  motor       3,322.20 | slide          78.11 | 4153.234%
+  OK  Valor total da NF                            motor   3,015,125.42 | slide   3,016,001.45 |  0.029%
+  OK  ISS a recolher                               motor      90,453.76 | slide      90,480.04 |  0.029%
+  OK  IRPJ                                         motor      34,922.79 | slide      34,932.94 |  0.029%
+  OK  CSLL                                         motor      31,430.51 | slide      31,439.64 |  0.029%
+  DIF CBS a recolher                               motor      35,600.02 | slide      35,630.17 |  0.085%
+
+====================================================================================================
+CASO 05 - LUCRO PRESUMIDO, COMERCIO (slides 61 a 67)
+====================================================================================================
+  OK  Credito de CBS                               motor      65,196.83 | slide      65,196.83 |  0.000%
+  OK  Credito de IBS                               motor         741.62 | slide         741.62 |  0.000%
+  OK  Preco ajustado por dentro (14,28%)           motor   2,890,144.14 | slide   2,891,077.41 |  0.032%
+  OK  BC da CBS/IBS                                motor   2,543,326.84 | slide   2,544,148.12 |  0.032%
+  DIF Ajuste IRPJ/CSLL por dentro                  motor      33,111.91 | slide         858.18 | 3758.387%
+  OK  Valor total da NF                            motor   3,159,785.44 | slide   3,160,805.79 |  0.032%
+  OK  CBS a recolher                               motor     168,789.24 | slide     168,864.80 |  0.045%
+  OK  IBS a recolher                               motor       1,801.71 | slide       1,802.53 |  0.046%
+  DIF ICMS a recolher                              motor     235,174.25 | slide     235,296.69 |  0.052%
+  OK  IRPJ                                         motor      35,079.07 | slide      35,090.40 |  0.032%
+  OK  CSLL                                         motor      31,571.17 | slide      31,581.36 |  0.032%
+  OK  ICMS a recolher ANTES                        motor     228,000.00 | slide     228,000.00 |  0.000%
+
+====================================================================================================
+CASO 06 - LUCRO PRESUMIDO, INDUSTRIA (slides 69 a 75)
+====================================================================================================
+  OK  Preco ajustado por dentro                    motor   3,030,418.70 | slide   3,031,068.08 |  0.021%
+  OK  BC da CBS/IBS                                motor   2,666,768.45 | slide   2,667,339.91 |  0.021%
+  DIF Ajuste IRPJ/CSLL por dentro                  motor      35,046.09 | slide         899.73 | 3795.178%
+  OK  Valor total da NF                            motor   3,313,474.25 | slide   3,313,857.14 |  0.012%
+  OK  CBS a recolher                               motor     180,145.87 | slide     180,198.45 |  0.029%
+  OK  ICMS a recolher                              motor     253,616.91 | slide     253,662.86 |  0.018%
+  OK  IRPJ                                         motor      36,785.58 | slide      36,789.53 |  0.011%
+  OK  IPI a recolher ANTES                         motor     190,000.00 | slide     190,000.00 |  0.000%
+
+====================================================================================================
+CASO 07 - LUCRO REAL, COMERCIO (slides 77 a 82)
+====================================================================================================
+  OK  PIS a recolher ANTES                         motor      24,974.40 | slide      24,974.40 |  0.000%
+  OK  COFINS a recolher ANTES                      motor     115,033.60 | slide     115,033.60 |  0.000%
+  OK  ICMS a recolher ANTES                        motor     264,000.00 | slide     264,000.00 |  0.000%
+  DIF Preco ajustado por dentro (12%)              motor   2,835,281.14 | slide   2,862,553.87 |  0.953%
+  DIF BC da CBS/IBS                                motor   2,495,047.41 | slide   2,519,047.41 |  0.953%
+  DIF Valor total da NF                            motor   3,098,962.29 | slide   3,128,771.38 |  0.953%
+  DIF CBS a recolher                               motor     161,379.31 | slide     163,587.31 |  1.350%
+  DIF IBS a recolher                               motor       1,715.50 | slide       1,739.50 |  1.380%
+  DIF ICMS a recolher                              motor     263,875.47 | slide     267,452.57 |  1.337%
+
+====================================================================================================
+LINHA DO TEMPO 2026 a 2033 - mesmo produto (Caso 02, comercio 12% ICMS)
+====================================================================================================
+  Ano        CBS     IBS    ICMS          NF   vs 2026
+  2026     0.00%   0.00%  12.00%      781.25     0.00%
+  2027     9.20%   0.10%  12.00%      781.68     0.06%
+  2028     9.20%   0.10%  12.00%      781.68     0.06%
+  2029     9.30%   1.87%  10.80%      787.40     0.79%
+  2030     9.30%   3.74%   9.60%      793.66     1.59%
+  2031     9.30%   5.61%   8.40%      800.47     2.46%
+  2032     9.30%   7.48%   7.20%      807.88     3.41%
+  2033     9.30%  18.70%   0.00%      866.54    10.92%
+
+====================================================================================================
+ANALISE DE PROPOSTAS DE FORNECEDORES (slides 85 e 86)
+====================================================================================================
+  Adquirente CONTRIBUINTE (decide pelo custo real):
+    A - Lucro Real                 NF  20,000.00 | credito  5,000.00 | custo real  15,000.00
+    C - Simples regime regular     NF  20,500.00 | credito  5,125.00 | custo real  15,375.00
+    B - Lucro Presumido            NF  21,000.00 | credito  5,250.00 | custo real  15,750.00
+    D - Simples tradicional        NF  17,000.00 | credito    570.00 | custo real  16,430.00
+  Adquirente NAO CONTRIBUINTE (decide pelo valor final):
+    D - Simples tradicional        NF  17,000.00 | custo real  17,000.00
+    A - Lucro Real                 NF  20,000.00 | custo real  20,000.00
+    C - Simples regime regular     NF  20,500.00 | custo real  20,500.00
+    B - Lucro Presumido            NF  21,000.00 | custo real  21,000.00
+
+====================================================================================================
+RESULTADO: 55 conferem | 11 divergem
+  DIVERGE: Ajuste IRPJ/CSLL por dentro
+  DIVERGE: CBS a recolher
+  DIVERGE: Ajuste IRPJ/CSLL por dentro
+  DIVERGE: ICMS a recolher
+  DIVERGE: Ajuste IRPJ/CSLL por dentro
+  DIVERGE: Preco ajustado por dentro (12%)
+  DIVERGE: BC da CBS/IBS
+  DIVERGE: Valor total da NF
+  DIVERGE: CBS a recolher
+  DIVERGE: IBS a recolher
+  DIVERGE: ICMS a recolher
+====================================================================================================

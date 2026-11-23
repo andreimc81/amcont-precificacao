@@ -1,0 +1,97 @@
+{
+ "name": "Amcont - Baixar LC 214 consolidada para o Drive",
+ "nodes": [
+  {
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "weeks",
+       "triggerAtDay": [
+        1
+       ],
+       "triggerAtHour": 6
+      }
+     ]
+    }
+   },
+   "name": "Toda segunda às 6h",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    0,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "url": "https://www2.camara.leg.br/legin/fed/leicom/2025/leicomplementar-214-16-janeiro-2025-796905-normaatualizada-pl.docx",
+    "options": {
+     "response": {
+      "response": {
+       "responseFormat": "file"
+      }
+     }
+    }
+   },
+   "name": "Baixar norma atualizada da Câmara",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    260,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "name": "=LC214_consolidada_{{ $now.toFormat('yyyy-MM-dd') }}.docx",
+    "driveId": {
+     "__rl": true,
+     "mode": "list",
+     "value": "My Drive"
+    },
+    "folderId": {
+     "__rl": true,
+     "mode": "id",
+     "value": "1i5HrAmJ0DkKegoTTVVVfvlZcJs841jUP"
+    },
+    "inputDataFieldName": "data",
+    "options": {}
+   },
+   "name": "Salvar na pasta do monitor",
+   "type": "n8n-nodes-base.googleDrive",
+   "typeVersion": 3,
+   "position": [
+    520,
+    0
+   ]
+  }
+ ],
+ "connections": {
+  "Toda segunda às 6h": {
+   "main": [
+    [
+     {
+      "node": "Baixar norma atualizada da Câmara",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Baixar norma atualizada da Câmara": {
+   "main": [
+    [
+     {
+      "node": "Salvar na pasta do monitor",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1"
+ }
+}

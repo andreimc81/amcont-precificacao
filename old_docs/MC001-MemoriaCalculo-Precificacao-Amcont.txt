@@ -1,0 +1,505 @@
+﻿
+MEMÓRIA DE CÁLCULO
+Código:
+MC.001
+
+Precificação na Reforma Tributária
+Rev.: 03
+Folha 1 de 10
+
+1. OBJETIVO E ESCOPO
+
+Este documento registra a lógica de cálculo das ferramentas de precificação da Amcont para o período de transição da Reforma Tributária. Serve a três propósitos: defender tecnicamente os números apresentados ao cliente, permitir auditoria por terceiros e viabilizar a manutenção por quem não construiu as ferramentas.
+Alcance: Simples Nacional, Lucro Presumido e Lucro Real, nas atividades de comércio, indústria, transporte de cargas, transporte de passageiros, serviços em geral, serviços com equiparação hospitalar e revenda de combustíveis. Exercícios de 2026 a 2033.
+
+Ferramenta
+Arquivo
+Uso
+Motor de referência
+motor_reforma.py
+Fonte da verdade. Base dos testes automatizados.
+Planilha de trabalho
+Amcont_Precificacao_Reforma_Tributaria.xlsx
+Uso interno. Onze abas com fórmulas nativas auditáveis.
+Calculadora de empresa
+amcont-precificacao.html
+Efeito no faturamento total. Versão interna e versão do cliente.
+Calculadora de produto
+amcont-produto.html
+Um produto por vez: compra, venda e margem de contribuição.
+
+2. BASE LEGAL
+
+Norma
+Objeto
+EC 132/2023
+Institui o novo sistema. O art. 128 do ADCT define a rampa de transição de 2029 a 2032.
+LC 214/2025
+Institui IBS, CBS e Imposto Seletivo. O art. 12, § 2º, incisos V e VI trata do que não integra a base de cálculo.
+LC 227/2026
+Institui o Comitê Gestor do IBS e trata dos saldos de ICMS na transição.
+Lei 9.249/1995
+Arts. 15 e 20: presunções de IRPJ e CSLL. Art. 3º: adicional de 10%.
+Lei 14.592/2023
+Exclusão do ICMS da base do crédito de PIS e COFINS.
+PLP 16/2025
+Em tramitação. Propõe excluir CBS e IBS da base do ICMS e do ISS.
+
+SOBRE AS ALÍQUOTAS
+As alíquotas de 9,3% para CBS e 18,7% para IBS são estimativas divulgadas pelo Secretário Extraordinário da Reforma Tributária em 25/04/2025. Não são texto legal. Estão parametrizadas nas três ferramentas e devem ser conferidas contra a norma vigente antes de cada uso com cliente.
+
+
+MEMÓRIA DE CÁLCULO
+Código:
+MC.001
+
+Precificação na Reforma Tributária
+Rev.: 03
+Folha 2 de 10
+
+3. NOTAÇÃO
+
+Símbolo
+Significado
+C
+Custo unitário líquido dos créditos a apropriar
+d, l
+Despesas e lucro desejado, ambos em percentual da receita líquida
+P0
+Preço de venda antes dos tributos sobre vendas
+i
+Alíquota vigente de ICMS ou ISS no ano, já aplicada a rampa de redução
+c, b
+Alíquotas de CBS e de IBS na saída, já aplicada a redução setorial
+tpc
+Alíquota efetiva de PIS e COFINS sobre a nota, aplicável somente em 2026
+A
+Preço de venda ajustado para os tributos por dentro
+bc
+Base de cálculo da CBS e do IBS
+BL
+Base de cálculo do IRPJ e da CSLL, igual à nota menos CBS e IBS destacados
+NF
+Valor total da nota fiscal
+
+4. ARQUITETURA
+
+As três ferramentas implementam o mesmo algoritmo. Não há duas lógicas concorrentes. Toda alteração de método precisa ser replicada nas três e revalidada pelo cruzamento descrito no item 12.
+
+Cascata das bases de cálculo
+O encadeamento é circular por natureza: ICMS e ISS incidem sobre o valor total da nota, que já contém CBS e IBS; CBS e IBS incidem sobre a nota deduzida do ICMS ou do ISS. A solução adotada resolve a circularidade em forma fechada, sem cálculo iterativo.
+
+ICMS ou ISS   ->  incide sobre  NF
+CBS e IBS     ->  incidem sobre  bc  =  A x (1 - i)
+IRPJ e CSLL   ->  incidem sobre  BL  =  NF - CBS - IBS
+A base da CBS e do IBS parte do preço ajustado A, não do valor final da nota. É o método sequencial adotado no material de referência e validado contra os seus seis casos práticos.
+
+
+MEMÓRIA DE CÁLCULO
+Código:
+MC.001
+
+Precificação na Reforma Tributária
+Rev.: 03
+Folha 3 de 10
+
+5. MOTOR A: PRECIFICAÇÃO A PARTIR DO CUSTO
+
+Aplicável a produto novo, em qualquer regime que não seja o Simples Nacional. Parte do custo e monta o preço com a margem desejada.
+
+Passo 1: preço antes dos tributos sobre vendas
+P0 = C / (1 - d - l)
+
+Passo 2: valor total da nota, conforme a premissa jurídica adotada
+Premissa 1  (compõem a base)
+   NF = P0 / (1 - i - tpc - (c + b) x (1 - i))
+   bc = NF x (1 - i)
+
+Premissa 2  (LC 214, art. 12, § 2º)
+   NF = P0 / (1 - i - tpc - (c + b) x (1 - i) / (1 + c + b))
+   bc = NF x (1 - i) / (1 + c + b)
+
+Premissa 3  (PLP 16/2025)
+   V  = P0 / (1 - i - tpc)
+   bc = V x (1 - i)
+   NF = V + bc x (c + b)
+
+Passo 3: decomposição
+CBS  = bc x c
+IBS  = bc x b
+ICMS ou ISS = NF x i          (nas premissas 1 e 2)
+            = (NF - CBS - IBS) x i   (na premissa 3)
+PIS e COFINS = (NF - ICMS) x aliquota      (somente em 2026)
+
+POR QUE TRÊS PREMISSAS
+A EC 132/2023 e a LC 214/2025 não dizem expressamente se CBS e IBS integram a base do ICMS e do ISS durante a transição. O PLP 16/2025 propõe excluí-los. As três leituras são calculadas e a faixa entre a maior e a menor é apresentada ao cliente. No cenário de referência a amplitude é de 1,88% do preço.
+
+
+MEMÓRIA DE CÁLCULO
+Código:
+MC.001
+
+Precificação na Reforma Tributária
+Rev.: 03
+Folha 4 de 10
+
+6. MOTOR B: PREÇO QUE PRESERVA A RECEITA LÍQUIDA
+
+Aplicável à carteira existente. Parte do faturamento atual e calcula o preço do ano de referência que preserva a mesma sobra depois dos tributos.
+
+Passo 1: receita líquida de hoje
+NF_hoje  = Receita + IPI_debito - IPI_credito
+Trib_hoje = (PIS - cred) + (COFINS - cred) + (ICMS/ISS - cred)
+          + (IPI - cred) + IRPJ + Adicional + CSLL
+Liq_hoje = NF_hoje - Trib_hoje
+
+Passo 2: base de partida
+base0 = Liq_hoje - credito_ICMS + credito_IPI - credito_CBS_IBS
+Os créditos de ICMS e de IPI são retirados porque voltam no cenário do ano. Os créditos de CBS e IBS reduzem a necessidade de faturamento.
+
+Passo 3: resolução por dentro
+r  = presuncao_IRPJ x 15% + presuncao_CSLL x 9%   (zero no Lucro Real)
+A  = base / (1 - i - r)
+bc = A x (1 - i)                    (ou / (1 + c + b) na premissa 2)
+CBS = bc x c            IBS = bc x b
+CBS_nota = CBS / (1 - i)            IBS_nota = IBS / (1 - i)
+k  = r / (1 - i)
+NF = (A + CBS_nota + IBS_nota - k x (CBS + IBS + A)) / (1 - k)
+O fator k corrige o fato de a base do IRPJ e da CSLL excluir CBS e IBS destacados, enquanto o preço ajustado A os embutiu proporcionalmente.
+
+Passo 4: apuração no ano
+BL   = NF - CBS - IBS
+IRPJ = BL x presuncao_IRPJ x 15%
+CSLL = BL x presuncao_CSLL x 9%
+ICMS ou ISS = NF x i - credito
+Trib_ano = (CBS - cred) + (IBS - cred) + (ICMS/ISS - cred) + IRPJ + Adicional + CSLL
+
+PROVA REAL OBRIGATÓRIA
+NF - Trib_ano deve igualar Liq_hoje. Qualquer valor diferente de zero indica erro de parametrização. A única exceção legítima é a indústria: o crédito de IPI extinto precisa ser reposto no preço, e a diferença é exatamente o valor desse crédito.
+
+
+MEMÓRIA DE CÁLCULO
+Código:
+MC.001
+
+Precificação na Reforma Tributária
+Rev.: 03
+Folha 5 de 10
+
+7. PRESUNÇÕES E ADICIONAL DE IRPJ
+
+Atividade
+IRPJ
+CSLL
+Imposto sobre consumo
+Comércio
+8%
+12%
+ICMS
+Indústria
+8%
+12%
+ICMS e IPI
+Transporte de cargas
+8%
+12%
+ICMS
+Transporte de passageiros
+16%
+12%
+ICMS
+Serviços em geral
+32%
+32%
+ISS
+Serviços com equiparação hospitalar
+8%
+12%
+ISS
+Revenda de combustíveis
+1,6%
+12%
+ICMS
+
+A equiparação hospitalar exige que a empresa seja sociedade empresária e atenda às normas da Anvisa. Sem esses requisitos, aplica-se a presunção de serviços em geral. A diferença, num faturamento de R$ 3.100.000, é de R$ 241.800 por ano.
+
+Adicional de IRPJ e o problema do degrau
+Adicional = max(0 ; BL x presuncao_IRPJ - 240.000) x 10%
+O adicional não é proporcional à receita: existe um degrau em R$ 240.000. Isso impede resolver a equação dos tributos por dentro em forma fechada, porque não se sabe de que lado do degrau o resultado cairá antes de calculá-lo.
+
+Solução adotada: duas hipóteses paralelas
+
+Hipótese 1
+Hipótese 2
+Alíquota r
+presunções x alíquotas
+mais presuncao_IRPJ x 10%
+Base
+base0
+base0 menos R$ 24.000
+Critério
+adotada se a base de IRPJ resultante ficar até R$ 240.000
+adotada caso contrário
+
+As duas são calculadas por completo e a coerente é adotada. A planilha registra a hipótese escolhida e o motivo em texto, na aba MOTOR_PRECO_2026.
+
+
+MEMÓRIA DE CÁLCULO
+Código:
+MC.001
+
+Precificação na Reforma Tributária
+Rev.: 03
+Folha 6 de 10
+
+8. APROPRIAÇÃO DE CRÉDITOS
+
+aliquota_efetiva = aliquota_base x (1 - reducao_setorial)
+base_credito     = valor_bruto / (1 + aliquota_efetiva)
+credito          = base_credito x aliquota_efetiva
+O gross-up é feito por tributo, separadamente para CBS e para IBS, replicando o material de referência. Ver a divergência registrada no item 11.
+
+Regra
+Aplicação
+Reduções válidas
+Integral, 30%, 60% e 70%. A redução decorre do regime do fornecedor e da natureza do bem, nunca de premissa do adquirente.
+ISS
+Cumulativo. Não gera crédito na entrada. Somente o ICMS gera.
+ICMS e IPI
+A base do crédito é informada separadamente da faixa de redução de CBS e IBS. Uma mercadoria pode ter redução de 60% na CBS e crédito integral de ICMS.
+PIS e COFINS
+Somente no Lucro Real. A base do crédito exclui o ICMS, conforme a Lei 14.592/2023.
+Uso pessoal
+Não gera crédito. Uniformes, EPI, vale-transporte, vale-refeição e benefícios educacionais não são considerados uso pessoal.
+
+Como cada ferramenta recebe as entradas
+Ferramenta
+Estrutura
+Planilha
+25 linhas livres. Cada uma com descrição, valor, faixa de redução e percentuais próprios de crédito de ICMS, IPI e PIS/COFINS.
+Calculadora
+Cinco campos agregados por faixa: integral, redução de 30%, de 60%, de 70% e sem crédito. Mais dois campos separados para a base de crédito de ICMS e de IPI.
+
+9. SIMPLES NACIONAL
+
+T   = aliquota efetiva do DAS
+Th  = T - parcela_PIS - parcela_COFINS
+Kb  = 1 - parcela_CPP - parcela_IPI - parcela_ICMS - parcela_ISS
+
+preco = (Receita x (1 - T) - creditos) / (1 - Th)
+bc    = preco x Kb
+CBS = bc x c        IBS = bc x b
+NF  = preco + CBS + IBS
+A base da CBS e do IBS exclui as parcelas de CPP, IPI, ICMS e ISS contidas no DAS, conforme o art. 12, § 2º da LC 214/2025. IRPJ e CSLL permanecem na base.
+
+Ponto de virada
+M    = (Th + Kb x (c + b)) / (1 - Th)
+cred = (Liq x M - Receita x T) / (M + 1)
+base de compras de equilibrio = cred / (c + b)
+Acima dessa base de compras creditáveis, optar pelo regime regular reduz a carga. Abaixo, aumenta.
+
+
+MEMÓRIA DE CÁLCULO
+Código:
+MC.001
+
+Precificação na Reforma Tributária
+Rev.: 03
+Folha 7 de 10
+
+10. MOTOR C: PREÇO DE UM PRODUTO
+
+Análise de um produto isolado, não da empresa. Parte do preço de compra e do preço de venda praticados hoje e calcula o preço que preserva a mesma margem de contribuição, que é o fluxo de caixa da operação.
+
+Passo 1: margem de contribuição de hoje
+MC = Preco de venda - Preco de compra - Tributos a recolher na operacao
+Os tributos entram líquidos dos créditos apropriáveis. É margem antes das despesas fixas, portanto não é lucro.
+
+Passo 2: crédito transferido, conforme a origem da compra
+Origem do fornecedor
+Crédito de CBS e IBS
+Lucro Real ou Presumido
+Valor da nota dividido por (1 + alíquotas), multiplicado pelas alíquotas.
+Simples optante do regime regular
+Igual ao regime regular.
+Simples tradicional
+Limitado à parcela de CBS e IBS embutida no DAS do fornecedor.
+MEI, pessoa física e produtor rural
+Nenhum.
+A redução setorial do produto vale nas duas pontas: se a venda tem redução de 60%, a compra do mesmo produto também tem. O ICMS só gera crédito para quem não é optante do Simples.
+
+Passo 3: preço que preserva a margem, com Imposto Seletivo
+k = (1 - i) x (c + b)
+m = (1 - k) / (1 + s)
+Preco = (MC + Compra - Creditos) / (1 - i - k - m x (s + r))
+IS = s x Preco x m          Base do IRPJ e da CSLL = Preco x m
+s é a alíquota do Imposto Seletivo. Ele integra a base da CBS e do IBS e não integra a receita bruta para IRPJ e CSLL. Com s igual a zero a equação volta à forma do Motor A.
+
+BASE DE NCM
+A calculadora embute a nomenclatura oficial vigente, com 10.455 códigos de oito dígitos e descrição. Serve para identificar o produto. O tratamento de CBS e IBS decorre das listas anexas à LC 214/2025 e é informado à parte, num mapa que precisa ser completado pela Amcont.
+
+
+MEMÓRIA DE CÁLCULO
+Código:
+MC.001
+
+Precificação na Reforma Tributária
+Rev.: 03
+Folha 8 de 10
+
+11. LINHA DO TEMPO DA TRANSIÇÃO
+
+Ano
+CBS
+IBS
+ICMS e ISS
+2026
+não incide
+não incide
+integrais, com PIS e COFINS
+2027 e 2028
+9,2%
+0,1%
+integrais, PIS e COFINS extintos
+2029
+9,3%
+1,87%
+reduzidos a 90%
+2030
+9,3%
+3,74%
+reduzidos a 80%
+2031
+9,3%
+5,61%
+reduzidos a 70%
+2032
+9,3%
+7,48%
+reduzidos a 60%
+2033
+9,3%
+18,7%
+extintos
+Em 2027 e 2028 a CBS é reduzida em 0,1 ponto para compensar a alíquota-teste do IBS. A rampa de 2029 a 2032 segue o art. 128 do ADCT.
+Todas as alíquotas desta tabela são editáveis. Na planilha ficam na aba PARAMETROS, celulas A32 a D39. Na calculadora ficam nos ajustes avançados, em quatro campos: CBS e IBS de 2027 e 2028, e CBS e IBS do regime pleno. Nenhuma alíquota permanece fixa dentro de fórmula em qualquer das três ferramentas.
+
+12. DIVERGÊNCIAS DELIBERADAS CONTRA O MATERIAL DE REFERÊNCIA
+
+Ponto
+Material de referência
+Adotado pela Amcont
+Adicional de IRPJ
+Não é calculado em nenhum dos seis casos práticos, mesmo com base acima do limite.
+Calculado nos dois cenários. Divergência de 0,03% contra os casos do material.
+Presunção da clínica
+Usa 8% e 12% sem mencionar que isso pressupõe equiparação hospitalar.
+Presunção derivada da atividade, com equiparação como opção explícita.
+Crédito de ISS
+Aplica ao ISS a mesma lógica de crédito do ICMS.
+ISS é cumulativo e não gera crédito na entrada.
+Base da CBS e do IBS
+O Caso 02 usa uma regra e os Casos 04 a 07 usam outra.
+Regra única, com a premissa jurídica selecionável e a faixa sempre visível.
+Gross-up do crédito
+Divide por (1 + alíquota) de cada tributo separadamente.
+Mantido igual. O método conjunto altera o crédito em 0,10%.
+Imposto Seletivo
+Não é tratado em nenhum dos seis casos práticos.
+Calculado no Motor C, integrando a base da CBS e do IBS.
+
+REGISTRO
+As três primeiras divergências são correções. As ferramentas produzem números diferentes dos slides do curso nesses pontos, e os números das ferramentas é que estão certos.
+
+
+MEMÓRIA DE CÁLCULO
+Código:
+MC.001
+
+Precificação na Reforma Tributária
+Rev.: 03
+Folha 9 de 10
+
+13. VALIDAÇÃO EXECUTADA
+
+Teste
+Resultado
+Método
+Motor contra os seis casos práticos do material
+66 de 66
+Valor a valor, tolerância de 0,05%
+Planilha contra o motor de referência
+35 de 35
+Sete atividades, recálculo a cada uma
+Calculadora de empresa contra o motor
+6 de 6
+Idênticos ao centavo
+Calculadora de produto contra a planilha
+6 de 6
+Com e sem Imposto Seletivo
+Prova real da margem de contribuição
+243 de 243
+Regime, fornecedor, tratamento, IS e ano
+Prova real da receita líquida
+zero em todos
+Sete atividades e três regimes
+Fórmulas da planilha
+1.210, zero erros
+Recálculo em LibreOffice
+
+O QUE O RECÁLCULO NÃO PROVA
+Uma planilha sem erro de fórmula não é uma planilha correta. Na construção, o recálculo acusou zero erros enquanto oito valores estavam errados por referência à linha errada. Toda alteração exige conferência valor a valor contra o motor.
+
+14. LIMITAÇÕES
+
+Item
+Limitação
+Alíquotas
+Estimativas, não texto legal. Conferir antes de cada uso.
+Premissa jurídica
+CBS e IBS na base do ICMS e do ISS: não pacificado. Faixa de 1,88%.
+Projeção até 2033
+Mantém o custo constante. É teto de impacto, não previsão.
+Split payment
+Afeta o fluxo de caixa, não o preço. Fora do escopo.
+Calculadora de empresa
+Agrega as entradas em cinco faixas de crédito.
+Mapa de NCM
+Semente com 12 produtos. A lista oficial está nos anexos da LC 214.
+Imposto Seletivo
+Alíquotas ainda não fixadas em lei. As que constam são estimativas editáveis.
+Motor C
+Analisa um produto. O adicional de IRPJ é anual e da empresa, não entra no unitário.
+
+
+MEMÓRIA DE CÁLCULO
+Código:
+MC.001
+
+Precificação na Reforma Tributária
+Rev.: 03
+Folha 10 de 10
+
+15. MANUTENÇÃO
+
+Nº
+Ao alterar qualquer regra de cálculo
+1
+Alterar primeiro o motor de referência em Python.
+2
+Rodar a suíte contra os seis casos práticos e confirmar que nada regrediu.
+3
+Replicar na planilha e recalcular.
+4
+Conferir a planilha valor a valor contra o motor, nas sete atividades.
+5
+Replicar na calculadora, cruzar os motores e revisar este documento.
+
+Elaborado por:
+Andrei Constantino
+Aprovado por:
+Andrei Constantino
+Data de emissão:
+13/08/2026
+Revisão prevista:
+A cada alteração de regra

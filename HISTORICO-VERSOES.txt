@@ -1,0 +1,10 @@
+HISTÓRICO DE VERSÕES  |  Ferramentas de precificação Amcont
+Versão atual: 2026.8.6, de 22/11/2026 22:14
+
+2026.8.6  (22/11/2026 22:14)  Metadados das tabelas corrigidos (fontes de SC e de PIS/COFINS) e número de versão único para dados, base fiscal e aplicativo. Sem mudança de cálculo.  Registro: R20-01
+2026.8.5  (13/11/2026 12:43)  Versão aprovada pela Amcont em 13/11/2026 (R16-01 a R19-02 aprovados). Mesmo conteúdo de cálculo da 2026.8.4; registro e manuais com a aprovação. Liberada para clientes.  Registro: R16-01 a R19-02 (aprovados)
+2026.8.4  (11/11/2026 21:08)  Listas do RICMS/SC, Anexo 1 (Seções VI, VII, XI e XIX): a pergunta de máquinas e informática só oferece a seção em que o NCM aparece; aço restrito às posições da Seção XI; asa-delta, balão e dirigível (8801) a 25%.  Registro: R19-02
+2026.8.3  (11/11/2026 20:17)  Conferência com o texto do RICMS/SC (art. 26): protetor solar a 17%, combustíveis com ICMS monofásico sem débito na revenda, etanol carburante a 17% entre contribuintes, notas de fibrocimento, coque e crédito vedado (art. 35-A).  Registro: R19-01
+2026.8.2  (11/11/2026 17:49)  Revisão completa e controle de versão em todos os arquivos: rodapé com a versão nos documentos, versão nos estudos e simulações salvos com aviso ao abrir arquivo de outra versão, bateria de testes registrada por versão. Inclui tudo da 2026.8.1.  Registro: R16-01 a R18-01
+2026.8.1  (11/11/2026 13:26)  Perguntas de ICMS de SC antes da alíquota, na calculadora e na planilha; benefícios do RICMS/SC (isenções e cargas reduzidas); selo Benefício para NCM sem condição; rótulo da opção integral; controle de versão.  Registro: R16-01 a R17-03
+2026.8.0  (10/11/2026 23:15)  Versão aprovada pela Amcont: correções da auditoria independente e conferência com as fontes oficiais (LC 214 consolidada, Lei 10.485, MP 1.399, Anexo VIII v1.02.00).  Registro: R08-01 a R15-01

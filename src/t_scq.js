@@ -1,0 +1,19 @@
+// Testa as perguntas de ICMS de SC (R17-01) contra as regras conferidas na SEF/SC
+const { chromium } = require('playwright');
+(async()=>{ const b=await chromium.launch(); const p=await b.newPage(); const errs=[]; p.on('pageerror',e=>errs.push(String(e)));
+ await p.goto('file:///home/claude/work/amcont-produto.html'); await p.fill('#senha','amcont2027'); await p.click('#form-gate button'); await p.waitForSelector('#app:not([hidden])');
+ const casos=[
+  ['02061000',{dest:'rev',orig:'fora'},0.07],['02061000',{dest:'uso',orig:'fora'},0.07],['02061000',{dest:'final',orig:'fora'},0.12],['02061000',{dest:'rev',orig:'sc'},0.12],['02061000',{dest:'rev',orig:'imp'},0.12],
+  ['02011000',{dest:'rev',orig:'fora'},0.07],['02031100',{},null],['22030000',{dest:'rev'},0.25],['22030000',{dest:'orgao'},0],['84713012',{dest:'rev',ben:'nao'},0.12],['84713012',{dest:'uso',ben:'nao'},0.17],['84713012',{dest:'final',ben:'nao'},0.17],['84713012',{dest:'final',ben:'s19'},0.17],['84714900',{dest:'final',ben:'s19'},0.12],['84714900',{dest:'final',ben:'nao'},0.17],['84439199',{dest:'final',ben:'s19'},0.12],['84439199',{dest:'rev',ben:'s6'},0.088],['84128000',{dest:'final',ben:'s7'},0.056],['72142000',{dest:'final',ben:'sim'},0.12],['72101100',{dest:'final',ben:'sim'},0.17],['88010000',{ben:'sim',dest:'rev'},0.25],['88010000',{ben:'nao',dest:'rev'},0.12],['87019490',{dest:'final',ben:'s7',desc:'nao'},0.056],['87019490',{dest:'uso',ben:'ativo',desc:'nao'},0.17],['84713012',{dest:'uso',ben:'ativo'},0.12],['84713012',{dest:'final',ben:'ativo'},0.17],['84798999',{dest:'rev',ben:'s6'},0.088],['84329000',{dest:'final',ben:'s7'},0.056],
+  ['61091000',{dest:'rev',ativ:'ind'},0.17],['61091000',{dest:'rev',ativ:'com'},0.12],['17011400',{dest:'final'},0.12],['08061000',{ben:'nao',desc:'nao',dest:'rev'},0.12],['08061000',{ben:'nao',desc:'nao',dest:'final'},0.17],['08061000',{ben:'sim',dest:'final'},0],['08081000',{dest:'rev'},0],['04072100',{ben:'sim',dest:'rev'},0],['04072100',{ben:'nao',dest:'rev'},0.12],['04011010',{ben:'sim',dest:'final'},0],['04011010',{ben:'sim',c7:'nao',dest:'rev'},0.12],['04011010',{ben:'nao',c7:'sim',dest:'rev'},0.07],['69041000',{ben:'sim',dest:'final'},0.07],['87021000',{dest:'final'},0.08],['33049910',{ben:'sim',dest:'rev'},0.17],['33049910',{ben:'nao',dest:'rev'},0.25],['27101259',{ben:'mono',dest:'final'},0],['22071090',{ben:'etanol',dest:'rev'},0.17],['27111910',{ben:'nao',dest:'rev'},0.12],['08061000',{ben:'nao',desc:'sim',dest:'final'},0.12],
+  ['10063021',{c7:'sim',dest:'rev'},0.07],['10063021',{c7:'nao',dest:'rev'},0.12],['10063021',{c7:'sim',dest:'final'},0],['11010010',{c7:'sim',ativ:'ind',dest:'rev'},0.12],['11010010',{c7:'sim',ativ:'com',dest:'rev'},0.07]];
+ const out=await p.evaluate((casos)=>{ definirModo('venda'); definirTipo('produto',true); const res=[];
+   for (const [cod,resp,esp] of casos){ selecionarCodigo(cod); const qs=(FICHA.scQ||[]).map(q=>q.id);
+     for (const [k,v] of Object.entries(resp)) if (qs.includes(k)) FICHA.scResp[k]=v;
+     aplicarSC(); const z=FICHA.scRes; res.push([cod,JSON.stringify(resp),qs.join(','),z?z.carga:null,esp,$("#icms-venda").value]); }
+   return res; }, casos);
+ let ok=0; for (const r of out){ const good = r[4]===null ? true : Math.abs((r[3]??-1)-r[4])<1e-9; ok+=good; console.log(good?'OK ':'ERRO',r.join(' | ')); }
+ // venda interestadual de carne: art. 12-A
+ const inter=await p.evaluate(()=>{ selecionarCodigo('02011000'); $("#uf-dest").value='SP'; $("#dest-tipo").value='contrib'; sincronizar(); const v=vendaICMS(); selecionarCodigo('84713012'); const w=vendaICMS(); $("#uf-dest").value='SC'; sincronizar(); return [v.icmsInter,w.icmsInter]; });
+ console.log('12-A carne SC->SP',inter[0],'| produto comum SC->SP',inter[1]); ok += (inter[0]===0.07 && inter[1]===0.12);
+ console.log(ok+' de '+(out.length+1), errs); await b.close(); })();
