@@ -1,6 +1,7 @@
 HISTÓRICO DE VERSÕES  |  Ferramentas de precificação Amcont
-Versão atual: 2026.8.6, de 22/11/2026 22:14
+Versão atual: 2026.8.7, de 23/11/2026 11:28
 
+2026.8.7  (23/11/2026 11:28)  Tabela IBPTax trocada pela 26.2.D (vigente de 17/11 a 20/12/2026). Sem mudança de cálculo.  Registro: R21-01
 2026.8.6  (22/11/2026 22:14)  Metadados das tabelas corrigidos (fontes de SC e de PIS/COFINS) e número de versão único para dados, base fiscal e aplicativo. Sem mudança de cálculo.  Registro: R20-01
 2026.8.5  (13/11/2026 12:43)  Versão aprovada pela Amcont em 13/11/2026 (R16-01 a R19-02 aprovados). Mesmo conteúdo de cálculo da 2026.8.4; registro e manuais com a aprovação. Liberada para clientes.  Registro: R16-01 a R19-02 (aprovados)
 2026.8.4  (11/11/2026 21:08)  Listas do RICMS/SC, Anexo 1 (Seções VI, VII, XI e XIX): a pergunta de máquinas e informática só oferece a seção em que o NCM aparece; aço restrito às posições da Seção XI; asa-delta, balão e dirigível (8801) a 25%.  Registro: R19-02

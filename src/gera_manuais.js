@@ -315,7 +315,7 @@ const mc001={tipo:"MEMÓRIA DE CÁLCULO",codigo:"MC.001",titulo:"Precificação 
  secoes:[
  {t:"1. OBJETIVO E ALCANCE",c:[labels([["Objetivo","Registrar as fórmulas, as premissas, as fontes e os testes das ferramentas de precificação da Amcont, para que qualquer número entregue ao cliente possa ser refeito e defendido."],
    ["Ferramentas cobertas","Planilha Amcont_Precificacao_Reforma_Tributaria.xlsx; calculadora de empresa (versão interna e versão do cliente); calculadora de produto e serviço."],
-   ["Versão dos dados","Versão "+VERS.v+", de "+VERS.br+". A partir da 2026.8.6, parâmetros e base fiscal usam o mesmo número de versão do aplicativo. Conteúdo fiscal conferido em 10/11/2026 (LC 214 e tabelas federais) e 11/11/2026 (SC): base 2026.7 com as correções da auditoria independente e da conferência com as fontes oficiais, aprovada pela Amcont em 10/11/2026. Alterações R16-01 a R19-02 (selo Benefício, perguntas e benefícios do ICMS de SC, RICMS/SC art. 26 e Anexo 1, controle de versão) aprovadas pela Amcont em 13/11/2026."]])]},
+   ["Versão dos dados","Versão "+VERS.v+", de "+VERS.br+". A partir da 2026.8.6, parâmetros e base fiscal usam o mesmo número de versão do aplicativo. Conteúdo fiscal conferido em 10/11/2026 (LC 214 e tabelas federais) e 11/11/2026 (SC): base 2026.7 com as correções da auditoria independente e da conferência com as fontes oficiais, aprovada pela Amcont em 10/11/2026. Alterações R16-01 a R19-02 (selo Benefício, perguntas e benefícios do ICMS de SC, RICMS/SC art. 26 e Anexo 1, controle de versão) aprovadas pela Amcont em 13/11/2026. Em 23/11/2026, a Tabela IBPTax foi trocada pela 26.2.D (R21-01), sem mudança de cálculo."]])]},
  {t:"2. PARÂMETROS E FONTES",c:[grade([2700,2400,4260],["Parâmetro","Valor","Fonte e situação"],[
    ["CBS em 2027 e 2028","11,2%","Cálculo do TCU de 11,3% (Acórdão 2933/2026) menos 0,1 ponto (LC 214/2025, art. 347). Aguarda resolução do Senado."],
    ["CBS de 2029 em diante","11,3%","Mesmo cálculo. Provisória."],
@@ -370,7 +370,7 @@ const mc001={tipo:"MEMÓRIA DE CÁLCULO",codigo:"MC.001",titulo:"Precificação 
    ["Venda isenta ou imune","Zera o débito e anula o crédito de CBS e IBS das entradas (LC 214/2025, art. 51). Alíquota zero mantém o crédito (art. 52)."],
    ["Simples","Compara o DAS tradicional com o DAS reduzido mais CBS e IBS por fora, líquidos de créditos, e calcula a base de compras de equilíbrio."]])]},
  {t:"6. BASE FISCAL",c:[grade([3000,1500,4860],["Tabela","Registros","Origem"],[
-   ["NCM vigentes","10.518","Tabela oficial de 07/10/2026 (via Mapa de Classificação), conferida com a Tabela IBPTax 26.2.C."],
+   ["NCM vigentes","10.518","Tabela oficial de 07/10/2026 (via Mapa de Classificação), conferida com a Tabela IBPTax 26.2.D."],
    ["NCM com benefício de CBS e IBS","1.888","Mapa de Classificação 1.0, de 14/10/2026: LC 214/2025 com LC 227 e LC 235/2026."],
    ["NBS","1.238","732 da lei e do Anexo VIII (item da LC 116, indOp e cClassTrib) e 506 da Tabela IBPTax."],
    ["Item da LC 116 com NBS","209 itens e 997 pares","Anexo VIII da NFS-e Nacional, v1.02.00, de 26/10/2026 (preliminar). Classificação própria por par; em 95 pares difere da geral da NBS. Cinco itens sem NBS."],

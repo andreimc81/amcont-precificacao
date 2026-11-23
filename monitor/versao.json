@@ -1,7 +1,7 @@
 {
  "base": "2026.8",
- "seq": 6,
- "data": "2026-11-22T22:14",
+ "seq": 7,
+ "data": "2026-11-23T11:28",
  "hist": [
   {
    "v": "2026.8.0",
@@ -44,6 +44,12 @@
    "data": "2026-11-22T22:14",
    "resumo": "Metadados das tabelas corrigidos (fontes de SC e de PIS/COFINS) e número de versão único para dados, base fiscal e aplicativo. Sem mudança de cálculo.",
    "registros": "R20-01"
+  },
+  {
+   "v": "2026.8.7",
+   "data": "2026-11-23T11:28",
+   "resumo": "Tabela IBPTax trocada pela 26.2.D (vigente de 17/11 a 20/12/2026). Sem mudança de cálculo.",
+   "registros": "R21-01"
   }
  ],
  "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"

@@ -112,7 +112,7 @@ for r in R[1:]:
         for ent in tgt:
             if cc(c) not in ent[1]: ent[1].append(cc(c))
         if not tgt: cur.setdefault('cx',[]).append(cc(c))
-# ---------- Tabela IBPTax 26.2.C (vigencia 20/10 a 30/11/2026): NCM e NBS adicionais e descricoes ----------
+# ---------- Tabela IBPTax 26.2.D (vigencia 17/11 a 20/12/2026): NCM e NBS adicionais e descricoes ----------
 ibpt=json.load(open('ibpt.json',encoding='utf-8'))
 nbs_lei=len(nbs_desc)
 for k,v in ibpt['nbs'].items(): nbs_desc.setdefault(k,v)
@@ -322,7 +322,7 @@ meta={'versao':_V['v'],'montadoEm':_V['data'][:10],'conferidoEm':'2026-11-10',
   'Mapa de Classificação 1.0, de 14/10/2026 (Contador Protagonista): regras por NCM e NBS. Normas: '+versao,
   'Anexo VIII, correlação item LC 116, NBS, indOp e cClassTrib, versão 1.02.00, de 26/10/2026 (preliminar)',
   'Tabela de nomes e reduções de cClassTrib: Mapa NCM RT 2026 v4 (tabela de 23/01/2026)',
-  'Tabela IBPTax 26.2.C, vigente de 20/10 a 30/11/2026: conferência da lista de NCM, descrições faltantes e lista de NBS',
+  'Tabela IBPTax 26.2.D, vigente de 17/11 a 20/12/2026: conferência da lista de NCM, descrições faltantes e lista de NBS',
   'Imposto Seletivo: MP 1.399/2026, Anexos IV e V, texto oficial (avulso do Congresso, DOU de 04/11/2026) conferido em 10/11/2026; sujeita à conversão em lei'],
  'aviso':'Apoio à classificação. O NCM ou a NBS não decide sozinho: o benefício depende da condição, de quem compra, da destinação e da operação. Quem decide é o emitente, com o contador.'}
 # Anexo XVII da LC 214/2025: "embarcações com motor classificadas na posição 8903". O 8903.12 descreve barco
