@@ -1,7 +1,7 @@
 {
  "base": "2026.8",
- "seq": 8,
- "data": "2026-11-23T18:59",
+ "seq": 9,
+ "data": "2026-11-23T23:31",
  "hist": [
   {
    "v": "2026.8.0",
@@ -56,6 +56,12 @@
    "data": "2026-11-23T18:59",
    "resumo": "Ajustes de tela e de classificação: atividades por tipo (produto ou serviço), PIS e COFINS de hoje sem monofásico em serviço, reajuste do fornecedor em percentual e opção integral do serviço só quando a tabela oficial a lista.",
    "registros": "R22-01 a R22-04"
+  },
+  {
+   "v": "2026.8.9",
+   "data": "2026-11-23T23:31",
+   "resumo": "Verificação de todos os NBS de saúde: NBS residual 1.2301.99.00 com as duas opções e a integral marcada fora dos serviços listados no Anexo III; mensagem dos NBS de saúde ajustada",
+   "registros": "R22-05"
   }
  ],
  "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"

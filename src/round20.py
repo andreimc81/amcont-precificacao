@@ -54,14 +54,19 @@ s=sub1(s,"""  $("#lb-pc").textContent = sv ? "Insumos e serviços tomados por un
   $("#lb-reaj").textContent = sv ? "Reajuste esperado nos insumos e serviços tomados, no ano simulado (%)" : "Reajuste esperado do fornecedor, no ano simulado (%)";""")
 # R22-04: a opção integral do serviço só aparece quando a tabela oficial a lista ou quando não há benefício
 s=sub1(s,"""  if (!tem("000001")) f.opcoes.push(INTEGRAL);
-  const beneficio""","""  if (!tem("000001") && (!idx || !f.opcoes.some(o=>o.red > 0))) f.opcoes.push(INTEGRAL);
+  const beneficio""","""  // R22-05: o NBS 1.2301.99.00 é residual; só os itens 18 a 26, 28 e 29 do Anexo III têm a redução. Fora dos itens da LC 116 que
+  // correspondem a serviço listado (04.07 farmacêuticos, 04.10 nutrição), a ficha mostra as duas opções, com a integral marcada.
+  const residuo = cod === "123019900" && !["04.07","04.10"].includes(item || "");
+  if (!tem("000001") && (!idx || residuo || !f.opcoes.some(o=>o.red > 0))) f.opcoes.push(INTEGRAL);
   const beneficio""")
+s=sub1(s,"""    f.sel = (e && e.ccl && e.ccl !== "000001") ? 0 : (iInt >= 0 ? iInt : 0);""","""    f.sel = residuo ? f.opcoes.findIndex(o=>o.ccl==="000001") : (e && e.ccl && e.ccl !== "000001") ? 0 : (iInt >= 0 ? iInt : 0);
+    if (residuo) f.avisos.push("O NBS 1.2301.99.00 é residual: a redução de 60% vale só para os serviços listados nos itens 18 a 26, 28 e 29 do Anexo III (vigilância sanitária, epidemiologia, vacinação, fonoaudiologia, nutrição, optometria, instrumentação cirúrgica, biomedicina, serviços farmacêuticos, serviços domiciliares de apoio e esterilização). Acupuntura, terapias em geral, próteses sob encomenda, psicanálise e ortóptica constam da correlação da LC 116, mas não do Anexo III. A simulação parte da tributação integral; marque a redução somente depois de confirmar que o serviço está listado.");""")
 s=sub1(s,"""  } else {
     f.cor = "amarelo"; f.selo = "Conferir";
     const iInt = f.opcoes.findIndex(o=>o.ccl==="000001" && o !== INTEGRAL);""","""  } else if (f.opcoes.length === 1 && !f.opcoes[0].semRed){
     f.cor = "verde"; f.selo = "Benefício"; f.sel = 0;
     f.msg = "Redução de "+Math.round(f.opcoes[0].red*100)+"% prevista na lei para este serviço"+(f.opcoes[0].rot ? " ("+f.opcoes[0].rot+")" : "")
-      +". A tabela oficial de correlação da NFS-e não traz outra classificação para este código, por isso não há opção integral. A redução vale se o serviço prestado for o descrito no anexo.";
+      +". Pela lei, este código tem só a redução (Anexo III), e a tabela oficial de correlação da NFS-e não traz classificação integral para ele; por isso não há opção integral. A redução vale se o serviço prestado for o descrito no anexo.";
   } else {
     f.cor = "amarelo"; f.selo = "Conferir";
     const iInt = f.opcoes.findIndex(o=>o.ccl==="000001" && o !== INTEGRAL);""")
