@@ -1,7 +1,7 @@
 {
  "base": "2026.8",
- "seq": 10,
- "data": "2026-11-24T12:04",
+ "seq": 11,
+ "data": "2026-11-24T13:43",
  "hist": [
   {
    "v": "2026.8.0",
@@ -68,6 +68,12 @@
    "data": "2026-11-24T12:04",
    "resumo": "Preço necessário passa a mostrar o valor do produto ou serviço a cadastrar, com CBS e IBS separados e o total da nota; novo cenário de mesmo desembolso do cliente, com a redução da margem; planilha com o mesmo bloco",
    "registros": "R23-01 a R23-03"
+  },
+  {
+   "v": "2026.8.11",
+   "data": "2026-11-24T13:43",
+   "resumo": "Barra de anos fixa, alíquotas editáveis e quadro Todos os anos",
+   "registros": "R24-01 a R24-03"
   }
  ],
  "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"
