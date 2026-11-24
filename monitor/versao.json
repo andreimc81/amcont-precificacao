@@ -1,7 +1,7 @@
 {
  "base": "2026.8",
- "seq": 9,
- "data": "2026-11-23T23:31",
+ "seq": 10,
+ "data": "2026-11-24T12:04",
  "hist": [
   {
    "v": "2026.8.0",
@@ -62,6 +62,12 @@
    "data": "2026-11-23T23:31",
    "resumo": "Verificação de todos os NBS de saúde: NBS residual 1.2301.99.00 com as duas opções e a integral marcada fora dos serviços listados no Anexo III; mensagem dos NBS de saúde ajustada",
    "registros": "R22-05"
+  },
+  {
+   "v": "2026.8.10",
+   "data": "2026-11-24T12:04",
+   "resumo": "Preço necessário passa a mostrar o valor do produto ou serviço a cadastrar, com CBS e IBS separados e o total da nota; novo cenário de mesmo desembolso do cliente, com a redução da margem; planilha com o mesmo bloco",
+   "registros": "R23-01 a R23-03"
   }
  ],
  "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"

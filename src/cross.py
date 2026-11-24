@@ -32,6 +32,6 @@ for i,sc in enumerate(SC):
     ws['B4']=cod; ws['B17']=tipo; ws['B10']=reg; ws['B11']=ax; ws['B12']=aliq; ws['B13']=ano; ws['B20']=forn; ws['B15']='I'; ws['B25']=pcx; ws['E23']='N'  # testa a aliquota informada (B12); as perguntas tem teste proprio
     wb.save(f); subprocess.run(['python3','/mnt/skills/public/xlsx/scripts/recalc.py',f,'180'],capture_output=True)
     ws=openpyxl.load_workbook(f,data_only=True)['PRODUTO']
-    res.append({'mc':ws['B47'].value,'nf':ws['B57'].value,'red':ws['B33'].value,'is':ws['B7'].value,'prova':ws['B67'].value,'sit':ws['E4'].value})
+    res.append({'mc':ws['B47'].value,'nf':ws['B57'].value,'red':ws['B33'].value,'is':ws['B7'].value,'prova':ws['B67'].value,'cad':ws['G82'].value,'mc2':ws['G87'].value,'cadT':ws['F82'].value,'mc2T':ws['F87'].value,'sit':ws['E4'].value})
 json.dump({'sc':SC,'res':res},open('cross_xlsx.json','w'))
 print('ok')

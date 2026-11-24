@@ -458,7 +458,7 @@ ws.unmerge_cells('A3:G3'); ws.merge_cells('A3:G3')
 # ---------------- PRODUTO: nota fiscal da venda no ano ----------------
 ws=wb['PRODUTO']
 ws.merge_cells('D56:G56'); ws['D56']='NOTA FISCAL DA VENDA NO ANO (uma unidade)'; ws['D56'].font=f_h; ws['D56'].fill=fill_h
-rows_nf=[('Valor do produto ou servico (com ICMS ou ISS e IS embutidos)','=IF($B$10="simples",C84,B57-B60-B61)'),
+rows_nf=[('Valor do produto ou servico a cadastrar (com ICMS ou ISS e IS embutidos)','=IF($B$10="simples",C84,B57-B60-B61)'),
  ('Base do ICMS ou ISS: total da nota','=IF($B$10="simples","no DAS",B57)'),
  ('ICMS ou ISS','=IF($B$10="simples","no DAS",B59)'),
  ('Imposto Seletivo','=IF($B$10="simples",0,B62)'),
@@ -472,6 +472,29 @@ for i,(lb,f_) in enumerate(rows_nf):
     ws['G%d'%r]=f_; ws['G%d'%r].font=Font(name='Arial',size=10,bold=(i==7)); ws['G%d'%r].fill=fill_c; ws['G%d'%r].number_format='#,##0.00'
 ws['D67']='No Simples, o quadro mostra a opcao pelo regime regular de CBS e IBS (coluna C das linhas 82 a 89). Leiaute ilustrativo: confirme com o emissor se a CBS e o IBS sao somados por fora.'
 ws['D67'].font=Font(name='Arial',size=8,italic=True); ws.merge_cells('D67:G67'); ws['D67'].alignment=Alignment(wrap_text=True,vertical='top'); ws.row_dimensions[67].height=36
+# R23-02: mesmo desembolso do cliente. O total da nota fica no preco de hoje (B27); mesmas formulas do preco necessario.
+ws.merge_cells('D80:G80'); ws['D80']='MESMO DESEMBOLSO DO CLIENTE (a partir de 2027)'; ws['D80'].font=f_h; ws['D80'].fill=fill_h
+ws.merge_cells('D81:E81'); ws['D81']='Indicador'; ws['F81']='Simples tradicional'; ws['G81']='Regime geral ou Simples regular'
+for a_ in ('D81','F81','G81'): ws[a_].font=Font(name='Arial',size=9,bold=True)
+S='OR($B$13<2027,$B$10<>"simples")'
+MD=[('Valor a cadastrar no emissor (produto ou servico)',
+     '=IF('+S+',"",$B$27)', '=IF($B$13<2027,"",IF($B$10="simples",$B$27/(1+$B$81*($B$34+$B$35)),$B$27-$B$27*(1-$B$36)/(1+$B$34+$B$35)*($B$34+$B$35)))'),
+    ('CBS somada por fora','=IF('+S+',"",0)','=IF($B$13<2027,"",IF($B$10="simples",G82*$B$81*$B$34,$B$27*(1-$B$36)/(1+$B$34+$B$35)*$B$34))'),
+    ('IBS somado por fora','=IF('+S+',"",0)','=IF($B$13<2027,"",IF($B$10="simples",G82*$B$81*$B$35,$B$27*(1-$B$36)/(1+$B$34+$B$35)*$B$35))'),
+    ('Total da nota: igual ao preco de hoje','=IF('+S+',"",F82+F83+F84)','=IF($B$13<2027,"",G82+G83+G84)'),
+    ('Margem de contribuicao preservada (hoje)','=IF('+S+',"",$B$47)','=IF($B$13<2027,"",$B$47)'),
+    ('Margem de contribuicao neste cenario','=IF('+S+',"",$B$27*(1-$I$10)-$B$24)',
+     '=IF($B$13<2027,"",IF($B$10="simples",G82-$B$24-G82*$B$80+$B$51,$B$27-$B$24-($B$27*$B$36+G83+G84+$B$27*$B$55+$B$27*$B$37*(1-$B$54-$B$55)-$B$53)))'),
+    ('Reducao da margem por unidade (R$)','=IF('+S+',"",F86-F87)','=IF($B$13<2027,"",G86-G87)'),
+    ('Reducao da margem (% da margem preservada)','=IF('+S+',"",IF(F86=0,0,F88/F86))','=IF($B$13<2027,"",IF(G86=0,0,G88/G86))'),
+    ('Valor a cadastrar que preserva a margem (linha 57 ou C84)','=IF('+S+',"",B83)','=IF($B$13<2027,"",G57)')]
+for i,(lb,ff,fg) in enumerate(MD):
+    r=82+i; ws.merge_cells('D%d:E%d'%(r,r)); ws['D%d'%r]=lb; ws['D%d'%r].font=Font(name='Arial',size=9,bold=(i in (3,5)))
+    for col,f_ in (('F',ff),('G',fg)):
+        ws['%s%d'%(col,r)]=f_; ws['%s%d'%(col,r)].font=Font(name='Arial',size=10,bold=(i in (3,5))); ws['%s%d'%(col,r)].fill=fill_c
+        ws['%s%d'%(col,r)].number_format='0.00%' if i==7 else '#,##0.00'
+ws['D91']='O total da nota fica fixo no preco de hoje (B27). Se o aumento de carga nao for repassado, a reducao da margem e a diferenca entre as linhas 86 e 87. Sem efeito em 2026.'
+ws['D91'].font=Font(name='Arial',size=8,italic=True); ws.merge_cells('D91:G91'); ws['D91'].alignment=Alignment(wrap_text=True,vertical='top'); ws.row_dimensions[91].height=34
 ws['A22']='Aliquota do DAS do fornecedor (se do Simples, tradicional ou regime regular)'
 ws['A23']='Anexo do fornecedor (Simples; ICMS so nos anexos I e II)'
 
