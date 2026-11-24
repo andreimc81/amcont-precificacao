@@ -1512,6 +1512,7 @@ s=sub1(s,"""  FICHA.sc = (TIPO === "produto" && FICHA.cor !== "cinza") ? icmsSC(
 """)
 exec(open('src/round17.py',encoding='utf-8').read())
 exec(open('src/round18.py',encoding='utf-8').read())
+exec(open('src/round20.py',encoding='utf-8').read())
 # ===== logotipo da Amcont =====
 _logo=open('logo_b64.txt').read()
 _img='<img class="%s" alt="Amcont Assessoria e Contabilidade" src="data:image/png;base64,'+_logo+'">'

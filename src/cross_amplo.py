@@ -14,6 +14,7 @@ for k in range(80):
     else: ax,ah=random.choice([('servicos em geral','servicos'),('servicos com equiparacao hospitalar','hospitalar')]); aliq=random.choice([0.02,0.03,0.05])
     ano=random.choice(range(2026,2034)); forn=random.choice(['regular','sn_regular','sn_tradicional','sn_sublimite','mei','pf'])
     das=random.choice([0.04,0.073,0.095,0.12]); pcx=random.choice(['auto','auto','normal','monofasico','monofasico_fab'])
+    if tipo=='servico': pcx=random.choice(['auto','auto','normal'])  # R22-02: monofásico e alíquota zero não existem para serviço
     uf,dt,imp,dup='SC','contribuinte','N','S'
     if tipo=='produto' and random.random()<0.4:
         uf=random.choice(UFS); dt=random.choice(['contribuinte','contribuinte_uso','final']); imp=random.choice(['N','N','S']); dup=random.choice(['S','N'])
