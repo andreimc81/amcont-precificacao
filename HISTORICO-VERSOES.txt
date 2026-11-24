@@ -1,6 +1,7 @@
 HISTÓRICO DE VERSÕES  |  Ferramentas de precificação Amcont
-Versão atual: 2026.8.11, de 24/11/2026 13:43
+Versão atual: 2026.8.12, de 24/11/2026 15:15
 
+2026.8.12  (24/11/2026 15:15)  Aviso de versão com botão de fechar, cabeçalho fixo com logotipo e mensagem do Imposto Seletivo conforme o NCM  Registro: R24-01 a R24-05
 2026.8.11  (24/11/2026 13:43)  Barra de anos fixa, alíquotas editáveis e quadro Todos os anos  Registro: R24-01 a R24-03
 2026.8.10  (24/11/2026 12:04)  Preço necessário passa a mostrar o valor do produto ou serviço a cadastrar, com CBS e IBS separados e o total da nota; novo cenário de mesmo desembolso do cliente, com a redução da margem; planilha com o mesmo bloco  Registro: R23-01 a R23-03
 2026.8.9  (23/11/2026 23:31)  Verificação de todos os NBS de saúde: NBS residual 1.2301.99.00 com as duas opções e a integral marcada fora dos serviços listados no Anexo III; mensagem dos NBS de saúde ajustada  Registro: R22-05

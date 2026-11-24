@@ -30,7 +30,11 @@ table.todos td.neg{color:var(--carimbo)}table.todos td.pos{color:var(--saldo)}
 #p-aliq input[type=number]{width:96px;padding:5px 7px;font-size:13px}
 #p-aliq .atalhos{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin:8px 0}
 #p-aliq .atalhos .campo{margin:0}
-@media print{.faixa-ano{position:static}}""")
+@media print{.faixa-ano{position:static}}
+header{position:sticky;top:0;z-index:45}
+.faixa-ano{top:var(--hh,66px)}
+@media(max-width:700px){header{position:static}.faixa-ano{top:0}}
+@media print{header{position:static}}""")
 # faixa de anos fixa no topo no lugar do bloco "Ano de referência"
 s=sub1(s,"""      <div class="bloco">
         <div class="bloco-tit">Ano de referência</div>
@@ -104,7 +108,9 @@ function sinalAliq(){
   }
   const r = $("#al-ref"); if (r){ const t33 = P.transicao.find(t=>t.ano===2033); r.textContent = "Alíquota combinada de CBS e IBS em 2033, nesta simulação: "+PCT(t33.cbs+t33.ibs)+". Previsto: "+PCT(TRANS0.find(t=>t.ano===2033).cbs+TRANS0.find(t=>t.ano===2033).ibs)+"."; }
 }
+function ajustarTopo(){ const h = document.querySelector("header"); if (h) document.documentElement.style.setProperty("--hh", h.offsetHeight + "px"); }
 function iniciarAliq(){
+  ajustarTopo(); window.addEventListener("resize", ajustarTopo);
   montarAliq(); lerAliq();
   $("#aliq-tabela").addEventListener("input", ()=>{ lerAliq(); calcular(); });
   $("#al-aplicar").addEventListener("click", ()=>{

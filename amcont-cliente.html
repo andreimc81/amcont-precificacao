@@ -632,7 +632,7 @@ details>div{padding-top:14px}
 <script type="application/json" id="amcont-parametros">
 {
  "app": "amcont-precificacao",
- "versaoDados": "2026.8.11",
+ "versaoDados": "2026.8.12",
  "atualizadoEm": "2026-11-10",
  "fonte": "EC 132/2023; LC 214/2025; LC 227/2026; LC 235/2026; Acórdão TCU 2933/2026; Lei 9.249/1995; Lei 14.592/2023",
  "avisoLegal": "CBS provisória: 11,3% calculados pelo TCU (11,2% em 2027 e 2028), aguardando resolução do Senado. IBS de referência ainda é estimativa. Confira contra a norma vigente antes de usar com cliente.",
@@ -1670,9 +1670,9 @@ montarConfig();
 sincronizar();
 </script>
 <script>
-window.AMCONT_VERSAO="2026.8.11";
+window.AMCONT_VERSAO="2026.8.12";
 (function(){
-  var VT="Versão 2026.8.11, de 24/11/2026 13:43. ", BASE="2026-11-10", LIMITE=45, dias=Math.floor((Date.now()-new Date(BASE+"T00:00:00").getTime())/864e5);
+  var VT="Versão 2026.8.12, de 24/11/2026 15:15. ", BASE="2026-11-10", LIMITE=45, dias=Math.floor((Date.now()-new Date(BASE+"T00:00:00").getTime())/864e5);
   var main=document.querySelector("main"); if(!main) return;
   var el=document.createElement("div"); el.id="validade";
   el.style.cssText="margin:14px auto 0;padding:10px 14px;border-left:4px solid "+(dias>LIMITE?"#A63D1B;background:#FBEDE7":"#4A8FA0;background:#EEF5F6")+";font:13px/1.45 Arial,sans-serif;color:#10242A";
@@ -1680,6 +1680,17 @@ window.AMCONT_VERSAO="2026.8.11";
     ? "Atenção: esta versão usa a legislação conferida em 10/11/2026, há "+dias+" dias. Peça à Amcont a versão atualizada antes de decidir preços."
     : "Legislação conferida em 10/11/2026 (LC 214/2025 consolidada). Válida para simulação até "+new Date(new Date(BASE+"T00:00:00").getTime()+LIMITE*864e5).toLocaleDateString("pt-BR")+".") + " Confira com a Amcont se esta é a versão mais recente.";
   main.parentNode.insertBefore(el, main);
+  var CH="amcont-aviso-fechado-"+window.AMCONT_VERSAO, fechado=false;
+  try{ fechado = localStorage.getItem(CH)==="1"; }catch(e){}
+  if (dias<=LIMITE){
+    var tx=el.textContent; el.textContent=""; el.style.display="flex"; el.style.gap="12px"; el.style.alignItems="flex-start";
+    var sp=document.createElement("span"); sp.style.flex="1"; sp.textContent=tx; el.appendChild(sp);
+    var xb=document.createElement("button"); xb.type="button"; xb.setAttribute("aria-label","Fechar aviso de versão"); xb.title="Fechar este aviso. A versão continua indicada no canto inferior direito.";
+    xb.textContent="×"; xb.style.cssText="border:0;background:transparent;font:20px/1 Arial,sans-serif;color:#10242A;cursor:pointer;padding:0 4px";
+    xb.onclick=function(){ el.hidden=true; el.style.display="none"; try{ localStorage.setItem(CH,"1"); }catch(e){} };
+    el.appendChild(xb);
+    if (fechado){ el.hidden=true; el.style.display="none"; }
+  }
   document.title = document.title + " | v" + VT.split(",")[0].replace("Versão ","");
   var bd=document.createElement("div"); bd.id="selo-versao"; bd.textContent=VT.replace(/[.] $/,"");
   bd.style.cssText="position:fixed;right:10px;bottom:10px;z-index:50;padding:4px 9px;border-radius:3px;background:#2A5F6B;color:#fff;font:600 11px Arial,sans-serif;opacity:.88";

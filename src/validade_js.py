@@ -15,6 +15,17 @@ window.AMCONT_VERSAO="%s";
     ? "Atenção: esta versão usa a legislação conferida em %s, há "+dias+" dias. Peça à Amcont a versão atualizada antes de decidir preços."
     : "Legislação conferida em %s (LC 214/2025 consolidada). Válida para simulação até "+new Date(new Date(BASE+"T00:00:00").getTime()+LIMITE*864e5).toLocaleDateString("pt-BR")+".") + " Confira com a Amcont se esta é a versão mais recente.";
   main.parentNode.insertBefore(el, main);
+  var CH="amcont-aviso-fechado-"+window.AMCONT_VERSAO, fechado=false;
+  try{ fechado = localStorage.getItem(CH)==="1"; }catch(e){}
+  if (dias<=LIMITE){
+    var tx=el.textContent; el.textContent=""; el.style.display="flex"; el.style.gap="12px"; el.style.alignItems="flex-start";
+    var sp=document.createElement("span"); sp.style.flex="1"; sp.textContent=tx; el.appendChild(sp);
+    var xb=document.createElement("button"); xb.type="button"; xb.setAttribute("aria-label","Fechar aviso de versão"); xb.title="Fechar este aviso. A versão continua indicada no canto inferior direito.";
+    xb.textContent="\u00D7"; xb.style.cssText="border:0;background:transparent;font:20px/1 Arial,sans-serif;color:#10242A;cursor:pointer;padding:0 4px";
+    xb.onclick=function(){ el.hidden=true; el.style.display="none"; try{ localStorage.setItem(CH,"1"); }catch(e){} };
+    el.appendChild(xb);
+    if (fechado){ el.hidden=true; el.style.display="none"; }
+  }
   document.title = document.title + " | v" + VT.split(",")[0].replace("Versão ","");
   var bd=document.createElement("div"); bd.id="selo-versao"; bd.textContent=VT.replace(/[.] $/,"");
   bd.style.cssText="position:fixed;right:10px;bottom:10px;z-index:50;padding:4px 9px;border-radius:3px;background:#2A5F6B;color:#fff;font:600 11px Arial,sans-serif;opacity:.88";
