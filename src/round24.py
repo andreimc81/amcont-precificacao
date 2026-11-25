@@ -1,12 +1,16 @@
 # ===== rodada 24 (versão 2026.8.11): R24-01 a R24-03 =====
 # R24-01: barra de anos fixa no topo; R24-02: alíquotas de CBS, IBS e transição editáveis; R24-03: painel "Todos os anos" com tabela e gráfico
 s=sub1(s,""".anos{display:flex;gap:4px;flex-wrap:wrap}""",""".anos{display:flex;gap:4px;flex-wrap:wrap}
-.faixa-ano{position:sticky;top:0;z-index:40;background:var(--nota);border-bottom:1px solid var(--linha);box-shadow:0 2px 0 rgba(16,36,42,.05);padding:9px 0 7px;margin-bottom:12px}
-.faixa-ano .fa-in{display:flex;align-items:center;gap:12px}
-.faixa-ano .fa-rot{font:500 10.5px "IBM Plex Mono";letter-spacing:.16em;text-transform:uppercase;color:var(--petroleo-2);white-space:nowrap}
-.faixa-ano .anos{flex:1;flex-wrap:nowrap;overflow-x:auto}
-.faixa-ano .dica{margin-top:5px}
-#aviso-aliq{margin-top:6px;padding:7px 10px;background:#FBEDE7;border-left:3px solid var(--carimbo);font-size:12.5px;color:var(--tinta);line-height:1.4}
+.faixa-ano{border-top:1px solid rgba(255,255,255,.16);padding:10px 0 11px}
+.faixa-ano .fa-in{display:flex;align-items:center;gap:14px}
+.faixa-ano .fa-rot{font:500 10.5px "IBM Plex Mono";letter-spacing:.16em;text-transform:uppercase;color:var(--petroleo-3);white-space:nowrap}
+.faixa-ano .anos{flex:1;flex-wrap:nowrap;overflow-x:auto;gap:6px}
+.faixa-ano .anos button{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);padding:7px 2px;font:500 13px "IBM Plex Mono"}
+.faixa-ano .anos button:hover{border-color:#fff}
+.faixa-ano .anos button[aria-pressed=true]{background:#fff;color:var(--petroleo);border-color:#fff;font-weight:700}
+.faixa-ano .dica{margin:6px 0 0;color:#CFE0E4;font-size:12.5px}
+#aviso-aliq{margin-top:8px;padding:7px 10px;background:#FBEDE7;border-left:3px solid var(--carimbo);font-size:12.5px;color:var(--tinta);line-height:1.4}
+#aviso-aliq a{color:var(--petroleo)}
 #aviso-aliq[hidden]{display:none}
 .rolar{overflow-x:auto}
 table.todos{border-collapse:collapse;width:100%;min-width:640px;font-size:13px}
@@ -30,10 +34,8 @@ table.todos td.neg{color:var(--carimbo)}table.todos td.pos{color:var(--saldo)}
 #p-aliq input[type=number]{width:96px;padding:5px 7px;font-size:13px}
 #p-aliq .atalhos{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin:8px 0}
 #p-aliq .atalhos .campo{margin:0}
-@media print{.faixa-ano{position:static}}
 header{position:sticky;top:0;z-index:45}
-.faixa-ano{top:var(--hh,66px)}
-@media(max-width:700px){header{position:static}.faixa-ano{top:0}}
+@media(max-width:700px){.hd .sub,.hd .lei{display:none}.logo-hd{height:30px;width:auto}}
 @media print{header{position:static}}""")
 # faixa de anos fixa no topo no lugar do bloco "Ano de referência"
 s=sub1(s,"""      <div class="bloco">
@@ -42,14 +44,14 @@ s=sub1(s,"""      <div class="bloco">
         <p class="dica" id="dica-ano"></p>
       </div>
 ""","")
-s=sub1(s,"""<main class="wrap">
-  <div class="barra">""","""<main class="wrap">
-  <div class="faixa-ano" id="faixa-ano">
-    <div class="fa-in"><span class="fa-rot">Ano simulado</span><div class="anos" id="anos"></div></div>
-    <p class="dica" id="dica-ano"></p>
-    <div id="aviso-aliq" role="status" hidden></div>
-  </div>
-  <div class="barra">""")
+s=sub1(s,"""  <span class="lei">LC 214/2025</span>
+</div></header>""","""  <span class="lei">LC 214/2025</span>
+</div>
+<div class="faixa-ano" id="faixa-ano"><div class="wrap">
+  <div class="fa-in"><span class="fa-rot">Ano simulado</span><div class="anos" id="anos"></div></div>
+  <p class="dica" id="dica-ano"></p>
+  <div id="aviso-aliq" role="status" hidden></div>
+</div></div></header>""")
 s=sub1(s,"""  <div class="rod">
     <h3>Antes de usar este número</h3>""","""  <div class="painel" id="p-todos"></div>
   <details class="painel" id="p-aliq">
@@ -108,9 +110,7 @@ function sinalAliq(){
   }
   const r = $("#al-ref"); if (r){ const t33 = P.transicao.find(t=>t.ano===2033); r.textContent = "Alíquota combinada de CBS e IBS em 2033, nesta simulação: "+PCT(t33.cbs+t33.ibs)+". Previsto: "+PCT(TRANS0.find(t=>t.ano===2033).cbs+TRANS0.find(t=>t.ano===2033).ibs)+"."; }
 }
-function ajustarTopo(){ const h = document.querySelector("header"); if (h) document.documentElement.style.setProperty("--hh", h.offsetHeight + "px"); }
 function iniciarAliq(){
-  ajustarTopo(); window.addEventListener("resize", ajustarTopo);
   montarAliq(); lerAliq();
   $("#aliq-tabela").addEventListener("input", ()=>{ lerAliq(); calcular(); });
   $("#al-aplicar").addEventListener("click", ()=>{

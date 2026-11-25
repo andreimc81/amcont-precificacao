@@ -1,7 +1,7 @@
 {
  "base": "2026.8",
- "seq": 12,
- "data": "2026-11-24T15:15",
+ "seq": 13,
+ "data": "2026-11-24T20:29",
  "hist": [
   {
    "v": "2026.8.0",
@@ -80,6 +80,12 @@
    "data": "2026-11-24T15:15",
    "resumo": "Aviso de versão com botão de fechar, cabeçalho fixo com logotipo e mensagem do Imposto Seletivo conforme o NCM",
    "registros": "R24-01 a R24-05"
+  },
+  {
+   "v": "2026.8.13",
+   "data": "2026-11-24T20:29",
+   "resumo": "Conferência com a base oficial da Receita Federal: tabela de cClassTrib v1.71 e avisos de divergência na ficha do NCM",
+   "registros": "R25-01 e R25-02"
   }
  ],
  "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"

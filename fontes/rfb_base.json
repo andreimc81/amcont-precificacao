@@ -1,0 +1,1031 @@
+{
+"fonte": "Repositório oficial ReceitaFederal/calculadora-rtc-regime-regular (GitHub, licença MIT), commit de 19/11/2026, base V0073: tabela de classificações tributárias da IT 2025.002 v1.71, publicada em 30/10/2026",
+"conferidoEm": "2026-11-24",
+"ccl": {
+"000001": [
+"000",
+"Situações tributadas integralmente pelo IBS e CBS.",
+0.0,
+"LC 214/2025"
+],
+"000002": [
+"000",
+"Exploração de via",
+0.0,
+"Art. 11, VIII"
+],
+"000003": [
+"000",
+"Regime automotivo - projetos incentivados (art. 311)",
+0.0,
+"Art. 311"
+],
+"000004": [
+"000",
+"Regime automotivo - projetos incentivados (art. 312)",
+0.0,
+"Art. 312"
+],
+"010001": [
+"010",
+"Operações do FGTS não realizadas pela Caixa Econômica Federal",
+0.0,
+"Art. 212"
+],
+"010002": [
+"010",
+"Operações do serviço financeiro",
+0.0,
+"Art. 233"
+],
+"011001": [
+"011",
+"Planos de assistência funerária.",
+0.6,
+"Art. 236"
+],
+"011002": [
+"011",
+"Planos de assistência à saúde",
+0.6,
+"Art. 237"
+],
+"011003": [
+"011",
+"Intermediação de planos de assistência à saúde",
+0.6,
+"Art. 240"
+],
+"011004": [
+"011",
+"Concursos e prognósticos",
+0.0,
+"Art. 246"
+],
+"011005": [
+"011",
+"Planos de assistência à saúde de animais domésticos",
+0.3,
+"Art. 243"
+],
+"200001": [
+"200",
+"Serviços de transporte de bens até as zonas de processamento de exportação e bens exportados a partir das zonas de processamento de exportação",
+1.0,
+"Art. 103"
+],
+"200002": [
+"200",
+"Fornecimento ou importação para produtor rural não contribuinte ou TAC",
+1.0,
+"Art. 110"
+],
+"200003": [
+"200",
+"Vendas de produtos destinados à alimentação humana (Anexo I)",
+1.0,
+"Art. 125"
+],
+"200004": [
+"200",
+"Fornecimento de dispositivos médicos (Anexo XII)",
+1.0,
+"Art. 144, I"
+],
+"200005": [
+"200",
+"Fornecimento de dispositivos médicos para órgãos da administração pública e entidades de saúde imunes (Anexo IV)",
+1.0,
+"Art. 144, II"
+],
+"200006": [
+"200",
+"Situação de emergência de saúde pública reconhecida pelo Poder público",
+1.0,
+"Art. 144, § 3º"
+],
+"200007": [
+"200",
+"Fornecimento dos dispositivos de acessibilidade próprios para pessoas com deficiência (Anexo XIII)",
+1.0,
+"Art. 145, I"
+],
+"200008": [
+"200",
+"Fornecimento dos dispositivos de acessibilidade próprios para pessoas com deficiência adquiridos por órgãos da administração pública (Anexo V)",
+1.0,
+"Art. 145, II"
+],
+"200009": [
+"200",
+"Fornecimento dos medicamentos registrados na Anvisa",
+1.0,
+"Art. 146"
+],
+"200010": [
+"200",
+"Fornecimento dos medicamentos registrados na Anvisa, adquiridos por órgãos da administração pública",
+1.0,
+"Art. 146, § 1º, I e II"
+],
+"200011": [
+"200",
+"Fornecimento das composições para nutrição enteral e parenteral quando adquiridas por órgãos da administração pública (Anexo VI)",
+1.0,
+"Art. 146, § 2º"
+],
+"200012": [
+"200",
+"Situação de emergência de saúde pública reconhecida pelo Poder público",
+1.0,
+"Art. 146, § 4º"
+],
+"200013": [
+"200",
+"Fornecimento de tampões higiênicos, absorventes higiênicos internos ou externos",
+1.0,
+"Art. 147"
+],
+"200014": [
+"200",
+"Fornecimento dos produtos hortícolas, frutas e ovos (Anexo XV)",
+1.0,
+"Art. 148"
+],
+"200015": [
+"200",
+"Venda de automóveis de passageiros de fabricação nacional adquiridos por motoristas profissionais ou pessoas com deficiência",
+1.0,
+"Art. 149"
+],
+"200016": [
+"200",
+"Prestação de serviços de pesquisa e desenvolvimento por Instituição Científica, Tecnológica e de Inovação (ICT)",
+1.0,
+"Art. 156"
+],
+"200017": [
+"200",
+"Operações relacionadas ao FGTS",
+1.0,
+"Art. 212, § 3º, I"
+],
+"200018": [
+"200",
+"Operações de resseguro e retrocessão",
+1.0,
+"Art. 223, § 4º"
+],
+"200019": [
+"200",
+"Importador dos serviços financeiros contribuinte",
+1.0,
+"Art. 231, § 1º, II"
+],
+"200020": [
+"200",
+"Operação praticada por sociedades cooperativas optantes por regime específico do IBS e CBS",
+1.0,
+"Art. 271"
+],
+"200021": [
+"200",
+"Serviços de transporte público coletivo de passageiros ferroviário e hidroviário",
+1.0,
+"Art. 285, I"
+],
+"200022": [
+"200",
+"Operação originada fora da ZFM que destine bem material industrializado a contribuinte estabelecido na ZFM",
+1.0,
+"Art. 445"
+],
+"200023": [
+"200",
+"Operação realizada por indústria incentivada que destine bem material intermediário para outra indústria incentivada na ZFM",
+1.0,
+"Art. 448"
+],
+"200024": [
+"200",
+"Operação originada fora das Áreas de Livre Comércio destinadas a contribuinte estabelecido nas Áreas de Livre Comércio",
+1.0,
+"Art. 463"
+],
+"200025": [
+"200",
+"Fornecimento dos serviços de educação relacionados ao Programa Universidade para Todos (Prouni)",
+0.6,
+"Art. 308"
+],
+"200026": [
+"200",
+"Locação de imóveis localizados nas zonas reabilitadas",
+0.8,
+"Art. 158, parágrafo único"
+],
+"200027": [
+"200",
+"Operações de locação, cessão onerosa e arrendamento de bens imóveis",
+0.7,
+"Art. 261, parágrafo único"
+],
+"200028": [
+"200",
+"Fornecimento dos serviços de educação (Anexo II)",
+0.6,
+"Art. 129"
+],
+"200029": [
+"200",
+"Fornecimento dos serviços de saúde humana (Anexo III)",
+0.6,
+"Art. 130"
+],
+"200030": [
+"200",
+"Venda dos dispositivos médicos (Anexo IV)",
+0.6,
+"Art. 131"
+],
+"200031": [
+"200",
+"Fornecimento dos dispositivos de acessibilidade próprios para pessoas com deficiência (Anexo V)",
+0.6,
+"Art. 132"
+],
+"200032": [
+"200",
+"Fornecimento dos medicamentos registrados na Anvisa ou produzidos por farmácias de manipulação, ressalvados os medicamentos sujeitos à alíquota zero",
+0.6,
+"Art. 133"
+],
+"200033": [
+"200",
+"Fornecimento das composições para nutrição enteral e parenteral (Anexo VI)",
+0.6,
+"Art. 133, § 1º"
+],
+"200034": [
+"200",
+"Fornecimento dos alimentos destinados ao consumo humano (Anexo VII)",
+0.6,
+"Art. 135"
+],
+"200035": [
+"200",
+"Fornecimento dos produtos de higiene pessoal e limpeza (Anexo VIII)",
+0.6,
+"Art. 136"
+],
+"200036": [
+"200",
+"Fornecimento de produtos agropecuários, aquícolas, pesqueiros, florestais e extrativistas vegetais in natura",
+0.6,
+"Art. 137"
+],
+"200037": [
+"200",
+"Fornecimento de serviços ambientais de conservação ou recuperação da vegetação nativa",
+0.6,
+"Art. 137, § 3º"
+],
+"200038": [
+"200",
+"Fornecimento dos insumos agropecuários e aquícolas (Anexo IX)",
+0.6,
+"Art. 138"
+],
+"200039": [
+"200",
+"Fornecimento dos bens e serviços relacionados com produções nacionais artísticas, culturais, de eventos, jornalísticas e audiovisuais (Anexo X)",
+0.6,
+"Art. 139"
+],
+"200040": [
+"200",
+"Fornecimento de serviços de comunicação institucional à administração pública",
+0.6,
+"Art. 140"
+],
+"200041": [
+"200",
+"Fornecimento de serviço de educação desportiva (art. 141. I)",
+0.6,
+"Art. 141, I"
+],
+"200042": [
+"200",
+"Fornecimento de serviço de gestão e exploração do desporto (art. 141. II)",
+0.6,
+"Art. 141, II"
+],
+"200043": [
+"200",
+"Fornecimento à administração pública dos serviços e dos bens relativos à soberania (Anexo XI)",
+0.6,
+"Art. 142, I"
+],
+"200044": [
+"200",
+"Operações e prestações de serviços de segurança da informação e segurança cibernética desenvolvidos por sociedade que tenha sócio brasileiro (Anexo XI)",
+0.6,
+"Art. 142, II"
+],
+"200045": [
+"200",
+"Operações relacionadas a projetos de reabilitação urbana de zonas históricas e de áreas críticas de recuperação e reconversão urbanística",
+0.6,
+"Art. 158"
+],
+"200046": [
+"200",
+"Operações com bens imóveis",
+0.5,
+"Art. 261"
+],
+"200047": [
+"200",
+"Bares e Restaurantes",
+0.4,
+"Art. 275"
+],
+"200048": [
+"200",
+"Hotelaria, Parques de Diversão e Parques Temáticos",
+0.4,
+"Art. 281"
+],
+"200049": [
+"200",
+"Transporte coletivo de passageiros rodoviário, ferroviário e hidroviário",
+0.4,
+"Art. 286"
+],
+"200050": [
+"200",
+"Serviços de transporte aéreo regional coletivo de passageiros ou de carga",
+0.4,
+"Art. 287"
+],
+"200051": [
+"200",
+"Agências de Turismo",
+0.4,
+"Art. 289, II"
+],
+"200052": [
+"200",
+"Prestação de serviços de profissões intelectuais",
+0.3,
+"Art. 127, I a XVIII"
+],
+"221001": [
+"221",
+"Locação, cessão onerosa ou arrendamento de bem imóvel com alíquota sobre a receita bruta",
+0.0,
+"Art. 487, § 2º"
+],
+"222001": [
+"222",
+"Transporte internacional de passageiros, caso os trechos de ida e volta sejam vendidos em conjunto",
+0.0,
+"Art. 12 § 8º"
+],
+"400001": [
+"400",
+"Fornecimento de serviços de transporte público coletivo de passageiros rodoviário e metroviário",
+0.0,
+"Art. 157"
+],
+"410001": [
+"410",
+"Fornecimento de bonificações quando constem no documento fiscal e que não dependam de evento posterior",
+0.0,
+"Art. 5º, § 1º, I"
+],
+"410002": [
+"410",
+"Transferências entre estabelecimentos pertencentes ao mesmo contribuinte",
+0.0,
+"Art. 6º, II"
+],
+"410003": [
+"410",
+"Doações e amostras grátis sem contraprestação em benefício do doador",
+0.0,
+"Art. 6º, VIII"
+],
+"410004": [
+"410",
+"Exportações de bens e serviços",
+0.0,
+"Art. 8º"
+],
+"410005": [
+"410",
+"Fornecimentos realizados pela União, pelos Estados, pelo Distrito Federal e pelos Municípios",
+0.0,
+"Art. 9º, I e § 1º"
+],
+"410006": [
+"410",
+"Fornecimentos realizados por entidades religiosas e templos de qualquer culto",
+0.0,
+"Art. 9º, II"
+],
+"410007": [
+"410",
+"Fornecimentos realizados por partidos políticos, entidades sindicais e instituições de educação e de assistência social",
+0.0,
+"Art. 9º, III"
+],
+"410008": [
+"410",
+"Fornecimentos de livros, jornais, periódicos e do papel destinado a sua impressão",
+0.0,
+"Art. 9º, IV"
+],
+"410009": [
+"410",
+"Fornecimentos de fonogramas e videofonogramas musicais produzidos no Brasil",
+0.0,
+"Art. 9º, V"
+],
+"410010": [
+"410",
+"Fornecimentos de serviço de comunicação nas modalidades de radiodifusão sonora e de sons e imagens de recepção livre e gratuita",
+0.0,
+"Art. 9º, VI"
+],
+"410011": [
+"410",
+"Fornecimentos de ouro, quando definido em lei como ativo financeiro ou instrumento cambial",
+0.0,
+"Art. 9º, VII"
+],
+"410012": [
+"410",
+"Fornecimento de condomínio edilício não optante pelo regime regular",
+0.0,
+"Art. 26, § 2º, II"
+],
+"410013": [
+"410",
+"Exportações de combustíveis",
+0.0,
+"Art. 98"
+],
+"410014": [
+"410",
+"Fornecimento de produtor rural não contribuinte",
+0.0,
+"Art. 164"
+],
+"410015": [
+"410",
+"Fornecimento por transportador autônomo não contribuinte",
+0.0,
+"Art. 169"
+],
+"410016": [
+"410",
+"Fornecimento ou aquisição de resíduos sólidos",
+0.0,
+"Art. 170"
+],
+"410017": [
+"410",
+"Aquisição de bem móvel com crédito presumido sob condição de revenda realizada",
+0.0,
+"Art. 171"
+],
+"410018": [
+"410",
+"Operações relacionadas aos fundos garantidores e executores de políticas públicas",
+0.0,
+"Art. 213"
+],
+"410019": [
+"410",
+"Exclusão da gorjeta na base de cálculo no fornecimento de alimentação",
+0.0,
+"Art. 274, I"
+],
+"410020": [
+"410",
+"Exclusão do valor de intermediação na base de cálculo no fornecimento de alimentação",
+0.0,
+"Art. 274, II"
+],
+"410021": [
+"410",
+"Contribuição de que trata o art. 149-A da Constituição Federal",
+0.0,
+"Art. 12 § 2º"
+],
+"410022": [
+"410",
+"Consolidação da propriedade do bem pelo credor",
+0.0,
+"Art. 200, I"
+],
+"410023": [
+"410",
+"Alienação de bens móveis ou imóveis que tenham sido objeto de garantia em que o prestador da garantia não seja contribuinte",
+0.0,
+"Art. 200, II, a"
+],
+"410024": [
+"410",
+"Consolidação da propriedade do bem pelo grupo de consórcio",
+0.0,
+"Art. 204, I"
+],
+"410025": [
+"410",
+"Alienação de bem que tenha sido objeto de garantia em que o prestador da garantia não seja contribuinte",
+0.0,
+"Art. 204, II, a"
+],
+"410026": [
+"410",
+"Doação e amostras grátis com anulação de crédito",
+0.0,
+"Art. 6º"
+],
+"410999": [
+"410",
+"Operações não onerosas sem previsão de tributação, não especificadas anteriormente",
+0.0,
+"Art. 4º, § 1º"
+],
+"510001": [
+"510",
+"Operações, sujeitas a diferimento, com energia elétrica, relativas à importação, geração, comercialização, distribuição e transmissão",
+0.0,
+"Art. 28, § 1º"
+],
+"515001": [
+"515",
+"Operações, sujeitas a diferimento, com insumos agropecuários e aquícolas (Anexo IX)",
+0.6,
+"Art. 138, § 2º"
+],
+"550001": [
+"550",
+"Exportações de bens materiais",
+0.0,
+"Art. 82"
+],
+"550002": [
+"550",
+"Regime de Trânsito",
+0.0,
+"Art. 84"
+],
+"550003": [
+"550",
+"Regimes de Depósito (art. 85)",
+0.0,
+"Art. 85"
+],
+"550004": [
+"550",
+"Regimes de Depósito (art. 87)",
+0.0,
+"Art. 87"
+],
+"550005": [
+"550",
+"Regimes de Depósito (art. 87, Parágrafo único)",
+0.0,
+"Art. 87, parágrafo único"
+],
+"550006": [
+"550",
+"Regimes de Permanência Temporária com suspensão total",
+0.0,
+"Art. 88"
+],
+"550007": [
+"550",
+"Regimes de Aperfeiçoamento (Recof)",
+0.0,
+"Art. 90"
+],
+"550008": [
+"550",
+"Importação de bens para o Regime de Repetro-Temporário",
+0.0,
+"Art. 93, I"
+],
+"550009": [
+"550",
+"GNL-Temporário",
+0.0,
+"Art. 93, II"
+],
+"550010": [
+"550",
+"Repetro-Permanente",
+0.0,
+"Art. 93, III"
+],
+"550011": [
+"550",
+"Repetro-Industrialização",
+0.0,
+"Art. 93, IV e Art. 93, § 4º"
+],
+"550012": [
+"550",
+"Repetro-Nacional",
+0.0,
+"Art. 93, V"
+],
+"550013": [
+"550",
+"Repetro-Entreposto",
+0.0,
+"Art. 93, VI"
+],
+"550014": [
+"550",
+"Zona de Processamento de Exportação",
+0.0,
+"Arts. 99 e 100"
+],
+"550015": [
+"550",
+"Regime Tributário para Incentivo à Modernização e à Ampliação da Estrutura Portuária",
+0.0,
+"Art. 105"
+],
+"550016": [
+"550",
+"Regime Especial de Incentivos para o Desenvolvimento da Infraestrutura",
+0.0,
+"Art. 106"
+],
+"550017": [
+"550",
+"Regime Tributário para Incentivo à Atividade Naval - Renaval (Art. 107, I)",
+0.0,
+"Art. 107"
+],
+"550018": [
+"550",
+"Desoneração da aquisição de bens de capital",
+0.0,
+"Art. 109"
+],
+"550019": [
+"550",
+"Importação de bem material por indústria incentivada para utilização na ZFM",
+0.0,
+"Art. 443"
+],
+"550020": [
+"550",
+"Áreas de livre comércio",
+0.0,
+"Art. 461"
+],
+"550021": [
+"550",
+"Industrialização destinada a exportações",
+0.0,
+"Art. 82, § 11"
+],
+"620001": [
+"620",
+"Tributação monofásica sobre combustíveis",
+0.0,
+"Art. 172"
+],
+"620002": [
+"620",
+"Tributação monofásica com responsabilidade pela retenção sobre combustíveis",
+0.0,
+"Art. 178"
+],
+"620003": [
+"620",
+"Tributação monofásica com responsabilidade de retenção de tributos por terceiros",
+0.0,
+"Art. 178"
+],
+"620004": [
+"620",
+"Tributação monofásica sobre mistura de EAC com gasolina A em percentual superior ao obrigatório",
+0.0,
+"Art. 179, II, a"
+],
+"620005": [
+"620",
+"Tributação monofásica sobre mistura de EAC com gasolina A em percentual inferior ao obrigatório",
+0.0,
+"Art. 179, II, b"
+],
+"620006": [
+"620",
+"Tributação monofásica sobre combustíveis cobrada anteriormente",
+0.0,
+"Art. 180"
+],
+"800001": [
+"800",
+"Fusão, cisão ou incorporação",
+0.0,
+"Art. 55"
+],
+"800002": [
+"800",
+"Transferência de crédito do associado, inclusive as cooperativas singulares",
+0.0,
+"Art. 272"
+],
+"810001": [
+"810",
+"Crédito presumido de IBS sobre o valor apurado nos fornecimentos a partir da ZFM",
+0.0,
+"Art. 450"
+],
+"811001": [
+"811",
+"Anulação de Crédito por Saídas Imunes/Isentas",
+0.0,
+"Art. 51"
+],
+"811002": [
+"811",
+"Débitos de notas fiscais não processadas na apuração",
+0.0,
+"Art. 45"
+],
+"811003": [
+"811",
+"Desenquadramento do Simples Nacional",
+0.0,
+"Art. 41"
+],
+"820001": [
+"820",
+"Documento com informações de fornecimento de serviços de planos de assistência à saúde elencados no art. 234 da Lei Complementar nº214, de 2025",
+0.0,
+"Art. 234"
+],
+"820002": [
+"820",
+"Documento com informações de fornecimento de serviços de planos de assistência funerária",
+0.0,
+"Art. 236"
+],
+"820003": [
+"820",
+"Documento com informações de fornecimento de serviços de planos de assistência à saúde de animais domésticos",
+0.0,
+"Art. 243"
+],
+"820004": [
+"820",
+"Documento com informações de prestação de serviços de consursos de prognósticos",
+0.0,
+"Art. 248"
+],
+"820005": [
+"820",
+"Documento com informações de alienação de bens imóveis",
+0.0,
+"Art. 254, § 1º"
+],
+"820006": [
+"820",
+"Documento com informações de fornecimento de serviços de exploração de via",
+0.0,
+"Art. 11, VIII"
+],
+"830001": [
+"830",
+"Documento com exclusão da BC da CBS e do IBS de energia elétrica fornecida pela distribuidora à UC",
+0.0,
+"Art 28, parágrafos 3° e 4°"
+],
+"410027": [
+"410",
+"Exportação de serviço ou de bem imaterial",
+1.0,
+"Art. 80 II"
+],
+"410028": [
+"410",
+"Operações com bens imóveis realizadas por pessoas físicas não consideradas contribuintes",
+1.0,
+"Art. 251, § 1º"
+],
+"410029": [
+"410",
+"Operações acobertadas somente pelo ICMS",
+1.0,
+"Art. 4º"
+],
+"410030": [
+"410",
+"Estorno de crédito por perecimento, deteriorização, roubo, furto ou extravio.",
+1.0,
+"Art. 47, § 6º"
+],
+"410031": [
+"410",
+"Fornecimento em período anterior ao início de vigência de incidências de CBS e IBS",
+1.0,
+"Art. 544, VI"
+],
+"820007": [
+"820",
+"Documento com informações de fornecimento de serviços financeiros",
+0.0,
+"Art. 181"
+],
+"820008": [
+"820",
+"Documento com informações de fornecimento de serviço continuado, mas com tributação realizada em fatura anterior",
+0.0,
+"Art. 10, § 3º"
+],
+"200053": [
+"200",
+"Fornecimento de medicamentos registrados na Anvisa, quando  classificados como soros ou vacinas",
+1.0,
+"Art. 146, § 1º, III"
+],
+"400002": [
+"400",
+"Fornecimento de serviços de transporte público coletivo de passageiros rodoviário e metroviário com medição por quilômetro rodado",
+0.0,
+"Art. 157"
+],
+"410032": [
+"410",
+"Tributos incidentes na operação que não integram a base de cálculo do IBS e da CBS",
+0.0,
+"Art. 12, §2º V"
+],
+"410033": [
+"410",
+"Operações de Fundos de Investimento Imobiliário (FII) e Fundos de Investimento nas Cadeias Produtivas do Agronegócio (Fiagro)",
+0.0,
+"Art. 26, § 5º-A, I e II"
+],
+"410034": [
+"410",
+"Operações de fundos de investimento",
+0.0,
+"Art. 26, § 5º-A, III"
+],
+"410035": [
+"410",
+"Fornecimento realizado por nanoempreendedor",
+0.0,
+"Art. 26, IV"
+],
+"550022": [
+"550",
+"Regime Especial de Incentivos para a Produção de Hidrogênio de Baixa Emissão de Carbono (Rehidro)",
+0.0,
+"Art. 106, § 7º"
+],
+"550023": [
+"550",
+"Operações com hidrocarbonetos líquidos derivados de petróleo não combustíveis ou de gás natural, inclusive nafta",
+0.0,
+"Art. 172, § 2º"
+],
+"820009": [
+"820",
+"Fornecimentos declarados e tributados em outro documento",
+0.0,
+"Art. 60"
+],
+"000005": [
+"000",
+"Operação com EAC destinado à mistura com gasolina A, mas com saída do biocombustível com destinação diversa",
+0.0,
+"Art. 179, I"
+],
+"200054": [
+"200",
+"Fornecimento de bem material pela cooperativa de produção agropecuária a associado não sujeito ao regime regular do IBS e da CBS",
+1.0,
+"Art. 271, § 1º, II"
+],
+"221002": [
+"221",
+"Incorporação imobiliária submetida ao regime especial de tributação",
+0.0,
+"Art. 485, I"
+],
+"221003": [
+"221",
+"Incorporação imobiliária submetida ao regime especial de tributação",
+0.0,
+"Art. 485, II"
+],
+"221004": [
+"221",
+"Alienação de imóvel decorrente de parcelamento do solo",
+0.0,
+"Art. 486"
+],
+"410036": [
+"410",
+"Descontos financeiros em nota fatura",
+0.0,
+"Art. 12, §2º III"
+],
+"410037": [
+"410",
+"Importação os bens materiais sem incidência de IBS e CBS",
+0.0,
+"Art. 66, I,III e VII"
+],
+"550024": [
+"550",
+"Regime Tributário para Incentivo à Atividade Naval - Renaval (Art. 107, II)",
+0.0,
+"Art. 107, II"
+],
+"550025": [
+"550",
+"Regime Tributário para Incentivo à Atividade Naval - Renaval (Art. 107, III)",
+0.0,
+"Art. 107, III"
+],
+"620007": [
+"620",
+"Perecimento, deteriorização, roubo, furto ou extravio no regime monofásico",
+0.0,
+"Art. 47, § 6º "
+],
+"000006": [
+"000",
+"Situações tributadas integralmente pelo IBS e CBS realizadas por autônomo",
+0.0,
+"LC 214/2025"
+],
+"200055": [
+"200",
+"Fornecimento dos serviços com redução de alíquota de 60% realizado por autônomo",
+0.6,
+"Art. 128, I, II, VIII, IX, X, XI, XII e XIII"
+],
+"200056": [
+"200",
+"Fornecimento dos serviços com redução de alíquota de 30% realizado por autônomo",
+0.3,
+"Art. 127"
+],
+"400003": [
+"400",
+"Bagagens",
+0.0,
+"Art. 94 I"
+],
+"400004": [
+"400",
+"Remessas internacionais",
+0.0,
+"Art. 94 II"
+],
+"550026": [
+"550",
+"Regimes de admissão temporária com suspensão total do pagamento dos tributos (ZFM)",
+0.0,
+"Art. 89, § 3º, II"
+],
+"550027": [
+"550",
+"Regimes de Aperfeiçoamento (Drawback)",
+0.0,
+"Art. 90"
+],
+"550028": [
+"550",
+"Regimes de Aperfeiçoamento (Admissão temporária)",
+0.0,
+"Art. 90"
+],
+"550029": [
+"550",
+"Zona de Processamento de Exportação",
+0.0,
+"Art. 102"
+]
+},
+"encerrados": [
+"220001",
+"220002",
+"220003"
+]
+}

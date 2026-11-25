@@ -133,6 +133,14 @@ for k,v in ccl_nome.items():
     if k not in ccl: ccl[k]=[k[:3],v,None,'']
 ccl.setdefault('200056',['200','Prestação de serviços de profissões intelectuais por profissional autônomo (novo na v1.70)',0.3,'Art. 127'])
 ccl.setdefault('515001',['515','Diferimento com redução de alíquota (ver tabela oficial)',None,''])
+# R25-01: conferência com a base oficial da Receita Federal (IT 2025.002 v1.71, de 30/10/2026)
+RFB=json.load(open('fontes/rfb_base.json',encoding='utf-8'))
+for k in RFB['encerrados']: ccl.pop(k,None)
+n_rfb=0
+for k,v in RFB['ccl'].items():
+    if k not in ccl: ccl[k]=[v[0],v[1]+' (incluído pela tabela v1.71)',v[2],v[3]]; n_rfb+=1
+ccl['200025'][3]=(ccl['200025'][3]+'. ' if ccl['200025'][3] else '')+'Atenção: a CBS é reduzida a zero e o IBS em 60%. Esta calculadora aplica 60% aos dois tributos, por isso a CBS fica superestimada neste caso'
+print('R25-01 cClassTrib incluídos da base oficial:',n_rfb,'encerrados retirados:',RFB['encerrados'])
 
 # ---------- Imposto Seletivo: MP 1.399/2026, Anexos IV e V (texto oficial conferido em 10/11/2026) ----------
 IS=[ # prefixo, aliquota ad valorem (None = nao simulavel por aliquota fixa), nota
@@ -323,7 +331,8 @@ meta={'versao':_V['v'],'montadoEm':_V['data'][:10],'conferidoEm':'2026-11-10',
   'Anexo VIII, correlação item LC 116, NBS, indOp e cClassTrib, versão 1.02.00, de 26/10/2026 (preliminar)',
   'Tabela de nomes e reduções de cClassTrib: Mapa NCM RT 2026 v4 (tabela de 23/01/2026)',
   'Tabela IBPTax 26.2.D, vigente de 17/11 a 20/12/2026: conferência da lista de NCM, descrições faltantes e lista de NBS',
-  'Imposto Seletivo: MP 1.399/2026, Anexos IV e V, texto oficial (avulso do Congresso, DOU de 04/11/2026) conferido em 10/11/2026; sujeita à conversão em lei'],
+  'Imposto Seletivo: MP 1.399/2026, Anexos IV e V, texto oficial (avulso do Congresso, DOU de 04/11/2026) conferido em 10/11/2026; sujeita à conversão em lei',
+  'Conferência cruzada em 24/11/2026 com a base oficial da Receita Federal (repositório calculadora-rtc-regime-regular no GitHub, base V0073, IT 2025.002 v1.71 de 30/10/2026): 10.516 NCM comparados; divergências registradas nos avisos da ficha'],
  'aviso':'Apoio à classificação. O NCM ou a NBS não decide sozinho: o benefício depende da condição, de quem compra, da destinação e da operação. Quem decide é o emitente, com o contador.'}
 # Anexo XVII da LC 214/2025: "embarcações com motor classificadas na posição 8903". O 8903.12 descreve barco
 # inflável não concebido para motor, que nunca está no alcance do IS (conferido em 10/11/2026, registro R13-02).

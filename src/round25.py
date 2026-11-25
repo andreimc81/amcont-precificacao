@@ -4,7 +4,7 @@ s=sub1(s,"""          <p class="dica">Incide sobre bens prejudiciais à saúde o
              com efeitos a partir de 2 de fevereiro de 2027 (art. 19) e sujeitas à conversão em lei.</p>""","""          <p class="dica" id="dica-is">Incide sobre bens prejudiciais à saúde ou ao meio ambiente e
              <b>integra a base do ICMS, da CBS e do IBS</b>. Alíquotas de 2027 pela MP 1.399/2026,
              com efeitos a partir de 2 de fevereiro de 2027 (art. 19) e sujeitas à conversão em lei.</p>""")
-s=sub1(s,"""function ajustarTopo(){""","""function dicaIS(){
+s=sub1(s,"""function iniciarAliq(){""","""function dicaIS(){
   const el = $("#dica-is"); if (!el) return;
   const base = " Integra a base do ICMS, da CBS e do IBS. Alíquotas pela MP 1.399/2026, com efeitos a partir de 02/02/2027 (art. 19) e sujeitas à conversão em lei.";
   let t;
@@ -26,5 +26,5 @@ s=sub1(s,"""function ajustarTopo(){""","""function dicaIS(){
   }
   el.textContent = t.trim();
 }
-function ajustarTopo(){""")
+function iniciarAliq(){""")
 s=sub1(s,"""  atualizarTodos(o, H); sinalAliq();""","""  atualizarTodos(o, H); sinalAliq(); dicaIS();""")
