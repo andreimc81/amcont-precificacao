@@ -13,7 +13,7 @@ s=sub1(s,""".rolar{overflow-x:auto}""",""".rolar{overflow-x:auto}
 #prem.fechado #prem-res{display:block}
 #prem.fechado #prem-cab h3{flex:0 0 auto}
 #prem.fechado #prem-cab{margin-bottom:8px}
-#abas{display:flex;gap:2px;border-bottom:2px solid var(--petroleo);margin-bottom:14px;position:sticky;top:var(--hh,120px);background:var(--papel);z-index:30;padding-top:6px;overflow-x:auto}
+#abas{display:flex;gap:2px;border-bottom:2px solid var(--petroleo);margin-bottom:14px;position:sticky;top:var(--hh,120px);background:var(--via);z-index:30;padding-top:6px;overflow-x:auto}
 #abas button{border:0;background:transparent;padding:10px 15px;font:500 13.5px "IBM Plex Sans";color:var(--petroleo-2);cursor:pointer;border-radius:4px 4px 0 0;white-space:nowrap}
 #abas button:hover{color:var(--petroleo)}
 #abas button.on{background:var(--petroleo);color:#fff}

@@ -1,7 +1,7 @@
 {
  "base": "2026.8",
- "seq": 14,
- "data": "2026-11-24T22:40",
+ "seq": 15,
+ "data": "2026-11-24T23:57",
  "hist": [
   {
    "v": "2026.8.0",
@@ -92,6 +92,12 @@
    "data": "2026-11-24T22:40",
    "resumo": "Opção de base do ICMS e do ISS com ou sem CBS e IBS e nova navegação: premissas no topo e resultados em abas",
    "registros": "R26-01 e R26-02"
+  },
+  {
+   "v": "2026.8.15",
+   "data": "2026-11-24T23:57",
+   "resumo": "Premissas alinhadas, com as explicações em balões de ajuda, e revisão de tela (abas com fundo sólido, selo de versão no cabeçalho, ficha do código em largura total)",
+   "registros": "R26-03"
   }
  ],
  "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"
