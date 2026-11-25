@@ -148,4 +148,5 @@ function opcoes(premissa){""")
         else avisar("Simulação e parâmetros carregados" + q + " (versão " + va + ").", "ok"); }""")
     from validade_js import VALIDADE_JS
     s=sub1(s,"</body>",VALIDADE_JS+"\n</body>")
-    open(dst,'w',encoding='utf-8').write(s); print(dst,len(s))
+    import sys; sys.path.insert(0,'src'); from favicon import com_favicon
+    s=com_favicon(s); open(dst,'w',encoding='utf-8').write(s); print(dst,len(s))

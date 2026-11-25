@@ -1,7 +1,7 @@
 {
  "base": "2026.8",
- "seq": 16,
- "data": "2026-11-25T11:30",
+ "seq": 17,
+ "data": "2026-11-25T14:39",
  "hist": [
   {
    "v": "2026.8.0",
@@ -104,6 +104,12 @@
    "data": "2026-11-25T11:30",
    "resumo": "Cabeçalho redesenhado com o lema da Amcont e premissas alinhadas, com Produto, Serviço, venda e compra em uma linha",
    "registros": "R26-04"
+  },
+  {
+   "v": "2026.8.17",
+   "data": "2026-11-25T14:39",
+   "resumo": "Modo serviço alinhado e ícone da aba com o símbolo AM",
+   "registros": "R26-05"
   }
  ],
  "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"

@@ -1526,5 +1526,6 @@ _img='<img class="%s" alt="Amcont Assessoria e Contabilidade" src="data:image/pn
 s=sub1(s,'<div class="gate-mark">Amcont</div>',_img%'logo-gate')
 s=sub1(s,'<span class="mark">AMCONT</span>',_img%'logo-hd')
 s=sub1(s,'</style>','.logo-gate{display:block;height:58px;margin-bottom:18px;filter:brightness(0) invert(1)}\n.logo-hd{height:32px;align-self:center;filter:brightness(0) invert(1)}\n@media print{header{background:#fff!important;color:#10242A!important;border-bottom:2px solid #2A5F6B}.logo-hd{filter:none}header .sub,header .lei{color:#2A5F6B!important}}\n</style>')
-open('amcont-produto.html','w',encoding='utf-8').write(s)
+import sys; sys.path.insert(0,'src'); from favicon import com_favicon
+open('amcont-produto.html','w',encoding='utf-8').write(com_favicon(s))
 print('ok',len(s))

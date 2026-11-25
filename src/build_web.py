@@ -22,7 +22,8 @@ for arq, init in ENTRADA.items():
     s = s[:i] + auto + s[i:]
     # o gate não pisca na abertura
     s = s.replace('<div id="gate">', '<div id="gate" style="display:none">', 1)
-    open(os.path.join(DEST, arq), 'w', encoding='utf-8').write(s)
+    import sys; sys.path.insert(0,'src'); from favicon import com_favicon
+    open(os.path.join(DEST, arq), 'w', encoding='utf-8').write(com_favicon(s))
 
 cli = open('amcont-cliente.html', encoding='utf-8').read()
 logo = re.search(r'<img class="logo-hd"[^>]*src="(data:image/png;base64,[^"]+)"', cli).group(1)
@@ -79,7 +80,7 @@ footer .wrap{{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap
 <footer><div class="wrap"><span>Amcont Assessoria e Contabilidade · CRC/SC 011862/O-0</span><span>Versão {VER} de {DATA}</span></div></footer>
 </body></html>
 '''
-open(os.path.join(DEST, 'index.html'), 'w', encoding='utf-8').write(INDEX)
+open(os.path.join(DEST, 'index.html'), 'w', encoding='utf-8').write(com_favicon(INDEX))
 
 open(os.path.join(DEST, 'versao.json'), 'w', encoding='utf-8').write(
     json.dumps({'versao': VER, 'data': V['data']}, ensure_ascii=False, indent=1))

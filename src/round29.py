@@ -97,3 +97,16 @@ s=sub1(s,"""  const pmd = $("#p-md"); if (!pmd) return;""","""  const sv = $("#s
 s=sub1(s,"""  <span class="sub">Preço por produto ou serviço na reforma tributária</span>""","""  <span class="sub"><span class="hd-t">Preço por produto ou serviço na reforma tributária</span><span class="hd-s">Pessoas, processos e tecnologia a favor do seu negócio</span></span>""")
 s=sub1(s,"""  prem.appendChild($("#modo"));""","""  const topo = document.createElement("div"); topo.id = "prem-topo";
   topo.appendChild($("#tipo")); topo.appendChild($("#modo")); prem.appendChild(topo);""")
+# R26-05: modo serviço alinhado (rótulos curtos, ajuda preservada ao trocar de modo, DIFAL fora do serviço)
+import re as _re
+_n = len(_re.findall(r'\$\("#(lb-[a-z0-9-]+)"\)\.textContent = ', s)); assert _n >= 3, _n
+s = _re.sub(r'\$\("#(lb-[a-z0-9-]+)"\)\.textContent = ', r'($("#\1 .lt") || $("#\1")).textContent = ', s)
+s=sub1(s,'''sv ? "Código do serviço (item da LC 116 ou código de tributação nacional), NBS ou descrição" : "NCM, por código ou descrição";''','''sv ? "Serviço: item da LC 116, NBS ou descrição" : "NCM, por código ou descrição";''')
+s=sub1(s,'''sv ? "Insumos deste serviço com nota, hoje" : "A compra deste produto, hoje";''','''sv ? "Insumos deste serviço, hoje" : "A compra deste produto, hoje";''')
+s=sub1(s,'''sv ? "Insumos e serviços tomados por unidade vendida, valor total das notas" : "Preço de compra por unidade, valor total da nota";''','''sv ? "Insumos e serviços tomados com nota, por unidade vendida" : "Preço de compra por unidade, valor total da nota";''')
+s=sub1(s,'''sv ? "Reajuste esperado nos insumos e serviços tomados, no ano simulado (%)" : "Reajuste esperado do fornecedor, no ano simulado (%)";''','''sv ? "Reajuste esperado dos insumos, no ano simulado (%)" : "Reajuste esperado do fornecedor, no ano simulado (%)";''')
+s=sub1(s,'''  $("#c-dest").hidden = sv; $("#c-dest2").hidden = !foraV;''','''  $("#c-dest").hidden = sv; $("#c-dest2").hidden = !foraV; $("#c-dupla").hidden = sv;''')
+s=sub1(s,"""#prem-grid .bloco-tit{min-height:0}""","""#prem-grid .bloco-tit{min-height:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#prem-grid .campo[hidden]{display:none}""")
+s=sub1(s,"""  const pmd = $("#p-md"); if (!pmd) return;""","""  document.querySelectorAll("#prem-grid > div").forEach(c=>{ c.style.display = ""; c.style.display = [...c.children].some(x=>x.offsetHeight > 0) ? "" : "none"; });
+  const pmd = $("#p-md"); if (!pmd) return;""")
