@@ -1,9 +1,30 @@
 # ===== rodada 29 (versão 2026.8.15): R26-03 premissas alinhadas, com as explicações em balões de ajuda =====
 s=sub1(s,"""body:not(.modo-compra) .grade{display:none}""","""body:not(.modo-compra) .grade{display:none}
 #prem-grid .campo{position:relative;margin-bottom:12px}
-#prem-grid .campo > label:not(.chk){display:flex;align-items:flex-end;gap:6px;min-height:2.75em;line-height:1.3;margin-bottom:5px}
+#prem-grid .campo > label:not(.chk){display:flex;align-items:flex-end;gap:6px;line-height:1.3;min-height:2.6em;margin-bottom:5px}
+#prem-grid #ncm-desc:empty{display:none}
+#b-base .bloco-tit{display:none}
+#prem-topo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-bottom:16px}
+#prem-topo .seg{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:0;max-width:none!important}
+#prem-topo .seg button{box-sizing:border-box;height:48px;min-height:0;padding:0 10px;margin:0;font-size:14px;line-height:1.2;display:flex;align-items:center;justify-content:center;text-align:center}
+#prem.fechado #prem-topo{display:none}
+@media(max-width:1000px){#prem-topo{grid-template-columns:repeat(2,minmax(0,1fr))}#prem-topo .seg{gap:10px}}
+@media(max-width:640px){#prem-topo{grid-template-columns:1fr}#prem-topo .seg{grid-column:auto}}
+header{padding:12px 0 0}
+.hd{align-items:center;gap:18px;flex-wrap:nowrap}
+.hd .sub{display:flex;flex-direction:column;gap:2px;min-width:0}
+.hd .sub .hd-t{font:600 15.5px/1.25 "IBM Plex Sans",Arial,sans-serif;color:#fff}
+.hd .sub .hd-s{font:400 12px/1.3 "IBM Plex Sans",Arial,sans-serif;color:var(--petroleo-3)}
+.hd .lei{white-space:nowrap}
+.faixa-ano{border-top:0;padding:12px 0 13px}
+@media(max-width:700px){.hd .sub{display:flex}.hd .sub .hd-s{display:none}.hd .sub .hd-t{font-size:13px}}
+#prem-grid .dupla{grid-template-columns:1fr;gap:0}
+#prem-grid label.chk{display:flex;align-items:flex-start;gap:7px;margin:6px 0 8px;line-height:1.3}
+#prem-grid label.chk .aj{margin-left:auto}
+#prem-grid .bloco{margin-bottom:6px}
+.barra{padding-bottom:12px}
 #prem-grid .campo > label .lt{flex:1}
-#prem-grid .bloco-tit{min-height:2.9em;display:flex;align-items:flex-end}
+#prem-grid .bloco-tit{min-height:0}
 #prem-grid select,#prem-grid input[type=number],#prem-grid input[type=text],#prem-grid input:not([type]){width:100%}
 .aj{flex:0 0 auto;width:19px;height:19px;border-radius:50%;border:1px solid var(--petroleo-2);background:#fff;color:var(--petroleo);font:600 12px/17px "IBM Plex Sans",Arial,sans-serif;text-align:center;cursor:pointer;padding:0;margin-left:6px;vertical-align:middle}
 .aj:hover,.aj[aria-expanded=true]{background:var(--petroleo);color:#fff;border-color:var(--petroleo)}
@@ -72,3 +93,7 @@ s=sub1(s,"""  col.forEach(c=>grid.appendChild(c)); prem.appendChild(grid);""",""
 s=sub1(s,"""  const pmd = $("#p-md"); if (!pmd) return;""","""  const sv = $("#selo-versao"), hd = document.querySelector("header .hd");
   if (sv && hd && !sv.classList.contains("no-topo")){ sv.classList.add("no-topo"); sv.textContent = sv.textContent.replace(/, de .*$/, ""); hd.appendChild(sv); }
   const pmd = $("#p-md"); if (!pmd) return;""")
+# cabeçalho com o lema institucional e escolha de tipo e de simulação em uma linha de quatro botões
+s=sub1(s,"""  <span class="sub">Preço por produto ou serviço na reforma tributária</span>""","""  <span class="sub"><span class="hd-t">Preço por produto ou serviço na reforma tributária</span><span class="hd-s">Pessoas, processos e tecnologia a favor do seu negócio</span></span>""")
+s=sub1(s,"""  prem.appendChild($("#modo"));""","""  const topo = document.createElement("div"); topo.id = "prem-topo";
+  topo.appendChild($("#tipo")); topo.appendChild($("#modo")); prem.appendChild(topo);""")

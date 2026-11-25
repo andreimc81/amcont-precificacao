@@ -1,6 +1,7 @@
 HISTÓRICO DE VERSÕES  |  Ferramentas de precificação Amcont
-Versão atual: 2026.8.15, de 24/11/2026 23:57
+Versão atual: 2026.8.16, de 25/11/2026 11:30
 
+2026.8.16  (25/11/2026 11:30)  Cabeçalho redesenhado com o lema da Amcont e premissas alinhadas, com Produto, Serviço, venda e compra em uma linha  Registro: R26-04
 2026.8.15  (24/11/2026 23:57)  Premissas alinhadas, com as explicações em balões de ajuda, e revisão de tela (abas com fundo sólido, selo de versão no cabeçalho, ficha do código em largura total)  Registro: R26-03
 2026.8.14  (24/11/2026 22:40)  Opção de base do ICMS e do ISS com ou sem CBS e IBS e nova navegação: premissas no topo e resultados em abas  Registro: R26-01 e R26-02
 2026.8.13  (24/11/2026 20:29)  Conferência com a base oficial da Receita Federal: tabela de cClassTrib v1.71 e avisos de divergência na ficha do NCM  Registro: R25-01 e R25-02

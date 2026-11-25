@@ -1,7 +1,7 @@
 {
  "base": "2026.8",
- "seq": 15,
- "data": "2026-11-24T23:57",
+ "seq": 16,
+ "data": "2026-11-25T11:30",
  "hist": [
   {
    "v": "2026.8.0",
@@ -98,6 +98,12 @@
    "data": "2026-11-24T23:57",
    "resumo": "Premissas alinhadas, com as explicações em balões de ajuda, e revisão de tela (abas com fundo sólido, selo de versão no cabeçalho, ficha do código em largura total)",
    "registros": "R26-03"
+  },
+  {
+   "v": "2026.8.16",
+   "data": "2026-11-25T11:30",
+   "resumo": "Cabeçalho redesenhado com o lema da Amcont e premissas alinhadas, com Produto, Serviço, venda e compra em uma linha",
+   "registros": "R26-04"
   }
  ],
  "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"

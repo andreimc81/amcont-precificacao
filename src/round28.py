@@ -9,7 +9,7 @@ s=sub1(s,""".rolar{overflow-x:auto}""",""".rolar{overflow-x:auto}
 #prem-grid .bloco{margin:0 0 12px}
 #prem #modo{max-width:520px;margin-bottom:14px}
 #prem-res{display:none;flex:1;font-size:14px;line-height:1.45}
-#prem.fechado #prem-grid,#prem.fechado #modo{display:none}
+#prem.fechado #prem-grid{display:none}
 #prem.fechado #prem-res{display:block}
 #prem.fechado #prem-cab h3{flex:0 0 auto}
 #prem.fechado #prem-cab{margin-bottom:8px}
