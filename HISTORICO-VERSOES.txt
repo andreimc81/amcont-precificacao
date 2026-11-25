@@ -1,6 +1,7 @@
 HISTÓRICO DE VERSÕES  |  Ferramentas de precificação Amcont
-Versão atual: 2026.8.13, de 24/11/2026 20:29
+Versão atual: 2026.8.14, de 24/11/2026 22:40
 
+2026.8.14  (24/11/2026 22:40)  Opção de base do ICMS e do ISS com ou sem CBS e IBS e nova navegação: premissas no topo e resultados em abas  Registro: R26-01 e R26-02
 2026.8.13  (24/11/2026 20:29)  Conferência com a base oficial da Receita Federal: tabela de cClassTrib v1.71 e avisos de divergência na ficha do NCM  Registro: R25-01 e R25-02
 2026.8.12  (24/11/2026 15:15)  Aviso de versão com botão de fechar, cabeçalho fixo com logotipo e mensagem do Imposto Seletivo conforme o NCM  Registro: R24-01 a R24-05
 2026.8.11  (24/11/2026 13:43)  Barra de anos fixa, alíquotas editáveis e quadro Todos os anos  Registro: R24-01 a R24-03

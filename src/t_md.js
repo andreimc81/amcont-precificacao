@@ -26,6 +26,5 @@ const { chromium } = require('playwright');
   console.log(out.res.join('\n')); console.log('FALHAS',out.falhas,'ERRS',errs); if(out.falhas||errs.length) process.exitCode=1;
   await p.evaluate(()=>{definirTipo('produto',true);$('#regime').value='presumido';ANO=2027;calcular();});
   console.log(await p.evaluate(()=>document.querySelector('#p-ano').innerText.replace(/\n+/g,' | ').slice(0,1800)));
-  await p.locator('#p-ano').screenshot({path:'/tmp/claude-0/-home-claude/ad0e41b0-2ebc-575a-9ba1-f64b3d834613/scratchpad/pano.png'});
   await b.close();
 })();
