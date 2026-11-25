@@ -107,6 +107,19 @@ s=sub1(s,'''sv ? "Insumos e serviços tomados por unidade vendida, valor total d
 s=sub1(s,'''sv ? "Reajuste esperado nos insumos e serviços tomados, no ano simulado (%)" : "Reajuste esperado do fornecedor, no ano simulado (%)";''','''sv ? "Reajuste esperado dos insumos, no ano simulado (%)" : "Reajuste esperado do fornecedor, no ano simulado (%)";''')
 s=sub1(s,'''  $("#c-dest").hidden = sv; $("#c-dest2").hidden = !foraV;''','''  $("#c-dest").hidden = sv; $("#c-dest2").hidden = !foraV; $("#c-dupla").hidden = sv;''')
 s=sub1(s,"""#prem-grid .bloco-tit{min-height:0}""","""#prem-grid .bloco-tit{min-height:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#prem-grid .campo[hidden]{display:none}""")
+#prem [hidden]{display:none!important}""")
 s=sub1(s,"""  const pmd = $("#p-md"); if (!pmd) return;""","""  document.querySelectorAll("#prem-grid > div").forEach(c=>{ c.style.display = ""; c.style.display = [...c.children].some(x=>x.offsetHeight > 0) ? "" : "none"; });
   const pmd = $("#p-md"); if (!pmd) return;""")
+# R26-06: campos conforme o regime e o modo (nada do Lucro Presumido no Simples ou no Real, nada do Simples fora do Simples)
+s=sub1(s,"""#prem [hidden]{display:none!important}""","""#prem [hidden]{display:none!important}
+.reg-oculto{display:none!important}""")
+s=sub1(s,"""  document.querySelectorAll("#prem-grid > div").forEach(c=>{ c.style.display = "";""","""  { const reg = $("#regime").value, compra = MODO === "compra", oc = (el, c)=>{ if (el) el.classList.toggle("reg-oculto", !!c); };
+    oc($("#c-setor"), reg !== "presumido");
+    [$("#inc-lucro"), $("#lc224")].forEach(x=>{ const l = x.closest("label"); oc(l, reg !== "presumido"); oc(l.nextElementSibling, reg !== "presumido"); });
+    oc($("#c-snop"), reg !== "simples");
+    oc($("#pc-hoje").closest(".campo"), compra && reg !== "real");
+    const lp = document.querySelector('label[for="pc-hoje"]'); if (lp) (lp.querySelector(".lt") || lp).textContent = compra ? "PIS e COFINS do item comprado, hoje" : "PIS e COFINS hoje nesta venda";
+    if (compra) $("#tit-venda").textContent = "Outros dados da compra";
+    document.querySelectorAll("#prem-grid > div").forEach(c=>{ c.style.display = ""; });
+    document.querySelectorAll("#prem-grid .bloco").forEach(bl=>{ bl.classList.remove("reg-oculto"); oc(bl, ![...bl.querySelectorAll(".campo")].some(x=>x.offsetHeight > 0)); }); }
+  document.querySelectorAll("#prem-grid > div").forEach(c=>{ c.style.display = "";""")

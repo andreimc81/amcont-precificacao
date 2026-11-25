@@ -1,7 +1,7 @@
 {
  "base": "2026.8",
- "seq": 17,
- "data": "2026-11-25T14:39",
+ "seq": 18,
+ "data": "2026-11-25T18:53",
  "hist": [
   {
    "v": "2026.8.0",
@@ -110,6 +110,12 @@
    "data": "2026-11-25T14:39",
    "resumo": "Modo serviço alinhado e ícone da aba com o símbolo AM",
    "registros": "R26-05"
+  },
+  {
+   "v": "2026.8.18",
+   "data": "2026-11-25T18:53",
+   "resumo": "Campos conforme o regime e relatório em PDF no padrão de documentos da Amcont",
+   "registros": "R26-06 e R27-01"
   }
  ],
  "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"

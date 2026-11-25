@@ -1,6 +1,7 @@
 HISTÓRICO DE VERSÕES  |  Ferramentas de precificação Amcont
-Versão atual: 2026.8.17, de 25/11/2026 14:39
+Versão atual: 2026.8.18, de 25/11/2026 18:53
 
+2026.8.18  (25/11/2026 18:53)  Campos conforme o regime e relatório em PDF no padrão de documentos da Amcont  Registro: R26-06 e R27-01
 2026.8.17  (25/11/2026 14:39)  Modo serviço alinhado e ícone da aba com o símbolo AM  Registro: R26-05
 2026.8.16  (25/11/2026 11:30)  Cabeçalho redesenhado com o lema da Amcont e premissas alinhadas, com Produto, Serviço, venda e compra em uma linha  Registro: R26-04
 2026.8.15  (24/11/2026 23:57)  Premissas alinhadas, com as explicações em balões de ajuda, e revisão de tela (abas com fundo sólido, selo de versão no cabeçalho, ficha do código em largura total)  Registro: R26-03

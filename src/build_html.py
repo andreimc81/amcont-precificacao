@@ -1520,6 +1520,7 @@ exec(open('src/round26.py',encoding='utf-8').read())
 exec(open('src/round27.py',encoding='utf-8').read())
 exec(open('src/round28.py',encoding='utf-8').read())
 exec(open('src/round29.py',encoding='utf-8').read())
+exec(open('src/round30.py',encoding='utf-8').read())
 # ===== logotipo da Amcont =====
 _logo=open('logo_b64.txt').read()
 _img='<img class="%s" alt="Amcont Assessoria e Contabilidade" src="data:image/png;base64,'+_logo+'">'
