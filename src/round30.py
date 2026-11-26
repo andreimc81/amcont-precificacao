@@ -128,6 +128,16 @@ function montarRelatorio(){
   const S = [];
   S.push(["Premissas", `<table class="r-prem"><tbody>` + P1.map(x=>`<tr><td>${esc(x[0])}</td><td>${esc(x[1])}</td></tr>`).join("") + `</tbody></table>`]);
   const fi = limpo($("#ficha")); if (fi && $("#ficha").offsetHeight > 0) S.push(["Classificação do código", fi]);
+  { const pct = o.pv > 0 ? PCT(H.mc / o.pv) : "", it = sv ? "serviço" : "produto";
+    const conc = compra
+      ? `<p><b>Custo real da compra.</b> É o valor da nota do fornecedor menos os créditos de tributos que a sua empresa recupera nessa compra. Dois fornecedores com o mesmo preço podem ter custos reais diferentes, porque o crédito depende do regime tributário de cada um.</p>`
+        + `<p><b>Crédito.</b> É o tributo pago na compra que a empresa pode abater do tributo devido nas vendas. O crédito só vale quando está destacado na nota do fornecedor e, no caso do Simples Nacional, limitado ao que ele paga.</p>`
+      : `<p><b>Margem de contribuição.</b> É o que sobra do preço de venda de cada unidade depois de pagar o que só existe porque a venda aconteceu: a compra do ${it} (ou os insumos) e os tributos sobre a venda, já descontados os créditos. É com essa sobra que a empresa paga as despesas fixas, como aluguel, folha e pró-labore, e forma o lucro. Por isso, margem de contribuição não é lucro: é o quanto cada venda contribui para cobrir a estrutura e gerar resultado.</p>`
+        + `<p>Neste estudo, a margem de contribuição de hoje é de <b>${BRL.format(H.mc)}</b> por unidade${pct ? " (" + pct + " do preço de venda)" : ""}. Comissões, frete, taxas de cartão e outras despesas que variam com a venda não foram informadas e não entram na conta.</p>`
+        + `<p><b>Por que ela é a referência.</b> A reforma muda os tributos sobre a venda e os créditos da compra. Se o preço não for ajustado, a margem de contribuição muda, mesmo com o mesmo volume de vendas. O relatório mostra dois caminhos: ajustar o preço para manter a mesma margem, ou manter o valor que o cliente paga e aceitar a mudança na margem.</p>`
+        + `<p><b>Valor a cadastrar e total da nota.</b> De 2027 em diante, a CBS e o IBS são somados por fora do preço. O valor a cadastrar é o preço do ${it} no sistema de emissão. O total da nota é esse valor mais a CBS e o IBS, e é o que o cliente paga.</p>`
+        + `<p><b>Crédito.</b> É o tributo pago na compra que a empresa pode abater do tributo devido nas vendas. Quanto maior o crédito, menor o custo real da compra.</p>`;
+    S.push(["Como ler este relatório", conc]); }
   if (compra){
     S.push(["Cotações informadas", limpo($("#p-cot"))]); S.push(["Custo real da compra em " + ANO, limpo($("#p-compra"))]); S.push(["Nota fiscal da compra", limpo($("#p-nota-compra"))]);
   } else {

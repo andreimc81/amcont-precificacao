@@ -4,7 +4,7 @@ cd /home/claude/work
 V=$(python3 src/versao.py atual | cut -d' ' -f1); OUT=TESTES-v$V.txt; MODO=${1:-rapida}
 echo "BATERIA DE TESTES ($MODO)  |  versão $V  |  $(TZ=America/Sao_Paulo date '+%d/%m/%Y %H:%M')" > $OUT
 FALHA=0
-tela(){ for t in t_md t_aliq t_is t_rfb t_base t_lc t_cq t_pc t_compra t_user t_uf t_prud test_html test_load test_prec test_def test_emp test_red test_senha; do
+tela(){ for t in t_md t_aliq t_is t_rfb t_base t_comp t_lc t_cq t_pc t_compra t_user t_uf t_prud test_html test_load test_prec test_def test_emp test_red test_senha; do
   r=$(timeout 300 node src/$t.js 2>&1); e=$?; erros=$(echo "$r" | grep -c "Error\|ERRO" || true)
   if [ $e -ne 0 ] || [ "$erros" != "0" ]; then echo "REPROVADO  tela $t" >> $OUT; FALHA=1; else echo "aprovado   tela $t" >> $OUT; fi; done; }
 linha(){ # $1 nome, $2 comando, $3 padrão de sucesso

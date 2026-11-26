@@ -1,6 +1,7 @@
 HISTÓRICO DE VERSÕES  |  Ferramentas de precificação Amcont
-Versão atual: 2026.8.18, de 25/11/2026 18:53
+Versão atual: 2026.8.19, de 25/11/2026 22:24
 
+2026.8.19  (25/11/2026 22:24)  Seção Como ler este relatório (margem de contribuição, markup e margem de lucro) e visão do comprador: custo líquido de quem compra, hoje e no ano simulado  Registro: R27-02 e R27-03
 2026.8.18  (25/11/2026 18:53)  Campos conforme o regime e relatório em PDF no padrão de documentos da Amcont  Registro: R26-06 e R27-01
 2026.8.17  (25/11/2026 14:39)  Modo serviço alinhado e ícone da aba com o símbolo AM  Registro: R26-05
 2026.8.16  (25/11/2026 11:30)  Cabeçalho redesenhado com o lema da Amcont e premissas alinhadas, com Produto, Serviço, venda e compra em uma linha  Registro: R26-04
