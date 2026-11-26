@@ -1,7 +1,7 @@
 {
  "base": "2026.8",
- "seq": 19,
- "data": "2026-11-25T22:24",
+ "seq": 20,
+ "data": "2026-11-26T07:11",
  "hist": [
   {
    "v": "2026.8.0",
@@ -122,6 +122,12 @@
    "data": "2026-11-25T22:24",
    "resumo": "Seção Como ler este relatório (margem de contribuição, markup e margem de lucro) e visão do comprador: custo líquido de quem compra, hoje e no ano simulado",
    "registros": "R27-02 e R27-03"
+  },
+  {
+   "v": "2026.8.20",
+   "data": "2026-11-26T07:11",
+   "resumo": "Barra de abas sem rolagem, alíquotas simuladas como botão, visão do comprador por último, variação da margem com sinal correto e Simples Nacional sem campos de ICMS, ISS e DIFAL",
+   "registros": "R27-04, R27-05 e R27-06"
   }
  ],
  "drive_doc": "1c_vZTJHlGgnQ4ZnDH-uajrcwqcZ_YWc4U7gyXlb9tkY"

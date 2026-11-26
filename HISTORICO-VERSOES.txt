@@ -1,6 +1,7 @@
 HISTÓRICO DE VERSÕES  |  Ferramentas de precificação Amcont
-Versão atual: 2026.8.19, de 25/11/2026 22:24
+Versão atual: 2026.8.20, de 26/11/2026 07:11
 
+2026.8.20  (26/11/2026 07:11)  Barra de abas sem rolagem, alíquotas simuladas como botão, visão do comprador por último, variação da margem com sinal correto e Simples Nacional sem campos de ICMS, ISS e DIFAL  Registro: R27-04, R27-05 e R27-06
 2026.8.19  (25/11/2026 22:24)  Seção Como ler este relatório (margem de contribuição, markup e margem de lucro) e visão do comprador: custo líquido de quem compra, hoje e no ano simulado  Registro: R27-02 e R27-03
 2026.8.18  (25/11/2026 18:53)  Campos conforme o regime e relatório em PDF no padrão de documentos da Amcont  Registro: R26-06 e R27-01
 2026.8.17  (25/11/2026 14:39)  Modo serviço alinhado e ícone da aba com o símbolo AM  Registro: R26-05
